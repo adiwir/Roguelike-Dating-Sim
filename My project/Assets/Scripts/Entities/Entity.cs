@@ -8,8 +8,8 @@ public abstract class Entity : MonoBehaviour
     public bool isFriendly;
     public bool isDead;
 
-    public BasicAbility basicAbility;
+    //public BasicAbility basicAbility;
     public int moveDistance;
-    public Life life;
+    public Constitution constitution;
 
 }

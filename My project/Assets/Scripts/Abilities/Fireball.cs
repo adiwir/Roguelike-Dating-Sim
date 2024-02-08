@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class Fireball : ActiveAbility
 {
-    string new Name = "Fireball";
+    string Name = "Fireball";
     //public __ image
     private int amountOfTilesAffected = 5;
-    
-    public override void useActive()
+
+
+    private void Awake()
+    {
+        this.range = 3;
+    }
+
+    public override void UseAbility()
     {
 
     }
