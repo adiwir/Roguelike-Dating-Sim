@@ -4,27 +4,34 @@ using UnityEngine;
 using UnityEngine.InputSystem.Android.LowLevel;
 using UnityEngine.Tilemaps;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private Tilemap col;
-        
-
+    
+    Character character;
     public float moveSpeed;
     private Vector3Int origPos;
     private Vector3Int targetCell;
     private Vector3 targetPosition;
-    private int elapsedTime = 0;
+    //private int elapsedTime = 0;
+    private float elapsedTime = 0f;
+    private float basicCd = 1f;
+    private float movementCd = 0.1f;
 
+
+    private void Awake()
+    {
+        Debug.Log("will get character");
+        character = GetComponent<Character>();
+    }
 
     private void Start()
     {
-        
         targetCell = tilemap.WorldToCell(transform.position);
         
         targetPosition = tilemap.GetCellCenterWorld(targetCell);
-        
     }
 
 
@@ -33,6 +40,11 @@ public class PlayerMovement : MonoBehaviour
         origPos = tilemap.WorldToCell(transform.position);
         targetCell = origPos;
 
+        //elapsedTime += Time.fixedDeltaTime;
+        //elapsedBasicAttackTime += Time.fixedDeltaTime;
+
+        //PlayerMovement
+
         if (Input.GetKey(KeyCode.W))
         {   
             targetCell.x += 1;
@@ -40,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 targetPosition = tilemap.GetCellCenterWorld(targetCell);
                 MovePlayer(targetPosition);
+                character.SetOrientation("W");
             }   
         }
 
@@ -50,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 targetPosition = tilemap.GetCellCenterWorld(targetCell);
                 MovePlayer(targetPosition);
+                character.SetOrientation("S");
             }
         }
 
@@ -60,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 targetPosition = tilemap.GetCellCenterWorld(targetCell);
                 MovePlayer(targetPosition);
+                character.SetOrientation("A");
             }
         }
 
@@ -70,18 +85,39 @@ public class PlayerMovement : MonoBehaviour
             {
                 targetPosition = tilemap.GetCellCenterWorld(targetCell);
                 MovePlayer(targetPosition);
+                character.SetOrientation("D");
             }
         }
 
-        elapsedTime += 6;
+        if (Input.GetButton("Slash1") && (basicCd <= 0))
+        {
+            print("hello");
+            attackTowardsOrientation();
+            basicCd = 1f;
+        } else
+        {
+            basicCd -= Time.fixedDeltaTime;
+        }
+
+        //elapsedTime += 6;
     }
+
+    void attackTowardsOrientation()
+    {
+        string orientation = character.getOrientationAsString();
+        //Debug.Log(orientation);
+    }
+
 
     void MovePlayer(Vector3 target)
     {
-        if(elapsedTime > 60)
+        if(movementCd <= 0)
         {
             transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed);
-            elapsedTime = 0;
+            movementCd = 0.1f;
+        } else
+        {
+            movementCd -= Time.fixedDeltaTime;
         }
         
     }

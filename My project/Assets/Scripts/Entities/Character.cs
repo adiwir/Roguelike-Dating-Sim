@@ -5,21 +5,29 @@ using UnityEngine;
 public class Character : Entity
 
 {
-    public int startingAbilityAmount;
-    public List <Ability> abilities;
+    //private int startingAbilityAmount;
+    public List<Ability> abilities;
     BasicAbility basicAbility;
-    
+
     public bool hasActiveAbilityLeft;
 
     //public BasicAbility basicAbility = //TODO: Lägg basicAbility här;
     //
+    enum Orientation
+    {
+        north,
+        south,
+        west,
+        east
+    }
+    Orientation orientation = Orientation.south;
 
     public void Awake()
     {
-        isFriendly = true;
-        isDead = false;
+        //isFriendly = true;
+        //isDead = false;
         moveDistance = 1;
-        this.constitution = gameObject.AddComponent<Constitution>();
+        //this.constitution = gameObject.AddComponent<Constitution>();
         //this.basicAbility = gameObject.AddComponent<PlayerBasicAbility>();
 
         assignStartingAbilities();
@@ -32,7 +40,7 @@ public class Character : Entity
 
     public void Start()
     {
-        
+
     }
 
     public void Update()
@@ -53,9 +61,41 @@ public class Character : Entity
 
     //getters and setters
 
-    public int getCurrentHP()
+    //public int getCurrentHP()
+    //{
+    //    return this.constitution.getHealthPoints();
+    //}
+
+    public void SetOrientation(string key)
     {
-        return this.constitution.getHealthPoints();
+        switch (key)
+        {
+            case "W":
+                orientation = Orientation.north;
+                break;
+
+            case "S":
+                orientation = Orientation.south;
+                break;
+
+            case "A":
+                orientation = Orientation.west;
+                break;
+
+            case "D":
+                orientation = Orientation.east;
+                break;
+
+            default:
+                //do nothing
+                break;
+        }
+
+    }
+
+    public string getOrientationAsString()
+    {
+        return orientation.ToString();
     }
 
 }
