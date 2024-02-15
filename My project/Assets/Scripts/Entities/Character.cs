@@ -5,11 +5,13 @@ using UnityEngine;
 public class Character : Entity
 
 {
-    //private int startingAbilityAmount;
-    public List<Ability> abilities;
+    private readonly int startingAbilityAmount = 3;
+    public Queue<ActiveAbility> abilities;
+    public Queue<string> activeAbilities { get; set; }
+    public List<string> assignedAbilities { get; set; }
     BasicAbility basicAbility;
 
-    public bool hasActiveAbilityLeft;
+    public bool hasActiveAbilityLeft = true;
 
     //public BasicAbility basicAbility = //TODO: Lägg basicAbility här;
     //
@@ -30,12 +32,52 @@ public class Character : Entity
         //this.constitution = gameObject.AddComponent<Constitution>();
         //this.basicAbility = gameObject.AddComponent<PlayerBasicAbility>();
 
-        assignStartingAbilities();
+        EnqueueStartingAbilities();
+        AssignAbilities();
     }
 
-    public void assignStartingAbilities()
-    {
+    //public void EnqueueStartingAbilities()
+    //{ //Vad vi ska ha
+    //    abilities = new Queue<ActiveAbility>();
+    //    abilities.Enqueue(new Fireball());
+    //    abilities.Enqueue(new Fireball());
+    //    abilities.Enqueue(new Shield());
+    //}
 
+    public void EnqueueStartingAbilities()
+    {
+        activeAbilities = new Queue<string>();
+        activeAbilities.Enqueue("C4");
+        activeAbilities.Enqueue("C4");
+        activeAbilities.Enqueue("Forcefield");
+        activeAbilities.Enqueue("C4");
+        activeAbilities.Enqueue("Shove");
+        activeAbilities.Enqueue("Shoot Laser");
+    }
+
+    void AssignAbilities()
+    {
+        assignedAbilities = new List<string>(2);
+        for(int i = 0; i < startingAbilityAmount; i++)
+        {
+            assignedAbilities[i] = activeAbilities.Dequeue();
+        }
+    }
+
+    public string GetAndDequeueAbility(int spot)
+    {
+        string activatedAbility = assignedAbilities[spot];
+        if (activeAbilities.Count > 0)
+        {
+            assignedAbilities[spot] = activeAbilities.Dequeue();
+        } else
+        {
+            hasActiveAbilityLeft = false;
+            assignedAbilities[spot] = null; //inte så bra att den kan returnera null men får fixa det vid ett senare tilfälle.
+            //borde också säga till den att sätta ett kryss på abilityns plats här i HUD:en och att knappen/platsen stängs av
+        }
+        
+        return activatedAbility;
     }
 
     public void Start()
@@ -57,7 +99,6 @@ public class Character : Entity
     {
 
     }
-
 
     //getters and setters
 
