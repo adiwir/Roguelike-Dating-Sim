@@ -90,7 +90,6 @@ public class Character : Entity
                 //do nothing
                 break;
         }
-
     }
 
     public string getOrientationAsString()

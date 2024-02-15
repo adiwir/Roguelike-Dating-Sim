@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,6 @@ public class PlayerController : MonoBehaviour
     private Vector3Int origPos;
     private Vector3Int targetCell;
     private Vector3 targetPosition;
-    //private int elapsedTime = 0;
     private float elapsedTime = 0f;
     private float basicCd = 1f;
     private float movementCd = 0.1f;
@@ -92,22 +92,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButton("Slash1") && (basicCd <= 0))
         {
             print("hello");
-            attackTowardsOrientation();
+            chooseAttackDirection();
             basicCd = 1f;
         } else
         {
             basicCd -= Time.fixedDeltaTime;
         }
 
-        //elapsedTime += 6;
     }
-
-    void attackTowardsOrientation()
-    {
-        string orientation = character.getOrientationAsString();
-        //Debug.Log(orientation);
-    }
-
 
     void MovePlayer(Vector3 target)
     {
@@ -129,7 +121,35 @@ public class PlayerController : MonoBehaviour
             return false;
         }
         return true;
-        
     }
-    
+
+    void chooseAttackDirection()
+    {
+        Vector3Int cellToAttack = origPos;
+
+        string orientation = character.getOrientationAsString();
+        switch (orientation)
+        {
+            case "north":
+                cellToAttack.x += 1;
+                break;
+            case "south":
+                cellToAttack.x -= 1;
+                break;
+            case "west":
+                cellToAttack.y += 1;
+                break;
+            case "east":
+                cellToAttack.y -= 1;
+                break;
+        }
+
+        PerformAttack(cellToAttack);
+
+    }
+
+    private void PerformAttack(Vector3Int cellToAttack)
+    {
+        throw new NotImplementedException();
+    }
 }
