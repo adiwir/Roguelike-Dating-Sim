@@ -1,30 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.Android.LowLevel;
 using UnityEngine.Tilemaps;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] private Tilemap tilemap;
-    [SerializeField] private Tilemap col;
-        
+    [SerializeField] private Tilemap tilemap, col;
 
-    public float moveSpeed;
-    private Vector3Int origPos;
-    private Vector3Int targetCell;
+    private float moveSpeed = 1;
+    private Vector3Int origPos, targetCell;
     private Vector3 targetPosition;
     private int elapsedTime = 0;
 
 
     private void Start()
-    {
-        
+    { 
         targetCell = tilemap.WorldToCell(transform.position);
         
         targetPosition = tilemap.GetCellCenterWorld(targetCell);
-        
     }
 
 
