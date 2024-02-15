@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8610734877936075474}
   - component: {fileID: 6154344873748433321}
+  - component: {fileID: -7638493747551969193}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -132,3 +133,17 @@ MonoBehaviour:
   tilemap: {fileID: 0}
   col: {fileID: 0}
   moveSpeed: 1
+--- !u!114 &-7638493747551969193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6983315668266302810}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070bc67672be09e41a52540652027c1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDistance: 0
+  hasActiveAbilityLeft: 0
