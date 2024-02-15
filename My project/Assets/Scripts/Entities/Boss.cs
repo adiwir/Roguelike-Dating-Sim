@@ -35,14 +35,12 @@ public class Boss : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, 100000000000000000);
 
     }
-    void OnCollisionEnter(Collision collision)
+
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        Character player = collision.gameObject.GetComponent<Character>(); 
-        if(player)
+        if(collision.gameObject.tag == "Player")
         {
-            Debug.Log("yeet");
+            Debug.Log("ouch");
         }
     }
-
-
 }
