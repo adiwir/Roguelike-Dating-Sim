@@ -95,5 +95,13 @@ public class PlayerMovement : MonoBehaviour
         return true;
         
     }
-    
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Teleport")
+        {
+            Debug.Log("yeet");
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(70, 39), 1000000000);
+        }
+    }
 }
