@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &437681492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 437681493}
+  m_Layer: 0
+  m_Name: NodeContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &437681493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437681492}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.4969637, y: 0.44070086, z: -1.8982656}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &918480886 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6983315668266302810, guid: 2b2214b25744df04d86e3add59942a83, type: 3}
@@ -160,11 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070bc67672be09e41a52540652027c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFriendly: 0
-  isDead: 0
   moveDistance: 0
-  constitution: {fileID: 0}
-  startingAbilityAmount: 0
   hasActiveAbilityLeft: 0
 --- !u!70 &918480891
 CapsuleCollider2D:
@@ -3206,6 +3233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1605300046}
   - component: {fileID: 1605300045}
+  - component: {fileID: 1605300047}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -3242,6 +3270,21 @@ Transform:
   - {fileID: 1394696972}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1605300047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605300044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 423eb0ac27ffaa74285ba842afce31a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodePrefab: {fileID: 3822470427676052809, guid: 8c2a2bc51d9196a4295104124a614e21, type: 3}
+  nodeContainer: {fileID: 437681492}
+  col: {fileID: 1394696974}
 --- !u!1 &1723064602
 GameObject:
   m_ObjectHideFlags: 0
@@ -100742,3 +100785,4 @@ SceneRoots:
   - {fileID: 1605300046}
   - {fileID: 7872124022325080491}
   - {fileID: 2037969251}
+  - {fileID: 437681493}
