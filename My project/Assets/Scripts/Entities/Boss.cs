@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Boss : MonoBehaviour
+public class Boss : MonoBehaviour, Enemy
 {
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private Tilemap col;
@@ -56,4 +57,11 @@ public class Boss : MonoBehaviour
             Debug.Log("ouch");
         }
     }
+
+    public Vector3Int getPos()
+    {
+        throw new NotImplementedException();
+    }
+
+
 }
