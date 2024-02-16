@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.Android.LowLevel;
 using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
@@ -100,7 +99,7 @@ public class PlayerController : MonoBehaviour
             basicCd = 1f;
         } else
         {
-            basicCd -= Time.fixedDeltaTime; //dåligt system, kan bli -massa om man bara inte trycker in den knappen men får fixa det senare
+            basicCd -= Time.fixedDeltaTime; //dï¿½ligt system, kan bli -massa om man bara inte trycker in den knappen men fï¿½r fixa det senare
             //tror nog inte ens att detta systemet kommer funka lol, TODO: fixa
         }
 
@@ -177,7 +176,7 @@ public class PlayerController : MonoBehaviour
     {
         
         string ability = character.GetAndDequeueAbility(spot);
-        if (ability == null) // detta är bara temporärt
+        if (ability == null) // detta ï¿½r bara temporï¿½rt
         {
             ability = "";
         }
@@ -186,7 +185,7 @@ public class PlayerController : MonoBehaviour
 
     void useActiveAbiltiy(String abilityName)
     {
-        //cellToAttack =  //hämta detta på current mouse/cursor pos som ger en node/cellPos
+        //cellToAttack =  //hï¿½mta detta pï¿½ current mouse/cursor pos som ger en node/cellPos
 
         switch (abilityName)
         {
