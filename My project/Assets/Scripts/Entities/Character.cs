@@ -11,7 +11,11 @@ public class Character : Entity
     public List<string> assignedAbilities { get; set; }
     BasicAbility basicAbility;
 
+    private int healthPoints;
+    private int maxHealth = 4;
+    private bool isDead;
     public bool hasActiveAbilityLeft = true;
+
 
     //public BasicAbility basicAbility = //TODO: Lägg basicAbility här;
     //
@@ -24,14 +28,18 @@ public class Character : Entity
     }
     Orientation orientation = Orientation.south;
 
+    public void Start()
+    {
+        this.healthPoints = maxHealth;
+    }
+
     public void Awake()
     {
         //isFriendly = true;
         //isDead = false;
         moveDistance = 1;
-        //this.constitution = gameObject.AddComponent<Constitution>();
         //this.basicAbility = gameObject.AddComponent<PlayerBasicAbility>();
-
+        
         EnqueueStartingAbilities();
         AssignAbilities();
     }
@@ -43,6 +51,15 @@ public class Character : Entity
     //    abilities.Enqueue(new Fireball());
     //    abilities.Enqueue(new Shield());
     //}
+
+    public void decreaseHealthPoints(int hpReduction)
+    {
+        this.healthPoints -= hpReduction;
+        if (this.healthPoints <= 0)
+        {
+            isDead = true;
+        }
+    }
 
     public void EnqueueStartingAbilities()
     {
@@ -80,14 +97,13 @@ public class Character : Entity
         return activatedAbility;
     }
 
-    public void Start()
-    {
-
-    }
-
     public void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            decreaseHealthPoints(1);
+            Debug.Log("Player health is: " + healthPoints);
+        }
     }
 
     private void useVariableAbility()
@@ -102,10 +118,7 @@ public class Character : Entity
 
     //getters and setters
 
-    //public int getCurrentHP()
-    //{
-    //    return this.constitution.getHealthPoints();
-    //}
+
 
     public void SetOrientation(string key)
     {
@@ -138,4 +151,8 @@ public class Character : Entity
         return orientation.ToString();
     }
 
+    public int getHealthPoints()
+    {
+        return this.healthPoints;
+    }
 }
