@@ -13,7 +13,6 @@ public class Character : Entity
 
     private int healthPoints;
     private int maxHealth = 4;
-    private bool isDead;
     public bool hasActiveAbilityLeft = true;
 
 
@@ -52,14 +51,7 @@ public class Character : Entity
     //    abilities.Enqueue(new Shield());
     //}
 
-    public void decreaseHealthPoints(int hpReduction)
-    {
-        this.healthPoints -= hpReduction;
-        if (this.healthPoints <= 0)
-        {
-            isDead = true;
-        }
-    }
+    
 
     public void EnqueueStartingAbilities()
     {
@@ -95,15 +87,6 @@ public class Character : Entity
         }
         
         return activatedAbility;
-    }
-
-    public void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            decreaseHealthPoints(1);
-            Debug.Log("Player health is: " + healthPoints);
-        }
     }
 
     private void useVariableAbility()
