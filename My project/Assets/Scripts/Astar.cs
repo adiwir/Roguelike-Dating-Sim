@@ -6,9 +6,9 @@ using UnityEngine;
 
 
 
-public class Astar : MonoBehaviour
+public class Astar 
 {
-    public List<Vector3Int> FindPath(Node start, Node end)
+    public List<Node> FindPath(Node start, Node end)
     {
         List<Node> openList = new List<Node>();
         List<Node> closedList = new List<Node>();
@@ -52,17 +52,17 @@ public class Astar : MonoBehaviour
             }
         }
         
-        return new List<Vector3Int>();
+        return new List<Node>();
     }
 
-    private List<Vector3Int> GetFinishedList(Node start, Node end)
+    private List<Node> GetFinishedList(Node start, Node end)
     {
-        List<Vector3Int> finishedList = new List<Vector3Int>();
+        List<Node> finishedList = new List<Node>();
         Node currentNode = end;
 
         while (currentNode != null)
         {
-            finishedList.Add(currentNode.position);
+            finishedList.Add(currentNode);
             currentNode = currentNode.parent;
         }
 
