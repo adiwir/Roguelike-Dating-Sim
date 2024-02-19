@@ -9,6 +9,7 @@ public abstract class BasicAbility : ScriptableObject, Ability
     public int range;
     public float perEnemyBaseDamage;
     //public __ image
-    public abstract void UseAbility();
+
+    public abstract void UseAbility(Character character, Vector3Int targetTile);
 
 }

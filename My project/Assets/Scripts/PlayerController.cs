@@ -48,10 +48,11 @@ public class PlayerController : MonoBehaviour
         //PlayerMovement
 
         if (Input.GetKey(KeyCode.W))
-        {   
+        {
             targetCell.x += 1;
             if (CanMove(targetCell))
             {
+                print("canMove");
                 targetPosition = tilemap.GetCellCenterWorld(targetCell);
                 MovePlayer(targetPosition);
                 character.SetOrientation("W");
@@ -210,7 +211,7 @@ public class PlayerController : MonoBehaviour
 
     private void PerformAttack(Vector3Int cellToAttack)
     {
-        throw new NotImplementedException();
+        print("should no nothing rn");
     }
 
     void OnCollisionEnter2D(Collision2D collision)

@@ -6,6 +6,6 @@ public interface Ability
 {
     //public __ image
     //public abstract void use
-    public void UseAbility();
+    //public void UseAbility();
 
 }

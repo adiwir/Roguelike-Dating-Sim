@@ -11,6 +11,7 @@ public class Boss : MonoBehaviour, Enemy
     private int elapsedTime = 0;
     private Vector3 targetPosition;
     private Vector3 outOfSightPosition = new Vector3(100f, 100f);
+    private Vector3Int position;
 
     public GameObject dirtParticles;
     public GameObject playerTarget;
@@ -42,11 +43,14 @@ public class Boss : MonoBehaviour, Enemy
     public IEnumerator Attack(Vector3 targetPosition)
     {
         transform.position = Vector3.MoveTowards(transform.position, outOfSightPosition, 10000000000000);
+        position = tilemap.WorldToCell(transform.position);
         dirtParticles.transform.position = Vector3.MoveTowards(dirtParticles.transform.position, targetPosition, 10000000000);
         yield return new WaitForSeconds(3);
         
         dirtParticles.transform.position = Vector3.MoveTowards(dirtParticles.transform.position, outOfSightPosition, 10000000000);
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetPosition.x, targetPosition.y, 5), 100000000000000000);
+        position = tilemap.WorldToCell(transform.position);
+        //position = Vector(targetPosition.x, targetPosition.y, 5);
 
     }
 
@@ -60,7 +64,7 @@ public class Boss : MonoBehaviour, Enemy
 
     public Vector3Int getPos()
     {
-        throw new NotImplementedException();
+        return this.position;
     }
 
 

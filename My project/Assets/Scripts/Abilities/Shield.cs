@@ -14,7 +14,7 @@ public class Shield : ActiveAbility
         this.range = 0;
     }
 
-    public override void UseAbility()
+    public override void UseAbility(Character character, Vector3Int targetTile)
     {
 
     }

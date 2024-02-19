@@ -60,7 +60,9 @@ public class Character : Entity
         assignedAbilities = new List<string>(2);
         for(int i = 0; i < startingAbilityAmount; i++)
         {
-            assignedAbilities[i] = activeAbilities.Dequeue();
+            Debug.Log(i);
+            //assignedAbilities[i] = activeAbilities.Dequeue();
+            assignedAbilities.Add(activeAbilities.Dequeue());
         }
     }
 

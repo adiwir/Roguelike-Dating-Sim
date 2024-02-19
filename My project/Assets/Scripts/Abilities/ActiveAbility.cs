@@ -13,6 +13,6 @@ public abstract class ActiveAbility : ScriptableObject, Ability
 
     //public abstract void useActive();
 
-    public  abstract void UseAbility();
+    public  abstract void UseAbility(Character character, Vector3Int targetTile);
 
 }

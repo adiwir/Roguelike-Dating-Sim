@@ -9,4 +9,5 @@ public abstract class PassiveAbility : ScriptableObject, Ability
     //public __ image
     public abstract void UseAbility();
 
+
 }

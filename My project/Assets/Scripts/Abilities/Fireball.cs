@@ -14,7 +14,7 @@ public class Fireball : ActiveAbility
         this.range = 3;
     }
 
-    public override void UseAbility()
+    public override void UseAbility(Character character, Vector3Int targetTile)
     {
 
     }
