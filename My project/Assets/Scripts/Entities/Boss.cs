@@ -16,11 +16,44 @@ public class Boss : MonoBehaviour
     public GameObject dirtParticles;
     public GameObject playerTarget;
 
+    public SpriteRenderer spriteRenderer;
+    public Sprite facingUpSprite;
+    public Sprite[] spriteArray;
+
+    bool flip;
+
     void Start()
     {
         dirtParticles = GameObject.FindWithTag("Dirt");
         playerTarget = GameObject.FindWithTag("Player");
         targetPosition = playerTarget.transform.position;
+    }
+
+    private void Update()
+    {
+        Vector3 scale = transform.localScale;
+
+        if(playerTarget.transform.position.y > transform.position.y)
+        {
+            ChangeSprite(1);
+            flip = true;
+        }
+        else
+        {
+            ChangeSprite(0);
+            flip = false;
+        }
+
+        if (playerTarget.transform.position.x > transform.position.x)
+        {
+            scale.x = Mathf.Abs(scale.x) * -1 * (flip ? -1 : 1);
+        }
+        else
+        {
+            scale.x = Mathf.Abs(scale.x) * (flip ? -1 : 1);
+        }
+
+        transform.localScale = scale;
     }
 
     void FixedUpdate()
@@ -64,6 +97,10 @@ public class Boss : MonoBehaviour
         elapsedTime = 0;
     }
 
+    void ChangeSprite(int index)
+    {
+        spriteRenderer.sprite = spriteArray[index];
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")

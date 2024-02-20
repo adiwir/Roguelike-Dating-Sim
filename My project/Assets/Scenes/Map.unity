@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!212 &85622766 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8346764444976798391, guid: df95552e9fb615641889591e79aa03fc, type: 3}
+  m_PrefabInstance: {fileID: 2037969251}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &437681492
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,8 +280,8 @@ MonoBehaviour:
   - {fileID: 1883865809}
   - {fileID: 2049297458}
   - {fileID: 1158643458}
-  fullHeart: {fileID: 21300000, guid: fed24bd82cefc0c4a8ef64dab6231b53, type: 3}
-  emptyHeart: {fileID: 21300002, guid: fed24bd82cefc0c4a8ef64dab6231b53, type: 3}
+  fullHeart: {fileID: 21300000, guid: 8f53899772c02cc4f81b42070498d200, type: 3}
+  emptyHeart: {fileID: 21300000, guid: f4382d940b00f91459a02acae7d4101a, type: 3}
   invincibilityDurationSeconds: 1.5
   invincibilityDeltaTime: 0.15
 --- !u!1 &1148658015
@@ -443,7 +448,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fed24bd82cefc0c4a8ef64dab6231b53, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8f53899772c02cc4f81b42070498d200, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7675,7 +7680,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fed24bd82cefc0c4a8ef64dab6231b53, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8f53899772c02cc4f81b42070498d200, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -105729,7 +105734,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fed24bd82cefc0c4a8ef64dab6231b53, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8f53899772c02cc4f81b42070498d200, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -105845,7 +105850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7337168982101740383, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7337168982101740383, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -105876,6 +105881,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8346764444976798391, guid: df95552e9fb615641889591e79aa03fc, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8346764444976798391, guid: df95552e9fb615641889591e79aa03fc, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8346764444976798391, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       propertyPath: m_Size.x
       value: 2
       objectReference: {fileID: 0}
@@ -105886,7 +105899,7 @@ PrefabInstance:
     - target: {fileID: 8346764444976798391, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8a9b3184e167cd346959b1000e4b6918, type: 3}
+      objectReference: {fileID: 21300000, guid: a9f532d2e5e58c54f9588e207a6125cf, type: 3}
     - target: {fileID: 8346764444976798391, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -105920,10 +105933,10 @@ PrefabInstance:
       addedObject: {fileID: 2037969253}
     - targetCorrespondingSourceObject: {fileID: 4346601964389275026, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2037969255}
+      addedObject: {fileID: 2037969256}
     - targetCorrespondingSourceObject: {fileID: 4346601964389275026, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2037969256}
+      addedObject: {fileID: 2037969258}
   m_SourcePrefab: {fileID: 100100000, guid: df95552e9fb615641889591e79aa03fc, type: 3}
 --- !u!1 &2037969252 stripped
 GameObject:
@@ -105947,8 +105960,40 @@ MonoBehaviour:
   inAttack: 0
   dirtParticles: {fileID: 0}
   playerTarget: {fileID: 0}
---- !u!70 &2037969255
-CapsuleCollider2D:
+  spriteRenderer: {fileID: 85622766}
+  facingUpSprite: {fileID: 21300000, guid: 33dced47bd615c642ae78ced2e617258, type: 3}
+  spriteArray:
+  - {fileID: 21300000, guid: a9f532d2e5e58c54f9588e207a6125cf, type: 3}
+  - {fileID: 21300000, guid: 33dced47bd615c642ae78ced2e617258, type: 3}
+--- !u!50 &2037969256
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037969252}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!60 &2037969258
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105979,36 +106024,32 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.027502675, y: 0.121097334}
-  m_Size: {x: 3.5893092, y: 3.570005}
-  m_Direction: 1
---- !u!50 &2037969256
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2037969252}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.6453247, y: 1.1486702}
+      - {x: 0.9620056, y: 1.410038}
+      - {x: 0.080459595, y: 1.3339348}
+      - {x: -0.69083315, y: 0.9083059}
+      - {x: -1.1695328, y: 0.37643814}
+      - {x: -1.6043091, y: -0.4858055}
+      - {x: -1.5395737, y: -0.7185669}
+      - {x: -1.3245468, y: -1.3172722}
+      - {x: -1.1840286, y: -1.4964676}
+      - {x: -0.60355514, y: -1.4004172}
+      - {x: -0.19667053, y: -1.2832489}
+      - {x: 0.76126254, y: -0.85633063}
+      - {x: 1.80268, y: 0.24593347}
+  m_UseDelaunayMesh: 0
 --- !u!1 &2049297456
 GameObject:
   m_ObjectHideFlags: 0
@@ -106066,7 +106107,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fed24bd82cefc0c4a8ef64dab6231b53, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8f53899772c02cc4f81b42070498d200, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
