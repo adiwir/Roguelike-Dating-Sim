@@ -4,8 +4,6 @@ using System.Linq;
 using UnityEngine;
 
 
-
-
 public class Astar : MonoBehaviour
 {
     public List<Vector3Int> FindPath(Node start, Node end)

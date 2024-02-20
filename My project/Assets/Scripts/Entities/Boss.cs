@@ -67,5 +67,8 @@ public class Boss : MonoBehaviour, Enemy
         return this.position;
     }
 
-
+    public void takeDamage(int damage)
+    {
+        throw new NotImplementedException();
+    }
 }

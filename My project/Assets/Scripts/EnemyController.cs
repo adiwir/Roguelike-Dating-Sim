@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour
     private Node currentNode, targetNode;
     private List<Node> path;
     public GameObject player;
+    private GridManager gridInstance;
     
 
 
@@ -30,57 +31,58 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         path = new List<Node>();
+        gridInstance = GridManager.Instance;
         
         cellPos = tilemap.WorldToCell(transform.position);
         currentPos = tilemap.GetCellCenterWorld(cellPos);
         Vector2Int nodePos = new Vector2Int(cellPos.x, cellPos.y);
-        currentNode = GridManager.Instance.GetNodeAtPos(nodePos);
+        //currentNode = gridInstance.GetNodeAtPos(nodePos);
 
         targetCell = tilemap.WorldToCell(player.transform.position);
         targetPos = tilemap.GetCellCenterWorld(targetCell);
         Vector2Int tNodePos = new Vector2Int(targetCell.x, targetCell.y);
-        targetNode = GridManager.Instance.GetNodeAtPos(tNodePos);
+        //targetNode = gridInstance.GetNodeAtPos(tNodePos);
 
-        path = FindPath(currentNode, targetNode);
+        //path = FindPath(currentNode, targetNode);
     }
 
     void FixedUpdate()
     {
         
-        cellPos = tilemap.WorldToCell(transform.position);
-        Vector2Int nodePos = new Vector2Int(cellPos.x, cellPos.y);
-        currentNode = GridManager.Instance.GetNodeAtPos(nodePos);
-        GridManager.Instance.map.TryGetValue(nodePos, out Node node);
+        //cellPos = tilemap.WorldToCell(transform.position);
+        //Vector2Int nodePos = new Vector2Int(cellPos.x, cellPos.y);
+        //currentNode = GridManager.Instance.GetNodeAtPos(nodePos);
+        //GridManager.Instance.map.TryGetValue(nodePos, out Node node);
 
-        targetCell = tilemap.WorldToCell(player.transform.position);
-        targetPos = tilemap.GetCellCenterWorld(targetCell);
-        Vector2Int tNodePos = new Vector2Int(targetCell.x, targetCell.y);
-        targetNode = GridManager.Instance.GetNodeAtPos(tNodePos);
+        //targetCell = tilemap.WorldToCell(player.transform.position);
+        //targetPos = tilemap.GetCellCenterWorld(targetCell);
+        //Vector2Int tNodePos = new Vector2Int(targetCell.x, targetCell.y);
+        //targetNode = GridManager.Instance.GetNodeAtPos(tNodePos);
 
-        Move();
+        //Move();
 
 
-        /*if (timeBetweenPathfinding > 60)
-        {
-            foreach (Node p in path)
-            {
-                p.HideTile();
-            }
-            path.Clear();
-            path = FindPath(currentNode, targetNode);
-            StopAllCoroutines();
-            //StartCoroutine(Move());
+        ///*if (timeBetweenPathfinding > 60)
+        //{
+        //    foreach (Node p in path)
+        //    {
+        //        p.HideTile();
+        //    }
+        //    path.Clear();
+        //    path = FindPath(currentNode, targetNode);
+        //    StopAllCoroutines();
+        //    //StartCoroutine(Move());
             
-            timeBetweenPathfinding = 0;
-            foreach (Node p in path)
-            {
-                p.ShowTile();
-            }
-        }*/
+        //    timeBetweenPathfinding = 0;
+        //    foreach (Node p in path)
+        //    {
+        //        p.ShowTile();
+        //    }
+        //}*/
         
 
-        elapsedTime += 1;
-        timeBetweenPathfinding += 1;
+        //elapsedTime += 1;
+        //timeBetweenPathfinding += 1;
     }
 
     private void Move()
@@ -121,46 +123,46 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    public List<Node> FindPath(Node start, Node end)
-    {
-        List<Node> openList = new List<Node>();
-        List<Node> closedList = new List<Node>();
+    //public List<Node> FindPath(Node start, Node end)
+    //{
+    //    List<Node> openList = new List<Node>();
+    //    List<Node> closedList = new List<Node>();
 
-        openList.Add(start);
+    //    openList.Add(start);
 
-        while (openList.Count > 0)
-        {
-            Node currentNode = openList.OrderBy(x => x.F).First();
+    //    while (openList.Count > 0)
+    //    {
+    //        Node currentNode = openList.OrderBy(x => x.F).First();
 
-            openList.Remove(currentNode);
-            closedList.Add(currentNode);
+    //        openList.Remove(currentNode);
+    //        closedList.Add(currentNode);
 
-            if (currentNode == end)
-            {
-                return GetFinishedList(start, end);
-            }
+    //        if (currentNode == end)
+    //        {
+    //            return GetFinishedList(start, end);
+    //        }
 
-            foreach (var node in GetNeighbourNodes(currentNode))
-            {
-                if (closedList.Contains(node) || Mathf.Abs(currentNode.position.z - node.position.z) > 1)
-                {
-                    continue;
-                }
+    //        foreach (var node in GetNeighbourNodes(currentNode))
+    //        {
+    //            if (closedList.Contains(node) || Mathf.Abs(currentNode.position.z - node.position.z) > 1)
+    //            {
+    //                continue;
+    //            }
 
-                node.G = GetManhattenDistance(start, node);
-                node.H = GetManhattenDistance(end, node);
+    //            node.G = GetManhattenDistance(start, node);
+    //            node.H = GetManhattenDistance(end, node);
 
-                node.parent = currentNode;
+    //            node.parent = currentNode;
 
-                if (!openList.Contains(node))
-                {
-                    openList.Add(node);
-                }
-            }
-        }
+    //            if (!openList.Contains(node))
+    //            {
+    //                openList.Add(node);
+    //            }
+    //        }
+    //    }
 
-        return new List<Node>();
-    } 
+    //    return new List<Node>();
+    //} 
 
     private List<Node> GetFinishedList(Node start, Node end)
     {

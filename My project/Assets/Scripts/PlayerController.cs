@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Tilemap col;
     
     Character character;
+    
     public float moveSpeed;
     private Vector3Int origPos;
     private Vector3Int targetCell;
@@ -19,12 +20,12 @@ public class PlayerController : MonoBehaviour
     private float basicCd = 1f;
     private float abilityCd = 1f;
     private float movementCd = 0.1f;
-
+    private bool activeAbilitySelected = false;
 
     private void Awake()
     {
-        Debug.Log("will get character");
         character = GetComponent<Character>();
+        character.SetPos(transform.position);
     }
 
     private void Start()
@@ -32,8 +33,9 @@ public class PlayerController : MonoBehaviour
         targetCell = tilemap.WorldToCell(transform.position);
         
         targetPosition = tilemap.GetCellCenterWorld(targetCell);
-    }
 
+        moveSpeed = character.GetMoveSpeed();
+    }
 
     void FixedUpdate()
     {
@@ -52,7 +54,6 @@ public class PlayerController : MonoBehaviour
             targetCell.x += 1;
             if (CanMove(targetCell))
             {
-                print("canMove");
                 targetPosition = tilemap.GetCellCenterWorld(targetCell);
                 MovePlayer(targetPosition);
                 character.SetOrientation("W");
@@ -93,9 +94,8 @@ public class PlayerController : MonoBehaviour
         }
 
         //BasicAttack
-        if (Input.GetButton("LeftMouse") && (basicCd <= 0))
+        if (Input.GetButton("LeftMouse") && (basicCd <= 0) && !(activeAbilitySelected))
         {
-            print("hello");
             ChooseAttackDirection();
             basicCd = 1f;
         } else
@@ -107,18 +107,21 @@ public class PlayerController : MonoBehaviour
         //VariableAbilities
         if (Input.GetButton("RightMouse") && (abilityCd <= 0))
         {
+            activeAbilitySelected = true;
             String ability = GetAbilityInSpot(0);
-            useActiveAbiltiy(ability);
+            UseActiveAbiltiy(ability);
             abilityCd = baseAbilityCd;
         } else if(Input.GetButton("LShift") && (abilityCd <= 0))
         {
+            activeAbilitySelected = true;
             String ability = GetAbilityInSpot(1);
-            useActiveAbiltiy(ability);
+            UseActiveAbiltiy(ability);
             abilityCd = baseAbilityCd;
         } else if(Input.GetButton("Space") && (abilityCd <= 0))
         {
+            activeAbilitySelected = true;
             String ability = GetAbilityInSpot(2);
-            useActiveAbiltiy(ability);
+            UseActiveAbiltiy(ability);
             abilityCd = baseAbilityCd;
         } else
         {
@@ -131,12 +134,12 @@ public class PlayerController : MonoBehaviour
         if(movementCd <= 0)
         {
             transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed);
+            character.SetPos(transform.position);
             movementCd = 0.1f;
         } else
         {
             movementCd -= Time.fixedDeltaTime;
-        }
-        
+        }    
     }
 
     private bool CanMove(Vector3Int target)
@@ -152,7 +155,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3Int cellToAttack = origPos;
 
-        string orientation = character.getOrientationAsString();
+        string orientation = character.GetOrientationAsString();
         switch (orientation)
         {
             case "north":
@@ -184,7 +187,7 @@ public class PlayerController : MonoBehaviour
         return ability;
     }
 
-    void useActiveAbiltiy(String abilityName)
+    void UseActiveAbiltiy(String abilityName)
     {
         //cellToAttack =  //h�mta detta p� current mouse/cursor pos som ger en node/cellPos
 
@@ -211,7 +214,7 @@ public class PlayerController : MonoBehaviour
 
     private void PerformAttack(Vector3Int cellToAttack)
     {
-        print("should no nothing rn");
+        character.UseBasicAbility(cellToAttack);
     }
 
     void OnCollisionEnter2D(Collision2D collision)

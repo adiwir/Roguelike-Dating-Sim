@@ -10,10 +10,9 @@ public class GridManager : MonoBehaviour
 {
     private static GridManager _instance;
     public static GridManager Instance { get { return _instance; } }
-
-    public List<Enemy> enemyList { get; set; }
-    public Dictionary<Vector3Int, Enemy> enemyPositions { get; set; }
-    private Boss boss;
+    //public Dictionary<Vector3Int, Enemy> enemyPositions { get; set; }
+    //private Boss boss;
+    //private StaticEnemy tempStaticEnemy;
 
     public GameObject nodePrefab;
     public GameObject nodeContainer;
@@ -61,39 +60,11 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
-        initializeEnemyList();
-        InitializeEnemyPositionMap();
-        //AddEnemies();
-
-    }
-
-    private void InitializeEnemyPositionMap()
-    {
-        foreach(Enemy enemy in enemyList)
-        {
-            enemyPositions.Add(enemy.getPos(), enemy);
-        }
-    }
-
-    void Start()
-    {
-        
     }
 
     public Node GetNodeAtPos(Vector2Int pos)
     {
         return map[pos];
-    }
-
-    void initializeEnemyList()
-    {
-        this.enemyList = new List<Enemy>();
-        enemyList.Add(boss);
-    }
-
-    void AddEnemies()
-    {
-
     }
 
 }

@@ -9,7 +9,8 @@ public class Character : Entity
     public Queue<ActiveAbility> abilities;
     public Queue<string> activeAbilities { get; set; }
     public List<string> assignedAbilities { get; set; }
-    BasicAbility basicAbility;
+    public BasicAbility basicAbility;
+    private Vector3 pos;
 
     public bool hasActiveAbilityLeft = true;
 
@@ -97,9 +98,9 @@ public class Character : Entity
 
     }
 
-    private void useBasicAbility()
+    public void UseBasicAbility(Vector3Int cellToAttack)
     {
-
+        basicAbility.UseAbility(this, cellToAttack);
     }
 
     //getters and setters
@@ -135,9 +136,24 @@ public class Character : Entity
         }
     }
 
-    public string getOrientationAsString()
+    public string GetOrientationAsString()
     {
         return orientation.ToString();
+    }
+
+    public Vector3 GetPos()
+    {
+        return this.pos;
+    }
+
+    public void SetPos(Vector3 vector)
+    {
+        this.pos = vector;
+    }
+
+    public float GetMoveSpeed()
+    {
+        return this.moveDistance;
     }
 
 }

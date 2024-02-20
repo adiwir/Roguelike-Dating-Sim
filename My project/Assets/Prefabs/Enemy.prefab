@@ -131,3 +131,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 0}
   col: {fileID: 0}
+  player: {fileID: 0}
