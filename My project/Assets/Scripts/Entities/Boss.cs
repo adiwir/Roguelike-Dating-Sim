@@ -30,7 +30,7 @@ public class Boss : MonoBehaviour
     private void Update()
     {
 
-        if (!(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1) && animator.GetCurrentAnimatorStateInfo(0).IsName("molebull_transformation"))
+        if (!(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1))
         {
             return;
         }
@@ -77,7 +77,7 @@ public class Boss : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1) && animator.GetCurrentAnimatorStateInfo(0).IsName("molebull_transformation"))
+        if (!(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1))
         {
             return;
         }
