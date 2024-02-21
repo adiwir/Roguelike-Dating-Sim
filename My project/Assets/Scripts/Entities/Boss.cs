@@ -62,16 +62,16 @@ public class Boss : MonoBehaviour
 
         if(isInSecondPhase)
         {
-            StartCoroutine(AnimatorSetFire(2.0f));
+            StartCoroutine(AnimatorSetFire("isTransforming", 2.0f));
             isInSecondPhase = false;
         }
     }
 
-    private IEnumerator AnimatorSetFire(float animationLength)
+    private IEnumerator AnimatorSetFire(string animation, float animationLength)
     {
-        animator.SetBool("isTransforming", true);
+        animator.SetBool(animation, true);
         yield return new WaitForSeconds(animationLength);
-        animator.SetBool("isTransforming", false);
+        animator.SetBool(animation, false);
         
     }
 
@@ -98,17 +98,22 @@ public class Boss : MonoBehaviour
 
     public IEnumerator Burrow(Vector3 playerPos)
     {
+        animator.SetBool("isBurrowing", true);
+        yield return new WaitForSeconds(1.1f);
         transform.position = Vector3.MoveTowards(transform.position, outOfSightPosition, 10000000000000);
         dirtParticles.transform.position = Vector3.MoveTowards(dirtParticles.transform.position, playerPos, 10000000000);
-        yield return new WaitForSeconds(3);
+        animator.SetBool("isBurrowing", false);
+        yield return new WaitForSeconds(2);
+        animator.SetBool("isUnburrowing", true);
         dirtParticles.transform.position = Vector3.MoveTowards(dirtParticles.transform.position, outOfSightPosition, 10000000000);
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPos.x, playerPos.y, 5), 100000000000000000);
+        yield return new WaitForSeconds(1.1f);
+        animator.SetBool("isUnburrowing", false);
         yield return Charge(new Vector3(currentPosition.x, currentPosition.y, 5));
     }
 
     public IEnumerator Charge(Vector3 playerPos)
     {
-        yield return new WaitForSeconds(0.5f);
         animator.SetBool("isCharging", true);
         Vector3 pos = transform.position;
         while (pos != playerPos)
