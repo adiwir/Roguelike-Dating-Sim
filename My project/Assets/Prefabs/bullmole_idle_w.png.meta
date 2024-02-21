@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a9f532d2e5e58c54f9588e207a6125cf
+guid: 1bf8916d35a70274ba795f5cfd8ed608
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bullmole_0
+      name: bullmole_idle_w_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 60
-        height: 47
+        width: 63
+        height: 35
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb3d05b9da0a2134181795673080a3ad
-      internalID: -1284995393
+      spriteID: 02760c6de78ad694bbbdb5c1e200e9c5
+      internalID: 18232183
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bullmole_1
+      name: bullmole_idle_w_1
       rect:
         serializedVersion: 2
-        x: 60
+        x: 63
         y: 0
-        width: 60
-        height: 47
+        width: 63
+        height: 35
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbe0aa935efca5f43bcebcf858e92df1
-      internalID: -1224915797
+      spriteID: c3b0c864f8cfce444a988602a6ef0c1a
+      internalID: -2094740659
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bullmole_2
+      name: bullmole_idle_w_2
       rect:
         serializedVersion: 2
-        x: 120
+        x: 126
         y: 0
-        width: 60
-        height: 47
+        width: 63
+        height: 35
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 454ae5547138bbb40a5bda820d19d476
-      internalID: 54404731
+      spriteID: b23692b6f4c9bff4e988778b87a443df
+      internalID: -1718052962
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bullmole_3
+      name: bullmole_idle_w_3
       rect:
         serializedVersion: 2
-        x: 180
+        x: 189
         y: 0
-        width: 60
-        height: 47
+        width: 63
+        height: 35
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14e5b1ed749d62d4382ef6026758ece9
-      internalID: 4509307
+      spriteID: 618da0b32d9e0e54bb681a88121bd1cc
+      internalID: -337918438
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bullmole_0: -1284995393
-      bullmole_1: -1224915797
-      bullmole_2: 54404731
-      bullmole_3: 4509307
+      bullmole_idle_w_0: 18232183
+      bullmole_idle_w_1: -2094740659
+      bullmole_idle_w_2: -1718052962
+      bullmole_idle_w_3: -337918438
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

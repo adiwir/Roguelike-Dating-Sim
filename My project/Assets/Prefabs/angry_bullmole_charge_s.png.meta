@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a9f532d2e5e58c54f9588e207a6125cf
+guid: ee9331c38bb074a4e96d1bfd3390716d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bullmole_0
+      name: angry_bullmole_charge_s_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 60
-        height: 47
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb3d05b9da0a2134181795673080a3ad
-      internalID: -1284995393
+      spriteID: e497d06a0e7bcec4aab91f8193049682
+      internalID: 684993053
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bullmole_1
+      name: angry_bullmole_charge_s_1
       rect:
         serializedVersion: 2
-        x: 60
+        x: 64
         y: 0
-        width: 60
-        height: 47
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbe0aa935efca5f43bcebcf858e92df1
-      internalID: -1224915797
+      spriteID: 483aca14ee0e9e5468e56f21560a6827
+      internalID: -29291679
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bullmole_2
+      name: angry_bullmole_charge_s_2
       rect:
         serializedVersion: 2
-        x: 120
+        x: 128
         y: 0
-        width: 60
-        height: 47
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 454ae5547138bbb40a5bda820d19d476
-      internalID: 54404731
+      spriteID: e42a21bd1f9d47441a7cc753643e6747
+      internalID: -2094006156
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bullmole_3
+      name: angry_bullmole_charge_s_3
       rect:
         serializedVersion: 2
-        x: 180
+        x: 192
         y: 0
-        width: 60
-        height: 47
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14e5b1ed749d62d4382ef6026758ece9
-      internalID: 4509307
+      spriteID: 710c69a1c931eef4dbd826e484f0610a
+      internalID: 887810614
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bullmole_0: -1284995393
-      bullmole_1: -1224915797
-      bullmole_2: 54404731
-      bullmole_3: 4509307
+      angry_bullmole_charge_s_0: 684993053
+      angry_bullmole_charge_s_1: -29291679
+      angry_bullmole_charge_s_2: -2094006156
+      angry_bullmole_charge_s_3: 887810614
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

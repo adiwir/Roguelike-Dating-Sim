@@ -15,12 +15,10 @@ public class Boss : MonoBehaviour
 
     public GameObject dirtParticles;
     public GameObject playerTarget;
+    public Animator animator;
 
-    public SpriteRenderer spriteRenderer;
-    public Sprite facingUpSprite;
-    public Sprite[] spriteArray;
-
-    bool flip;
+    [SerializeField] public bool isInSecondPhase = false;
+    public bool isFlipped = false;
 
     void Start()
     {
@@ -31,33 +29,59 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
+
+        if (!(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1) && animator.GetCurrentAnimatorStateInfo(0).IsName("molebull_transformation"))
+        {
+            return;
+        }
+
         Vector3 scale = transform.localScale;
 
         if(playerTarget.transform.position.y > transform.position.y)
         {
-            ChangeSprite(1);
-            flip = true;
+            isFlipped = true;
+
         }
         else
         {
-            ChangeSprite(0);
-            flip = false;
+            isFlipped = false;
         }
+        animator.SetBool("isFlipped", isFlipped);
 
         if (playerTarget.transform.position.x > transform.position.x)
         {
-            scale.x = Mathf.Abs(scale.x) * -1 * (flip ? -1 : 1);
+            
+            scale.x = Mathf.Abs(scale.x) * -1 * (isFlipped ? -1 : 1);
+
         }
         else
         {
-            scale.x = Mathf.Abs(scale.x) * (flip ? -1 : 1);
+            scale.x = Mathf.Abs(scale.x) * (isFlipped ? -1 : 1);
         }
-
         transform.localScale = scale;
+
+        if(isInSecondPhase)
+        {
+            StartCoroutine(AnimatorSetFire(2.0f));
+            isInSecondPhase = false;
+        }
+    }
+
+    private IEnumerator AnimatorSetFire(float animationLength)
+    {
+        animator.SetBool("isTransforming", true);
+        yield return new WaitForSeconds(animationLength);
+        animator.SetBool("isTransforming", false);
+        
     }
 
     void FixedUpdate()
     {
+        if (!(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1) && animator.GetCurrentAnimatorStateInfo(0).IsName("molebull_transformation"))
+        {
+            return;
+        }
+
         targetPosition = playerTarget.transform.position;
         currentPosition = targetPosition;
         if (elapsedTime > 150)
@@ -85,6 +109,7 @@ public class Boss : MonoBehaviour
     public IEnumerator Charge(Vector3 playerPos)
     {
         yield return new WaitForSeconds(0.5f);
+        animator.SetBool("isCharging", true);
         Vector3 pos = transform.position;
         while (pos != playerPos)
         {
@@ -93,14 +118,11 @@ public class Boss : MonoBehaviour
             yield return null;
             
         }
+        animator.SetBool("isCharging", false);
         inAttack = false;
         elapsedTime = 0;
     }
 
-    void ChangeSprite(int index)
-    {
-        spriteRenderer.sprite = spriteArray[index];
-    }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
