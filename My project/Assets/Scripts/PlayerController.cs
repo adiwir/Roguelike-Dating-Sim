@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        character = GetComponent<Character>();
-        character.SetPos(transform.position);
+        //character = GetComponent<Character>();
+        //character.SetPos(transform.position);
     }
 
     private void Start()
@@ -34,7 +34,12 @@ public class PlayerController : MonoBehaviour
         
         targetPosition = tilemap.GetCellCenterWorld(targetCell);
 
+        character = GetComponent<Character>();
+        character.SetPos(transform.position);
+
         moveSpeed = character.GetMoveSpeed();
+
+
     }
 
     void FixedUpdate()

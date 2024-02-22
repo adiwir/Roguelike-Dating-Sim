@@ -13,10 +13,9 @@ public class StaticEnemy : MonoBehaviour, Enemy
 
     public void Awake()
     {
-        tilemap = GetComponent<Tilemap>();
-        pos = tilemap.WorldToCell(transform.position);
+        //tilemap = GetComponent<Tilemap>();
         //col = GetComponent<Col>();
-        
+        pos = tilemap.WorldToCell(transform.position);
     }
 
     public Vector3Int getPos()
@@ -26,6 +25,7 @@ public class StaticEnemy : MonoBehaviour, Enemy
 
     public void takeDamage(int damage)
     {
+        Debug.Log("Ouch");
         this.HP -= damage;
         if (this.HP < 0)
         {

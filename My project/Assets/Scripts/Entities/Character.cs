@@ -9,7 +9,7 @@ public class Character : Entity
     public Queue<ActiveAbility> abilities;
     public Queue<string> activeAbilities { get; set; }
     public List<string> assignedAbilities { get; set; }
-    public BasicAbility basicAbility;
+    [SerializeField] private BasicAbility basicAbility;
     private Vector3 pos;
 
     public bool hasActiveAbilityLeft = true;

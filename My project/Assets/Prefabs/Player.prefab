@@ -94,6 +94,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8610734877936075474}
   - component: {fileID: 6154344873748433321}
+  - component: {fileID: -8668151527730129067}
+  - component: {fileID: -5483694335589299693}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -131,3 +133,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 0}
   col: {fileID: 0}
+  moveSpeed: 0
+--- !u!114 &-8668151527730129067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6983315668266302810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070bc67672be09e41a52540652027c1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDistance: 1
+  basicAbility: {fileID: 11400000, guid: 47327a7eca4acdd4d80a6064ded1c119, type: 2}
+  hasActiveAbilityLeft: 1
+--- !u!114 &-5483694335589299693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6983315668266302810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f462f14e7b09b6a4ca39760d3292e89f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
