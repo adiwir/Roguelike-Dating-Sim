@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Enemy
+public interface IEnemy
 {
     //Observer stuff
     // private List<IObserver> _observers = new List<IObserver>();

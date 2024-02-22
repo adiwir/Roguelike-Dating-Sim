@@ -10,7 +10,7 @@ public class GridManager : MonoBehaviour
 {
     private static GridManager _instance;
     public static GridManager Instance { get { return _instance; } }
-    //public Dictionary<Vector3Int, Enemy> enemyPositions { get; set; }
+    //public Dictionary<Vector3Int, IEnemy> enemyPositions { get; set; }
     //private Boss boss;
     //private StaticEnemy tempStaticEnemy;
 

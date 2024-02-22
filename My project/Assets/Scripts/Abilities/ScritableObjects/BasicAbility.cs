@@ -12,4 +12,6 @@ public abstract class BasicAbility : ScriptableObject, Ability
 
     public abstract void UseAbility(Character character, Vector3Int targetTile);
 
+    public abstract int GetDamage();
+
 }

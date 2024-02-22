@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Character : Entity
 
@@ -10,11 +11,12 @@ public class Character : Entity
     public Queue<string> activeAbilities { get; set; }
     public List<string> assignedAbilities { get; set; }
     [SerializeField] private BasicAbility basicAbility;
+    //[SerializeField] private EntityPosStorage enemyStorage;
     private Vector3 pos;
 
     public bool hasActiveAbilityLeft = true;
 
-    //public BasicAbility basicAbility = //TODO: Lägg basicAbility här;
+    //public BasicAbility basicAbility = //TODO: Lï¿½gg basicAbility hï¿½r;
     //
     enum Orientation
     {
@@ -76,8 +78,8 @@ public class Character : Entity
         } else
         {
             hasActiveAbilityLeft = false;
-            assignedAbilities[spot] = null; //inte så bra att den kan returnera null men får fixa det vid ett senare tilfälle.
-            //borde också säga till den att sätta ett kryss på abilityns plats här i HUD:en och att knappen/platsen stängs av
+            assignedAbilities[spot] = null; //inte sï¿½ bra att den kan returnera null men fï¿½r fixa det vid ett senare tilfï¿½lle.
+            //borde ocksï¿½ sï¿½ga till den att sï¿½tta ett kryss pï¿½ abilityns plats hï¿½r i HUD:en och att knappen/platsen stï¿½ngs av
         }
         
         return activatedAbility;
@@ -100,7 +102,14 @@ public class Character : Entity
 
     public void UseBasicAbility(Vector3Int cellToAttack)
     {
-        basicAbility.UseAbility(this, cellToAttack);
+        
+        //print("enemyStorage" + (enemyStorage == null));
+        IEnemy enemy = EntityPosStorage.Instance.GetEnemyOnCell(cellToAttack);
+        Debug.Log("enemy" + (enemy == null));
+        if (enemy != null)
+        {
+            enemy.takeDamage(basicAbility.GetDamage());
+        }
     }
 
     //getters and setters

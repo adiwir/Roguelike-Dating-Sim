@@ -1,17 +1,20 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Boss : MonoBehaviour, Enemy
+public class Boss : MonoBehaviour, IEnemy
 {
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private Tilemap col;
+    private List<Vector3Int> coveredArea;
 
     private int elapsedTime = 0;
     private Vector3 targetPosition;
     private Vector3 outOfSightPosition = new Vector3(100f, 100f);
     private Vector3Int position;
+    private int tilesCovered = 3;
 
     public GameObject dirtParticles;
     public GameObject playerTarget;
@@ -21,6 +24,7 @@ public class Boss : MonoBehaviour, Enemy
         dirtParticles = GameObject.FindWithTag("Dirt");
         playerTarget = GameObject.FindWithTag("Player");
         targetPosition = playerTarget.transform.position;
+        coveredArea = new List<Vector3Int>();
     }
 
     void FixedUpdate()
@@ -66,6 +70,22 @@ public class Boss : MonoBehaviour, Enemy
     {
         return this.position;
     }
+
+    // public List<Vector3Int> GetCoveredArea()
+    // {
+    //     Vector3Int 
+    //     for()
+    //     coveredArea.AddRange(new List<Vector3Int>
+    //     {
+        
+    //         this.position,
+    //         (this.position.x + 1), this.position.y + 1, this.position.x + 1
+    //         new Person("John3", "Doe" ),
+    //     });
+    //     coveredArea.
+
+    //     return coveredArea;
+    // }
 
     public void takeDamage(int damage)
     {
