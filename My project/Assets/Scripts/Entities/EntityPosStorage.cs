@@ -30,17 +30,6 @@ public class EntityPosStorage : MonoBehaviour
         //InitializeEnemyPositionMap();
     }
 
-    private void Update()
-    {
-        //if (enemyList != null) 
-        //{
-        //    foreach (IEnemy enemy in enemyList)
-        //    {
-        //        AddEnemy(enemy);
-        //    }
-        //}
-    }
-
     void InitializeEnemyList()
     {
         this.enemyList = new List<IEnemy>();

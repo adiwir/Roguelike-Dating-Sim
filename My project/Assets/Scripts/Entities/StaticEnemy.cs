@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
@@ -35,19 +36,29 @@ public class StaticEnemy : MonoBehaviour, IEnemy, IEnemyObserver
         return this.pos;
     }
 
-    public void takeDamage(int damage)
+    public void OnDeath()
+    {
+        Debug.Log("IEnemy died");
+        Destroy(this.gameObject);
+    }
+
+    public void TakeDamage(int damage)
     {
         Debug.Log("Ouch");
         this.HP -= damage;
         if (this.HP < 0)
         {
-            Debug.Log("IEnemy died");
-            //enemy dies here
+            OnDeath();
         }
     }
 
     public void UpdateEnemyPosition(Vector3 newPosition)
     {
         EntityPosStorage.Instance.AddEnemy(this);
+    }
+
+    public List<Vector3Int> GetCoveredArea()
+    {
+        throw new NotImplementedException();
     }
 }

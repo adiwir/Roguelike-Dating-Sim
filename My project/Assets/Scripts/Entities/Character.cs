@@ -47,7 +47,7 @@ public class Character : Entity
     //    abilities.Enqueue(new Shield());
     //}
 
-    public void EnqueueStartingAbilities()
+    public void EnqueueStartingAbilities() //TODO: Ändra så att vi använder Scriptable objects istället
     {
         activeAbilities = new Queue<string>();
         activeAbilities.Enqueue("C4");
@@ -108,7 +108,7 @@ public class Character : Entity
         Debug.Log("enemy" + (enemy == null));
         if (enemy != null)
         {
-            enemy.takeDamage(basicAbility.GetDamage());
+            enemy.TakeDamage(basicAbility.GetDamage());
         }
     }
 

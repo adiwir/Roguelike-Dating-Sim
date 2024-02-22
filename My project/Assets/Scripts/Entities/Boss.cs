@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static UnityEditor.PlayerSettings;
 
-public class Boss : MonoBehaviour, IEnemy
+public class Boss : MonoBehaviour, IEnemy, IEnemyObserver
 {
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private Tilemap col;
-    private List<Vector3Int> coveredArea;
+    private List<Vector3Int> coveredArea = new();
 
     private int elapsedTime = 0;
     private Vector3 targetPosition;
@@ -25,6 +26,8 @@ public class Boss : MonoBehaviour, IEnemy
         playerTarget = GameObject.FindWithTag("Player");
         targetPosition = playerTarget.transform.position;
         coveredArea = new List<Vector3Int>();
+        UpdateEnemyPosition(this.position);
+        UpdateCoveredArea();
     }
 
     void FixedUpdate()
@@ -71,24 +74,41 @@ public class Boss : MonoBehaviour, IEnemy
         return this.position;
     }
 
-    // public List<Vector3Int> GetCoveredArea()
-    // {
-    //     Vector3Int 
-    //     for()
-    //     coveredArea.AddRange(new List<Vector3Int>
-    //     {
-        
-    //         this.position,
-    //         (this.position.x + 1), this.position.y + 1, this.position.x + 1
-    //         new Person("John3", "Doe" ),
-    //     });
-    //     coveredArea.
+    public List<Vector3Int> GetCoveredArea()
+    {
+         return this.coveredArea;
+    }
 
-    //     return coveredArea;
-    // }
+    private void UpdateCoveredArea()//kalla på denna när bossen rör sig
+    {
+        coveredArea.Clear();
+        coveredArea.Add(this.position);
 
-    public void takeDamage(int damage)
+        for (int x = position.x - 1; x <= position.x + 1; x++)
+        {
+            for (int y = position.y - 1; y <= position.y + 1; y++)
+            {
+                for (int z = position.z - 1; z <= position.z + 1; z++)
+                {
+                    coveredArea.Add(new Vector3Int(x, y, z));
+                }
+            }
+        }
+    }
+
+    public void TakeDamage(int damage)
     {
         throw new NotImplementedException();
+    }
+
+    public void OnDeath()
+    {
+        //you get loot, game ends/ new room is unlocked
+        throw new NotImplementedException();
+    }
+
+    public void UpdateEnemyPosition(Vector3 newPosition)
+    {
+        EntityPosStorage.Instance.AddEnemy(this);
     }
 }

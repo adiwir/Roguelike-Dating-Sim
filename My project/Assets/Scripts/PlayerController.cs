@@ -183,7 +183,6 @@ public class PlayerController : MonoBehaviour
 
     private String GetAbilityInSpot(int spot)
     {
-        
         string ability = character.GetAndDequeueAbility(spot);
         if (ability == null) // detta �r bara tempor�rt
         {
@@ -194,7 +193,8 @@ public class PlayerController : MonoBehaviour
 
     void UseActiveAbiltiy(String abilityName)
     {
-        //cellToAttack =  //h�mta detta p� current mouse/cursor pos som ger en node/cellPos
+        
+        //cellToAttack =  //h�mta detta p� current mouse/cursor pos som ger en node/cellPos(använd MousePos.cs)
 
         switch (abilityName)
         {
