@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,8 +13,10 @@ public class PlayerController : MonoBehaviour
     
     Character character;
     public float moveSpeed;
-    private Vector3Int origPos;
-    private Vector3Int targetCell;
+    //public Node currentNode;
+    public finished2.OverlayTile standingOnTile;
+    private Vector2Int tilePos;
+    private Vector3Int origPos, targetCell;
     private Vector3 targetPosition;
     private float elapsedTime = 0f;
     private float basicCd = 1f;
@@ -28,9 +31,13 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        tilePos = new Vector2Int();
         targetCell = tilemap.WorldToCell(transform.position);
-        
         targetPosition = tilemap.GetCellCenterWorld(targetCell);
+        tilePos.x = targetCell.x;
+        tilePos.y = targetCell.y;
+        standingOnTile = finished2.MapManager.Instance.map[tilePos];
+        //currentNode = GridManager.Instance.map[new Vector2Int(targetCell.x, targetCell.y)];
     }
 
 
@@ -124,12 +131,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        
+    }
+
     void MovePlayer(Vector3 target)
     {
         if(movementCd <= 0)
         {
             transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed);
+            targetCell = tilemap.WorldToCell(transform.position);
+            targetPosition = tilemap.GetCellCenterWorld(targetCell);
+            tilePos.x = targetCell.x;
+            tilePos.y = targetCell.y;
+            standingOnTile = finished2.MapManager.Instance.map[tilePos];
             movementCd = 0.1f;
+
         } else
         {
             movementCd -= Time.fixedDeltaTime;
