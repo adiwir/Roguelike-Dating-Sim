@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private float abilityCd = 1f;
     private float movementCd = 0.1f;
     private bool activeAbilitySelected = false;
+    private bool isDead = false;
 
 
 
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (isDead) return;
         origPos = tilemap.WorldToCell(transform.position);
         targetCell = origPos;
 
@@ -233,6 +235,11 @@ public class PlayerController : MonoBehaviour
                 //push enemies that are in the _ spots in front of you
                 break;
         }
+    }
+
+    public void setDead(bool value)
+    {
+        isDead = value;
     }
 
     private void PerformAttack(Vector3Int cellToAttack)

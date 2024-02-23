@@ -7,17 +7,22 @@ public class Health : MonoBehaviour
 {
     public int health;
     public int numOfHearts;
-    private bool isDead = false;
-    [SerializeField] private bool isInvincible = false;
-
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
+    [SerializeField] private bool isInvincible = false;
     [SerializeField] private float invincibilityDurationSeconds;
     [SerializeField] private float invincibilityDeltaTime;
-    private GameObject player;
 
+    private PlayerController playerController;
+
+    private void Start()
+    {
+        playerController = GetComponent<PlayerController>();
+        health = 4;
+        numOfHearts = 4;
+    }
 
     void Update()
     {
@@ -48,15 +53,21 @@ public class Health : MonoBehaviour
         }
     }
 
+    public int getHealth()
+    {
+        return health; 
+    }
+
+
     public void decreaseHealthPoints(int hpReduction)
     {
         if (isInvincible) return;
 
         health -= hpReduction;
 
-        if (health <= 0)
+        if(health <= 0)
         {
-            isDead = true;
+            playerController.setDead(true);
         }
 
         StartCoroutine(BecomeTemporarilyInvincible());
