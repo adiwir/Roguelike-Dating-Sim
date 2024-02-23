@@ -12,150 +12,73 @@ using static UnityEngine.GraphicsBuffer;
 public class EnemyController : MonoBehaviour
 {
 
-    [SerializeField] Tilemap tilemap, col;
+    [SerializeField] Tilemap tilemap;
 
     public float moveSpeed = 1;
-    private Vector3Int currentCell, targetCell;
-    private Vector3 currentPos, targetPos;
-    private int elapsedTime = 0;
-    private int timeBetweenPathfinding = 0;
-    private Astar pathfinder;
-    private Node currNode, targetNode;
-    public List<Node> path;
-    public GameObject player;
+
+    private Vector3Int currentCell;
+    public Vector2Int tilePos;
+
+    private finished2.PathFinder pathFinder;
+    private List<finished2.OverlayTile> path;
+    public PlayerController target;
+    public finished2.OverlayTile enemyTile;
+    
+    
     
 
 
     // Start is called before the first frame update
     void Start()
     {
-        path = new List<Node>();
-        pathfinder = new Astar();
+        pathFinder = new finished2.PathFinder();
+        path = new List<finished2.OverlayTile>();
+        currentCell = tilemap.WorldToCell(transform.position);
+        target = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        tilePos.x = currentCell.x;
+        tilePos.y = currentCell.y;
+        enemyTile = finished2.MapManager.Instance.map[tilePos];
+
+    }
+
+    
+
+    private void Move(finished2.OverlayTile tile)
+    {
+        transform.position = Vector3.MoveTowards(transform.position, tilemap.GetCellCenterWorld(tile.gridLocation), moveSpeed);
 
         currentCell = tilemap.WorldToCell(transform.position);
-        currentPos = tilemap.GetCellCenterWorld(currentCell);
-        currNode = GridManager.Instance.GetNodeAtPos(new Vector2Int(currentCell.x, currentCell.y));
-
-        targetCell = tilemap.WorldToCell(player.transform.position);
-        targetPos = tilemap.GetCellCenterWorld(targetCell);
-        targetNode = GridManager.Instance.GetNodeAtPos(new Vector2Int(targetCell.x, targetCell.y));
-
-        path = pathfinder.FindPath(currNode, targetNode);
-        foreach (Node p in path)
-        {
-            p.ShowTile();
-        }
+        tilePos.x = currentCell.x;
+        tilePos.y = currentCell.y;
+        enemyTile = finished2.MapManager.Instance.map[tilePos];
+        
     }
 
-    void FixedUpdate()
+    public void MoveAlongPath()
     {
-        
-        
-        
-        targetCell = tilemap.WorldToCell(player.transform.position);
-        targetPos = tilemap.GetCellCenterWorld(targetCell);
-        targetNode = GridManager.Instance.GetNodeAtPos(new Vector2Int(targetCell.x, targetCell.y));
-        
-        
+        path = pathFinder.FindPath(enemyTile, target.standingOnTile);
 
-        /*
-        //Move(path[1]);
-        //path.RemoveAt(1);
-
-        if (path.Count > 1)
+        if (path.Count > 0)
         {
-            foreach (Node p in path)
-            {
-                p.HideTile();
-            }
-
-            foreach (Node p in path)
-            {
-                p.ShowTile();
-            }
-            
-            if (elapsedTime > 30)
-            {
-                Move(path[1]);
-                path.RemoveAt(1);
-            }
-            
-        }*/
-
-        
-        if (timeBetweenPathfinding > 60)
-        {
-            /*
-            path.Clear();
-            path = pathfinder.FindPath(currNode, targetNode);
-            */
-            if (path.Count > 1)
-            {
-                
-                foreach (Node p in path)
-                {
-                    p.HideTile();
-                }
-                path.Clear();
-                path = FindPath(currNode, targetNode);
-                //path.ShowTile();
-                
-                Move(path[1]);
-                path.RemoveAt(1);
-
-                timeBetweenPathfinding = 0;
-                    
-                foreach (Node p in path)
-                {
-                    p.ShowTile();
-                }
-                    
-            }
+            Move(path[0]);
+            path.RemoveAt(0);
 
         }
-
-        elapsedTime += 1;
-        timeBetweenPathfinding += 1;
     }
 
-    private void Move(Node node)
+    public void ShowAttack(List<Vector2Int> attackTiles)
     {
-        /*targetPos = tilemap.GetCellCenterWorld(target[0].position);
-        target.RemoveAt(0);
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed);
-        */
-
-        /*Vector3 target = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        Vector3Int tar = tilemap.WorldToCell(target);
-        tar.x -= 1;
-        target = tilemap.GetCellCenterWorld(tar);*/
-
-        /*Vector3Int tar = path[1].position;
-        Debug.Log(path[1].position);
-        Debug.Log(currentCell);
-        path.RemoveAt(0);*/
-
-        
-
-        if (CanMove(node.position))
-        {
-            
-            transform.position = Vector3.MoveTowards(transform.position, tilemap.GetCellCenterWorld(node.position), moveSpeed);
-
-            currentCell = tilemap.WorldToCell(transform.position);
-            currentPos = tilemap.GetCellCenterWorld(currentCell);
-            currNode = GridManager.Instance.GetNodeAtPos(new Vector2Int(currentCell.x, currentCell.y));
+        foreach (Vector2Int tilePos in attackTiles)
+        {            
+            finished2.MapManager.Instance.map[tilePos].ShowHurtTile();           
         }
-        elapsedTime = 0;   
     }
-    private bool CanMove(Vector3Int target)
+
+    public void HideAttack(List<Vector2Int> attackTiles)
     {
-        if (!tilemap.HasTile(target) || col.HasTile(target))
-        {
-            return false;
+        foreach (Vector2Int tilePos in attackTiles)
+        {           
+            finished2.MapManager.Instance.map[tilePos].HideTile();           
         }
-        return true;
-
     }
-
 }
