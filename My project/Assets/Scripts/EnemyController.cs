@@ -16,11 +16,7 @@ public class EnemyController : MonoBehaviour
 
     public float moveSpeed = 1;
 
-    private Astar pathfinder;
-    private Node currentNode, targetNode;
-    private List<Node> path;
-    public GameObject player;
-    private GridManager gridInstance;
+
     private Vector3Int currentCell;
     public Vector2Int tilePos;
 
@@ -36,20 +32,8 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        path = new List<Node>();
-        gridInstance = GridManager.Instance;
         
-        cellPos = tilemap.WorldToCell(transform.position);
-        currentPos = tilemap.GetCellCenterWorld(cellPos);
-        Vector2Int nodePos = new Vector2Int(cellPos.x, cellPos.y);
-        //currentNode = gridInstance.GetNodeAtPos(nodePos);
 
-        targetCell = tilemap.WorldToCell(player.transform.position);
-        targetPos = tilemap.GetCellCenterWorld(targetCell);
-        Vector2Int tNodePos = new Vector2Int(targetCell.x, targetCell.y);
-        //targetNode = gridInstance.GetNodeAtPos(tNodePos);
-
-        //path = FindPath(currentNode, targetNode);
         pathFinder = new finished2.PathFinder();
         path = new List<finished2.OverlayTile>();
         currentCell = tilemap.WorldToCell(transform.position);

@@ -25,11 +25,7 @@ public class PlayerController : MonoBehaviour
     private float movementCd = 0.1f;
     private bool activeAbilitySelected = false;
 
-    private void Awake()
-    {
-        //character = GetComponent<Character>();
-        //character.SetPos(transform.position);
-    }
+
 
     private void Start()
     {
@@ -40,15 +36,16 @@ public class PlayerController : MonoBehaviour
         tilePos.y = targetCell.y;
         standingOnTile = finished2.MapManager.Instance.map[tilePos];
         //currentNode = GridManager.Instance.map[new Vector2Int(targetCell.x, targetCell.y)];
-    }
-
         character = GetComponent<Character>();
         character.SetPos(transform.position);
 
         moveSpeed = character.GetMoveSpeed();
-
-
     }
+
+        
+
+
+    
 
     void FixedUpdate()
     {
@@ -204,7 +201,7 @@ public class PlayerController : MonoBehaviour
     {
         string ability = character.GetAndDequeueAbility(spot);
 
-        string ability = null; // character.GetAndDequeueAbility(spot);
+        
         if (ability == null) // detta �r bara tempor�rt
         {
             ability = "";

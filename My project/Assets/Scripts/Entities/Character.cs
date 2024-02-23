@@ -54,7 +54,7 @@ public class Character : Entity
     //    abilities.Enqueue(new Shield());
     //}
 
-    public void EnqueueStartingAbilities() //TODO: Ändra så att vi använder Scriptable objects istället
+    
     
 
     public void EnqueueStartingAbilities()

@@ -15,7 +15,7 @@ public class Sheep : MonoBehaviour
     {
         controller = GetComponent<EnemyController>();
         isAttacking = false;
-        timeThresh = 150;
+        timeThresh = 60;
         
     }
     void LateUpdate()
@@ -76,7 +76,7 @@ public class Sheep : MonoBehaviour
         {
             if (finished2.MapManager.Instance.map[tilePos] == controller.target.standingOnTile)
             {
-                Debug.Log("You have activated my trap card");
+                controller.target.GetComponentInParent<Health>().decreaseHealthPoints(1);
                 return;
             }
         }

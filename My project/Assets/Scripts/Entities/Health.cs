@@ -48,7 +48,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    void decreaseHealthPoints(int hpReduction)
+    public void decreaseHealthPoints(int hpReduction)
     {
         if (isInvincible) return;
 
