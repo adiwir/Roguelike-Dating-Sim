@@ -23,8 +23,6 @@ public class PlayerController : MonoBehaviour
     private float abilityCd = 1f;
     private float movementCd = 0.1f;
 
-
-
     private void Awake()
     {
         Debug.Log("will get character");
@@ -193,8 +191,8 @@ public class PlayerController : MonoBehaviour
 
     private String GetAbilityInSpot(int spot)
     {
-        
-        string ability = character.GetAndDequeueAbility(spot);
+
+        string ability = null; // character.GetAndDequeueAbility(spot);
         if (ability == null) // detta �r bara tempor�rt
         {
             ability = "";
@@ -238,6 +236,9 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("yeet");
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(70, 39), 1000000000);
+            float newSize = Mathf.MoveTowards(Camera.main.orthographicSize, 5, 100 * Time.fixedDeltaTime);
+            Camera.main.orthographicSize = newSize;
         }
     }
+
 }
