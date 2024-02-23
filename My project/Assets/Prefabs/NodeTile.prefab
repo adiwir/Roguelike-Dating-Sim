@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3271948906013338320}
   - component: {fileID: 2223634700477321773}
   - component: {fileID: -7628880569317777274}
-  - component: {fileID: 2537284701800402308}
+  - component: {fileID: 880299917855891728}
   m_Layer: 0
   m_Name: NodeTile
   m_TagString: Untagged
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6ede8eedb53d8c24f8cb69de98d09a79, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -135,7 +135,7 @@ PolygonCollider2D:
       - {x: 0, y: -0.18}
       - {x: 0.34, y: 0}
   m_UseDelaunayMesh: 0
---- !u!114 &2537284701800402308
+--- !u!114 &880299917855891728
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,10 +144,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3822470427676052809}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02a0eda601df13044945de31dd55b546, type: 3}
+  m_Script: {fileID: 11500000, guid: 64d65354c26dbb94cb90b8236e463be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   G: 0
   H: 0
-  parent: {fileID: 0}
-  position: {x: 0, y: 0, z: 0}
+  isBlocked: 0
+  Previous: {fileID: 0}
+  gridLocation: {x: 0, y: 0, z: 0}
