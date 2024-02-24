@@ -115,20 +115,23 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButton("RightMouse") && (abilityCd <= 0))
         {
             activeAbilitySelected = true;
+            character.ActivateAbilityInSpot(0);// nytt
             String ability = GetAbilityInSpot(0);
-            UseActiveAbiltiy(ability);
+            ToggleActiveAbility(ability);
             abilityCd = baseAbilityCd;
         } else if(Input.GetButton("LShift") && (abilityCd <= 0))
         {
             activeAbilitySelected = true;
+            character.ActivateAbilityInSpot(1);// nytt
             String ability = GetAbilityInSpot(1);
-            UseActiveAbiltiy(ability);
+            ToggleActiveAbility(ability);
             abilityCd = baseAbilityCd;
         } else if(Input.GetButton("Space") && (abilityCd <= 0))
         {
             activeAbilitySelected = true;
+            character.ActivateAbilityInSpot(2);// nytt
             String ability = GetAbilityInSpot(2);
-            UseActiveAbiltiy(ability);
+            ToggleActiveAbility(ability);
             abilityCd = baseAbilityCd;
         } else
         {
@@ -136,7 +139,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void LateUpdate()
+    private void LateUpdate()//TODO: Ta bort denna? Den gör väl inget?
     {
         
     }
@@ -181,7 +184,7 @@ public class PlayerController : MonoBehaviour
         return ability;
     }
 
-    void UseActiveAbiltiy(String abilityName)
+    void ToggleActiveAbility(String abilityName)//TODO: implementera så att detta faktiskt funkar som en toggle sen
     {
         
         //cellToAttack =  //h�mta detta p� current mouse/cursor pos som ger en node/cellPos(använd MousePos.cs)

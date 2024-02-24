@@ -17,7 +17,6 @@ public class Character : Entity
     private int maxHealth = 4;
     public bool hasActiveAbilityLeft = true;
 
-
     //public BasicAbility basicAbility = //TODO: L�gg basicAbility h�r;
     //
     enum Orientation
@@ -39,6 +38,7 @@ public class Character : Entity
         moveDistance = 1;
         
         EnqueueStartingAbilities();
+        //abilities = AbilityManager.Instance.GetAbilityQueue;
         AssignAbilities();
     }
 
@@ -55,11 +55,11 @@ public class Character : Entity
 
     void AssignAbilities()
     {
-        assignedAbilities = new List<string>(2);
-        for(int i = 0; i < startingAbilityAmount; i++)
-        {
-            Debug.Log(i);
-            //assignedAbilities[i] = activeAbilities.Dequeue();
+        assignedAbilities = new List<string>(3);
+        //assignedAbilities = new List<ActiveAbility>(3);
+        for (int i = 0; i < startingAbilityAmount; i++)
+        { 
+            assignedAbilities.Add(activeAbilities.Dequeue());
             assignedAbilities.Add(activeAbilities.Dequeue());
         }
     }
@@ -123,6 +123,20 @@ private void AttackNextCell(Vector3Int closestTargetCell, Vector3Int addVec) //T
             }
         }
 
+    }
+
+    public void ActivateAbilityInSpot(int spot)
+    {
+        string activatedAbility = assignedAbilities[spot];
+        if (activeAbilities.Count > 0)
+        {
+            assignedAbilities[spot] = activeAbilities.Dequeue();
+        }
+        else
+        {
+            hasActiveAbilityLeft = false;
+            assignedAbilities[spot] = null;
+        }
     }
 
     //getters and setters

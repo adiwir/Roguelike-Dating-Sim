@@ -9,13 +9,13 @@ public class StickyBomb : ActiveAbility
     private int amountOfTilesAffected = 5;
     private List<Vector3Int> TilesAffected = new();
 
-
-    private void Awake()
+    public StickyBomb() 
     {
         this.range = 3;
+        SetTiles();
     }
 
-    private void OnEnable()
+    private void SetTiles()
     {
         TilesAffected.Clear();
         TilesAffected.Add(new Vector3Int(0, 0, 0));

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ActiveAbility : ScriptableObject, Ability
+public abstract class ActiveAbility : Ability
 {
     //public string name;
     public string Description;
