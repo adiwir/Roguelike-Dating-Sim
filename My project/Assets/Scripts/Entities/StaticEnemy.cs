@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
-public class StaticEnemy : MonoBehaviour, IEnemy, IEnemyObserver
+public class StaticEnemy : MonoBehaviour, IEnemy
 {
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private Tilemap col;
@@ -31,7 +31,7 @@ public class StaticEnemy : MonoBehaviour, IEnemy, IEnemyObserver
         UpdateEnemyPosition(this.pos);
     }
 
-    public Vector3Int getPos()
+    public Vector3Int GetPos()
     {
         return this.pos;
     }

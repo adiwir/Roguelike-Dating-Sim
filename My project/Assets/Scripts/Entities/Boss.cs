@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using static UnityEditor.PlayerSettings;
 
-public class Boss : MonoBehaviour, IEnemy, IEnemyObserver
+public class Boss : MonoBehaviour, IEnemy
 {
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private Tilemap col;
@@ -145,7 +145,7 @@ public class Boss : MonoBehaviour, IEnemy, IEnemyObserver
         }
     }
 
-    public Vector3Int getPos()
+    public Vector3Int GetPos()
     {
         return this.position;
     }

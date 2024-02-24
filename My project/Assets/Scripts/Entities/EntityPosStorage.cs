@@ -61,7 +61,7 @@ public class EntityPosStorage : MonoBehaviour
         {
             foreach (IEnemy enemy in enemyList)
             {
-                if(enemy.getPos() == targetCell)//TODO: gör så att detta kommer funka för Bossen
+                if(enemy.GetPos() == targetCell)//TODO: gör så att detta kommer funka för Bossen
                 {
                     return enemy;
                 }
