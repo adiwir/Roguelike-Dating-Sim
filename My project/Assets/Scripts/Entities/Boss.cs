@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using static UnityEditor.PlayerSettings;
 
-public class Boss : MonoBehaviour, IEnemy
+public class Boss : Enemy
 {
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private Tilemap col;
@@ -15,7 +15,7 @@ public class Boss : MonoBehaviour, IEnemy
     private Vector3 targetPosition;
     private Vector3 currentPosition;
     private Vector3 outOfSightPosition = new Vector3(100f, 100f);
-    private Vector3Int position;
+
     private int tilesCovered = 3;
     [SerializeField] private bool inAttack = false;
 
@@ -32,7 +32,7 @@ public class Boss : MonoBehaviour, IEnemy
         playerTarget = GameObject.FindWithTag("Player");
         targetPosition = playerTarget.transform.position;
         coveredArea = new List<Vector3Int>();
-        UpdateEnemyPosition(this.position);
+        UpdateEnemyPosition(this.pos);
         UpdateCoveredArea();
     }
 
@@ -145,26 +145,16 @@ public class Boss : MonoBehaviour, IEnemy
         }
     }
 
-    public Vector3Int GetPos()
-    {
-        return this.position;
-    }
-
-    public List<Vector3Int> GetCoveredArea()
-    {
-         return this.coveredArea;
-    }
-
     private void UpdateCoveredArea()//kalla p� denna n�r bossen r�r sig
     {
         coveredArea.Clear();
-        coveredArea.Add(this.position);
+        coveredArea.Add(this.pos);
 
-        for (int x = position.x - 1; x <= position.x + 1; x++)
+        for (int x = pos.x - 1; x <= pos.x + 1; x++)
         {
-            for (int y = position.y - 1; y <= position.y + 1; y++)
+            for (int y = pos.y - 1; y <= pos.y + 1; y++)
             {
-                for (int z = position.z - 1; z <= position.z + 1; z++)
+                for (int z = pos.z - 1; z <= pos.z + 1; z++)
                 {
                     coveredArea.Add(new Vector3Int(x, y, z));
                 }
@@ -172,19 +162,19 @@ public class Boss : MonoBehaviour, IEnemy
         }
     }
 
-    public void TakeDamage(int damage)
+    public override List<Vector3Int> GetCoveredArea()
+    {
+        return this.coveredArea;
+    }
+
+    public override void TakeDamage(int damage)
     {
         throw new NotImplementedException();
     }
 
-    public void OnDeath()
+    public override void OnDeath()
     {
-        //you get loot, game ends/ new room is unlocked
         throw new NotImplementedException();
     }
 
-    public void UpdateEnemyPosition(Vector3 newPosition)
-    {
-        EntityPosStorage.Instance.AddEnemy(this);
-    }
 }

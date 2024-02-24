@@ -4,14 +4,12 @@ using UnityEngine;
 
 public abstract class ActiveAbility : ScriptableObject, Ability
 {
-    string Name;
+    //public string name;
     public string Description;
 
     public int range;
 
     public Vector3Int targetSquare;
-
-    //public abstract void useActive();
 
     public  abstract void UseAbility(Character character, Vector3Int targetTile);
 

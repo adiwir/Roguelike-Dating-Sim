@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private Vector2Int tilePos;
     private Vector3Int origPos, targetCell;
     private Vector3 targetPosition;
-    private float elapsedTime = 0f;
+
     private float basicCd = 1f;
     private float abilityCd = 1f;
     private float movementCd = 0.1f;
@@ -42,11 +42,6 @@ public class PlayerController : MonoBehaviour
 
         moveSpeed = character.GetMoveSpeed();
     }
-
-        
-
-
-    
 
     void FixedUpdate()
     {
@@ -108,7 +103,7 @@ public class PlayerController : MonoBehaviour
         //BasicAttack
         if (Input.GetButton("LeftMouse") && (basicCd <= 0) && !(activeAbilitySelected))
         {
-            ChooseAttackDirection();
+            character.UseBasicAbility(origPos);
             basicCd = 1f;
         } else
         {
@@ -174,31 +169,6 @@ public class PlayerController : MonoBehaviour
         return true;
     }
 
-    void ChooseAttackDirection()
-    {
-        Vector3Int cellToAttack = origPos;
-
-        string orientation = character.GetOrientationAsString();
-        switch (orientation)
-        {
-            case "north":
-                cellToAttack.x += 1;
-                break;
-            case "south":
-                cellToAttack.x -= 1;
-                break;
-            case "west":
-                cellToAttack.y += 1;
-                break;
-            case "east":
-                cellToAttack.y -= 1;
-                break;
-        }
-
-        PerformAttack(cellToAttack);
-
-    }
-
     private String GetAbilityInSpot(int spot)
     {
         string ability = character.GetAndDequeueAbility(spot);
@@ -218,7 +188,7 @@ public class PlayerController : MonoBehaviour
 
         switch (abilityName)
         {
-            case "C4":
+            case "StickyBomb":
                 //cellToAttack.x + 1;
                 //cellToAttack.x - 1;
                 //cellToAttack.y + 1;
@@ -242,10 +212,7 @@ public class PlayerController : MonoBehaviour
         isDead = value;
     }
 
-    private void PerformAttack(Vector3Int cellToAttack)
-    {
-        character.UseBasicAbility(cellToAttack);
-    }
+
 
     void OnCollisionEnter2D(Collision2D collision)
     {

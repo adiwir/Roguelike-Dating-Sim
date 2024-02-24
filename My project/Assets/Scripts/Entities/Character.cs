@@ -11,7 +11,6 @@ public class Character : Entity
     public Queue<string> activeAbilities { get; set; }
     public List<string> assignedAbilities { get; set; }
     [SerializeField] private BasicAbility basicAbility;
-    //[SerializeField] private EntityPosStorage enemyStorage;
     private Vector3 pos;
 
     private int healthPoints;
@@ -37,33 +36,19 @@ public class Character : Entity
 
     public void Awake()
     {
-        //isFriendly = true;
-        //isDead = false;
         moveDistance = 1;
-        //this.basicAbility = gameObject.AddComponent<PlayerBasicAbility>();
         
         EnqueueStartingAbilities();
         AssignAbilities();
     }
 
-    //public void EnqueueStartingAbilities()
-    //{ //Vad vi ska ha
-    //    abilities = new Queue<ActiveAbility>();
-    //    abilities.Enqueue(new Fireball());
-    //    abilities.Enqueue(new Fireball());
-    //    abilities.Enqueue(new Shield());
-    //}
-
-    
-    
-
     public void EnqueueStartingAbilities()
     {
         activeAbilities = new Queue<string>();
-        activeAbilities.Enqueue("C4");
-        activeAbilities.Enqueue("C4");
+        activeAbilities.Enqueue("StickyBomb");
+        activeAbilities.Enqueue("StickyBomb");
         activeAbilities.Enqueue("Forcefield");
-        activeAbilities.Enqueue("C4");
+        activeAbilities.Enqueue("StickyBomb");
         activeAbilities.Enqueue("Shove");
         activeAbilities.Enqueue("Shoot Laser");
     }
@@ -102,18 +87,45 @@ public class Character : Entity
 
     public void UseBasicAbility(Vector3Int cellToAttack)
     {
-        
-        //print("enemyStorage" + (enemyStorage == null));
-        IEnemy enemy = EntityPosStorage.Instance.GetEnemyOnCell(cellToAttack);
-        Debug.Log("enemy" + (enemy == null));
-        if (enemy != null)
+        Vector3Int addVector = new();
+        switch (orientation)
         {
-            enemy.TakeDamage(basicAbility.GetDamage());
+            case Orientation.north:
+                addVector.x = 1;
+                break;
+            case Orientation.south:
+                cellToAttack.x = -1;
+                break;
+            case Orientation.west:
+                cellToAttack.y = 1;
+                break;
+            case Orientation.east:
+                cellToAttack.y = -1;
+                break;
         }
+        AttackNextCell(cellToAttack, addVector);
+
+    }
+
+private void AttackNextCell(Vector3Int closestTargetCell, Vector3Int addVec) //TODO: Loopa denna(för basic loopa 2 gånger).
+    {
+        Enemy enemy;
+        
+        for(int i = 1; i <= basicAbility.GetRange(); i++)
+        {
+            
+            enemy = EnemyPosStorage.Instance.GetEnemyOnCell(closestTargetCell + (addVec*i));
+            if (enemy != null)
+            {
+                Debug.Log("hitting enemy");
+                enemy.TakeDamage(basicAbility.GetDamage());
+                break;
+            }
+        }
+
     }
 
     //getters and setters
-
 
 
     public void SetOrientation(string key)

@@ -5,12 +5,11 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
-public class StaticEnemy : MonoBehaviour, IEnemy
+public class StaticEnemy : Enemy
 {
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private Tilemap col;
     [SerializeField] private int HP = 3;
-    private Vector3Int pos;
     EnemySubject enemySubject;
 
     public void Awake()
@@ -31,33 +30,23 @@ public class StaticEnemy : MonoBehaviour, IEnemy
         UpdateEnemyPosition(this.pos);
     }
 
-    public Vector3Int GetPos()
+    public override void OnDeath()
     {
-        return this.pos;
-    }
-
-    public void OnDeath()
-    {
-        Debug.Log("IEnemy died");
+        Debug.Log("Enemy died");
         Destroy(this.gameObject);
     }
 
-    public void TakeDamage(int damage)
+    public override void TakeDamage(int damage)
     {
         Debug.Log("Ouch");
         this.HP -= damage;
-        if (this.HP < 0)
+        if (this.HP <= 0)
         {
             OnDeath();
         }
     }
 
-    public void UpdateEnemyPosition(Vector3 newPosition)
-    {
-        EntityPosStorage.Instance.AddEnemy(this);
-    }
-
-    public List<Vector3Int> GetCoveredArea()
+    public override List<Vector3Int> GetCoveredArea()
     {
         throw new NotImplementedException();
     }

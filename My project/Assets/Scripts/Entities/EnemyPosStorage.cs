@@ -6,15 +6,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class EntityPosStorage : MonoBehaviour
+public class EnemyPosStorage : MonoBehaviour
 {
 
     //använd observer pattern
     //GridManager gridManager = GridManager.Instance;
-    private static EntityPosStorage _instance;
-    public static EntityPosStorage Instance { get { return _instance; } }
-    public List<IEnemy> enemyList { get; set; }
-    //public Dictionary<Vector3Int, IEnemy> enemyPositions { get; set; }
+    private static EnemyPosStorage _instance;
+    public static EnemyPosStorage Instance { get { return _instance; } }
+    public List<Enemy> enemyList { get; set; }
 
     private void Awake()
     {
@@ -27,28 +26,21 @@ public class EntityPosStorage : MonoBehaviour
             _instance = this;
         }
         InitializeEnemyList();
-        //InitializeEnemyPositionMap();
     }
 
     void InitializeEnemyList()
     {
-        this.enemyList = new List<IEnemy>();
-        //enemyList.Add(boss);
-        //enemyList.Add(tempStaticEnemy);
+        this.enemyList = new List<Enemy>();
     }
 
-    public void AddEnemy(IEnemy enemy)
+    public void AddEnemy(Enemy enemy)
     {
         this.enemyList.Add(enemy);
     }
-    //private void InitializeEnemyPositionMap()
-    //{
-    //    enemyPositions = new Dictionary<Vector3Int, IEnemy>();
-    //}
 
-    public IEnemy GetEnemyOnCell(Vector3Int targetCell)
+    public Enemy GetEnemyOnCell(Vector3Int targetCell)
     {
-        //IEnemy enemyOnCell;
+        //Enemy enemyOnCell;
         //if (enemyPositions.TryGetValue(targetCell, out enemyOnCell))
         //{
         //    return enemyOnCell;
@@ -59,7 +51,7 @@ public class EntityPosStorage : MonoBehaviour
         //}
         if (enemyList != null)
         {
-            foreach (IEnemy enemy in enemyList)
+            foreach (Enemy enemy in enemyList)
             {
                 if(enemy.GetPos() == targetCell)//TODO: gör så att detta kommer funka för Bossen
                 {

@@ -9,21 +9,13 @@ public class PlayerBasicAbility : BasicAbility
 {
     [SerializeField] int damage = 1;
     string name;
-    //[SerializeField] private EntityPosStorage enemyStorage;
-
-    //public __ image
-
-    public override void UseAbility(Character character, Vector3Int targetTile)
-    {
-        //start animation here
-    }
 
     private void Awake()
     {
         //enemyStorage = EnemyStorage.Instance;
         //enemyStorage = GetComponment<EnemyStorage>();//TODO: Fixa detta imorgon
         name = "Whack";
-        range = 1;
+        range = 2;
         //description = ""
     }
 
@@ -32,4 +24,8 @@ public class PlayerBasicAbility : BasicAbility
         return this.damage;
     }
 
+    public override int GetRange()
+    {
+        return this.range;
+    }
 }
