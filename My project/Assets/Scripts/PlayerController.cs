@@ -112,26 +112,21 @@ public class PlayerController : MonoBehaviour
         }
 
         //VariableAbilities
-        if (Input.GetButton("RightMouse") && (abilityCd <= 0))
+        if (Input.GetButtonDown("RightMouse") && (abilityCd <= 0)) //frågan är om man ska använda nya ability systemet här
         {
-            activeAbilitySelected = true;
+            Debug.Log("activated RightMouse");
+            //activeAbilitySelected = true;
             character.ActivateAbilityInSpot(0);// nytt
-            String ability = GetAbilityInSpot(0);
-            ToggleActiveAbility(ability);
             abilityCd = baseAbilityCd;
-        } else if(Input.GetButton("LShift") && (abilityCd <= 0))
+        } else if(Input.GetButtonDown("LShift") && (abilityCd <= 0))
         {
-            activeAbilitySelected = true;
+            //activeAbilitySelected = true;
             character.ActivateAbilityInSpot(1);// nytt
-            String ability = GetAbilityInSpot(1);
-            ToggleActiveAbility(ability);
             abilityCd = baseAbilityCd;
-        } else if(Input.GetButton("Space") && (abilityCd <= 0))
+        } else if(Input.GetButtonDown("Space") && (abilityCd <= 0))
         {
-            activeAbilitySelected = true;
+            //activeAbilitySelected = true;
             character.ActivateAbilityInSpot(2);// nytt
-            String ability = GetAbilityInSpot(2);
-            ToggleActiveAbility(ability);
             abilityCd = baseAbilityCd;
         } else
         {
@@ -170,18 +165,6 @@ public class PlayerController : MonoBehaviour
             return false;
         }
         return true;
-    }
-
-    private String GetAbilityInSpot(int spot)
-    {
-        string ability = character.GetAndDequeueAbility(spot);
-
-        
-        if (ability == null) // detta �r bara tempor�rt
-        {
-            ability = "";
-        }
-        return ability;
     }
 
     void ToggleActiveAbility(String abilityName)//TODO: implementera så att detta faktiskt funkar som en toggle sen

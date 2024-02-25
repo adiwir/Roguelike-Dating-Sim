@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class StickyBomb : ActiveAbility
 {
-    string Name = "StickyBomb";
     //public __ image
     private int amountOfTilesAffected = 5;
     private List<Vector3Int> TilesAffected = new();
 
     public StickyBomb() 
     {
+        this.name = "StickyBomb";
         this.range = 3;
         SetTiles();
     }

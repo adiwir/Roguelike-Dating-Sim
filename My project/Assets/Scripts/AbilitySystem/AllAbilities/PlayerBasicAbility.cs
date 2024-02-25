@@ -8,7 +8,7 @@ using UnityEngine.TextCore.Text;
 public class PlayerBasicAbility : BasicAbility
 {
     [SerializeField] int damage = 1;
-    string name;
+    //string name;
 
     private void Awake()
     {

@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 6154344873748433321}
   - component: {fileID: -8668151527730129067}
   - component: {fileID: -5483694335589299693}
+  - component: {fileID: -7578157351148216833}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -134,6 +135,7 @@ MonoBehaviour:
   tilemap: {fileID: 0}
   col: {fileID: 0}
   moveSpeed: 0
+  standingOnTile: {fileID: 0}
 --- !u!114 &-8668151527730129067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,3 +163,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f462f14e7b09b6a4ca39760d3292e89f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-7578157351148216833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6983315668266302810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e20d93aeae1188b4198c00a2a0f10cd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TotalAbilityAmount: 6

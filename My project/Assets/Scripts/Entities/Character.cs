@@ -4,14 +4,13 @@ using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 public class Character : Entity
-
 {
     private readonly int startingAbilityAmount = 3;
-    public Queue<ActiveAbility> abilities;
-    public Queue<string> activeAbilities { get; set; }
-    public List<string> assignedAbilities { get; set; }
+    public Queue<ActiveAbility> abilityQueue;
+    public List<ActiveAbility> assignedAbilities { get; set; }
     [SerializeField] private BasicAbility basicAbility;
     private Vector3 pos;
+    private AbilityManager abilityManager;
 
     private int healthPoints;
     private int maxHealth = 4;
@@ -31,54 +30,42 @@ public class Character : Entity
     public void Start()
     {
         this.healthPoints = maxHealth;
+        abilityQueue = abilityManager.GetAbilityQueue();
+        Debug.Log("ability amount " + abilityQueue.Count);
+        AssignAbilities();
     }
 
     public void Awake()
     {
         moveDistance = 1;
+        abilityManager = GetComponent<AbilityManager>();
         
-        EnqueueStartingAbilities();
-        //abilities = AbilityManager.Instance.GetAbilityQueue;
-        AssignAbilities();
-    }
+        
 
-    public void EnqueueStartingAbilities()
-    {
-        activeAbilities = new Queue<string>();
-        activeAbilities.Enqueue("StickyBomb");
-        activeAbilities.Enqueue("StickyBomb");
-        activeAbilities.Enqueue("Forcefield");
-        activeAbilities.Enqueue("StickyBomb");
-        activeAbilities.Enqueue("Shove");
-        activeAbilities.Enqueue("Shoot Laser");
+        //abilityQueue = AbilityManager.Instance.GetAbilityQueue();
     }
 
     void AssignAbilities()
     {
-        assignedAbilities = new List<string>(3);
-        //assignedAbilities = new List<ActiveAbility>(3);
+        assignedAbilities = new List<ActiveAbility>(3);
         for (int i = 0; i < startingAbilityAmount; i++)
         { 
-            assignedAbilities.Add(activeAbilities.Dequeue());
-            assignedAbilities.Add(activeAbilities.Dequeue());
+            assignedAbilities.Add(abilityQueue.Dequeue());
         }
     }
 
-    public string GetAndDequeueAbility(int spot)
-    {
-        string activatedAbility = assignedAbilities[spot];
-        if (activeAbilities.Count > 0)
-        {
-            assignedAbilities[spot] = activeAbilities.Dequeue();
-        } else
-        {
-            hasActiveAbilityLeft = false;
-            assignedAbilities[spot] = null; //inte s� bra att den kan returnera null men f�r fixa det vid ett senare tilf�lle.
-            //borde ocks� s�ga till den att s�tta ett kryss p� abilityns plats h�r i HUD:en och att knappen/platsen st�ngs av
-        }
+    //public ActiveAbility GetAndDequeueAbility(int spot)
+    //{
+    //    ActiveAbility activatedAbility = assignedAbilities[spot];
+    //    assignedAbilities[spot] = abilityQueue.Dequeue();
+    //    if(abilityQueue.Count <= 0)
+    //    {
+    //        hasActiveAbilityLeft = false;
+    //        assignedAbilities[spot] = null;
+    //    }
         
-        return activatedAbility;
-    }
+    //    return activatedAbility;
+    //}
 
     private void useVariableAbility()
     {
@@ -107,7 +94,7 @@ public class Character : Entity
 
     }
 
-private void AttackNextCell(Vector3Int closestTargetCell, Vector3Int addVec) //TODO: Loopa denna(för basic loopa 2 gånger).
+    private void AttackNextCell(Vector3Int closestTargetCell, Vector3Int addVec) //TODO: Loopa denna(för basic loopa 2 gånger).
     {
         Enemy enemy;
         
@@ -122,21 +109,41 @@ private void AttackNextCell(Vector3Int closestTargetCell, Vector3Int addVec) //T
                 break;
             }
         }
-
     }
 
     public void ActivateAbilityInSpot(int spot)
     {
-        string activatedAbility = assignedAbilities[spot];
-        if (activeAbilities.Count > 0)
+        if (ActivesAvailable())
         {
-            assignedAbilities[spot] = activeAbilities.Dequeue();
+            //assignedAbilities[spot].UseAbility(this,);
+            //Debug.Log(assignedAbilities[spot]);
+            if (assignedAbilities[spot] != null) 
+            {
+                assignedAbilities[spot].CanIActivate(); 
+            } else
+            {
+                print("That button doesn't have an ability"); //TODO: fixa så att man inte kan aktivera den alls om den är tom
+            }
         }
-        else
+        assignedAbilities[spot] = null;
+        if (abilityQueue.Count <= 0)
         {
+            
             hasActiveAbilityLeft = false;
-            assignedAbilities[spot] = null;
+            //TODO: visa på HUD att abilityQueue är använda
         }
+        else { assignedAbilities[spot] = abilityQueue.Dequeue(); }
+
+    }
+
+    private bool ActivesAvailable()
+    {
+        bool hasAssignedAbility = false;
+        foreach(ActiveAbility active in assignedAbilities)
+        {
+            if (active != null) { hasAssignedAbility = true; }
+        }
+        return hasAssignedAbility;
     }
 
     //getters and setters

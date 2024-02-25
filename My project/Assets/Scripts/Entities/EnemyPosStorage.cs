@@ -40,15 +40,6 @@ public class EnemyPosStorage : MonoBehaviour
 
     public Enemy GetEnemyOnCell(Vector3Int targetCell)
     {
-        //Enemy enemyOnCell;
-        //if (enemyPositions.TryGetValue(targetCell, out enemyOnCell))
-        //{
-        //    return enemyOnCell;
-        //}
-        //else
-        //{
-        //    return null;
-        //}
         if (enemyList != null)
         {
             foreach (Enemy enemy in enemyList)
