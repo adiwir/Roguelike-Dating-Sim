@@ -19,4 +19,8 @@ public class Shield : ActiveAbility
 
     }
 
+    public override void SetAreaOfEffect()
+    {
+        throw new System.NotImplementedException();
+    }
 }

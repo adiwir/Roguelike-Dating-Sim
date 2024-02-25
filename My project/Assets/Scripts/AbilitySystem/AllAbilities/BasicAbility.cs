@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BasicAbility : ScriptableObject, Ability
+public abstract class BasicAbility : ScriptableObject, IAbility
 {
     string Name;
     public string Description;

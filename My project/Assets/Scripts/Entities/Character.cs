@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+using UnityEngine.Tilemaps;
 
 public class Character : Entity
 {
@@ -9,6 +11,9 @@ public class Character : Entity
     public Queue<ActiveAbility> abilityQueue;
     public List<ActiveAbility> assignedAbilities { get; set; }
     [SerializeField] private BasicAbility basicAbility;
+    ActiveAbility toggledAbility;
+    public List<Vector3Int> areaOfEffect;
+
     private Vector3 pos;
     private AbilityManager abilityManager;
 
@@ -16,8 +21,6 @@ public class Character : Entity
     private int maxHealth = 4;
     public bool hasActiveAbilityLeft = true;
 
-    //public BasicAbility basicAbility = //TODO: L�gg basicAbility h�r;
-    //
     enum Orientation
     {
         north,
@@ -39,10 +42,6 @@ public class Character : Entity
     {
         moveDistance = 1;
         abilityManager = GetComponent<AbilityManager>();
-        
-        
-
-        //abilityQueue = AbilityManager.Instance.GetAbilityQueue();
     }
 
     void AssignAbilities()
@@ -52,24 +51,6 @@ public class Character : Entity
         { 
             assignedAbilities.Add(abilityQueue.Dequeue());
         }
-    }
-
-    //public ActiveAbility GetAndDequeueAbility(int spot)
-    //{
-    //    ActiveAbility activatedAbility = assignedAbilities[spot];
-    //    assignedAbilities[spot] = abilityQueue.Dequeue();
-    //    if(abilityQueue.Count <= 0)
-    //    {
-    //        hasActiveAbilityLeft = false;
-    //        assignedAbilities[spot] = null;
-    //    }
-        
-    //    return activatedAbility;
-    //}
-
-    private void useVariableAbility()
-    {
-
     }
 
     public void UseBasicAbility(Vector3Int cellToAttack)
@@ -113,27 +94,59 @@ public class Character : Entity
 
     public void ActivateAbilityInSpot(int spot)
     {
+        if(toggledAbility != null && ReferenceEquals(toggledAbility, assignedAbilities[spot]))
+        {
+            ActivateToggledAbility(spot);
+        }
+        else
+        {
+            ToggleAbilityInSpot(spot);
+        }
+    }
+
+    private void ActivateToggledAbility(int spot)
+    {
+        print("ActivatedAbility");
+        toggledAbility.CanIActivate();
+        toggledAbility = null;
+
+        if (abilityQueue.Count <= 0)
+        {
+            hasActiveAbilityLeft = false;
+            //TODO: visa på HUD att abilityQueue är använda
+        }
+        else { assignedAbilities[spot] = abilityQueue.Dequeue(); }
+    }
+
+    public void ToggleAbilityInSpot(int spot)
+    {
         if (ActivesAvailable())
         {
             //assignedAbilities[spot].UseAbility(this,);
             //Debug.Log(assignedAbilities[spot]);
             if (assignedAbilities[spot] != null) 
             {
-                assignedAbilities[spot].CanIActivate(); 
+                print("toggledAbility");
+                toggledAbility = assignedAbilities[spot];
+                areaOfEffect = toggledAbility.GetAreaOfEffect();
+                DisplayAreaOfEffect();
             } else
             {
                 print("That button doesn't have an ability"); //TODO: fixa så att man inte kan aktivera den alls om den är tom
             }
         }
-        assignedAbilities[spot] = null;
-        if (abilityQueue.Count <= 0)
-        {
-            
-            hasActiveAbilityLeft = false;
-            //TODO: visa på HUD att abilityQueue är använda
-        }
-        else { assignedAbilities[spot] = abilityQueue.Dequeue(); }
+    }
 
+    private void DisplayAreaOfEffect()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        //mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //TODO: Adi hjälp här pls :).
+        //Vector3Int mouseTargetCell = tilemap.WorldToCell(mousePos);
+        
+        foreach (Vector3Int tile in areaOfEffect)
+        {
+            //tile += mouseTargetCell;
+        }
     }
 
     private bool ActivesAvailable()
@@ -174,11 +187,11 @@ public class Character : Entity
                 break;
         }
     }
-
-    public string GetOrientationAsString()
-    {
-        return orientation.ToString();
-    }
+   
+   public bool UsedAbility()
+   {
+        return (this.toggledAbility == null);
+   }
 
     public Vector3 GetPos()
     {

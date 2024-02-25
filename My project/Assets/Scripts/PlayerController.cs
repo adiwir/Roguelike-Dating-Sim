@@ -116,18 +116,21 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("activated RightMouse");
             //activeAbilitySelected = true;
-            character.ActivateAbilityInSpot(0);// nytt
-            abilityCd = baseAbilityCd;
+            character.ActivateAbilityInSpot(0); //nyare
+            //character.ToggleAbilityInSpot(0);// nytt
+            if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
         } else if(Input.GetButtonDown("LShift") && (abilityCd <= 0))
         {
             //activeAbilitySelected = true;
-            character.ActivateAbilityInSpot(1);// nytt
-            abilityCd = baseAbilityCd;
+            character.ActivateAbilityInSpot(1); //nyare
+            //character.ToggleAbilityInSpot(1);// nytt
+            if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
         } else if(Input.GetButtonDown("Space") && (abilityCd <= 0))
         {
             //activeAbilitySelected = true;
-            character.ActivateAbilityInSpot(2);// nytt
-            abilityCd = baseAbilityCd;
+            character.ActivateAbilityInSpot(2); //nyare
+            //character.ToggleAbilityInSpot(2);// nytt
+            if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
         } else
         {
             abilityCd -= Time.fixedDeltaTime;
@@ -165,32 +168,6 @@ public class PlayerController : MonoBehaviour
             return false;
         }
         return true;
-    }
-
-    void ToggleActiveAbility(String abilityName)//TODO: implementera så att detta faktiskt funkar som en toggle sen
-    {
-        
-        //cellToAttack =  //h�mta detta p� current mouse/cursor pos som ger en node/cellPos(använd MousePos.cs)
-
-        switch (abilityName)
-        {
-            case "StickyBomb":
-                //cellToAttack.x + 1;
-                //cellToAttack.x - 1;
-                //cellToAttack.y + 1;
-                //cellToAttack.y - 1;
-                //cellToAttack;
-                break;
-            case "Shoot Laser":
-                //cellToAttack;
-                break;
-            case "Forcefield":
-                //become invulnerable for 2 seconds
-                break;
-            case "Shove":
-                //push enemies that are in the _ spots in front of you
-                break;
-        }
     }
 
     public void setDead(bool value)

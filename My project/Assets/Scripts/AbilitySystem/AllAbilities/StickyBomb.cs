@@ -5,24 +5,14 @@ using UnityEngine;
 public class StickyBomb : ActiveAbility
 {
     //public __ image
-    private int amountOfTilesAffected = 5;
-    private List<Vector3Int> TilesAffected = new();
+    private int amountOfareaOfEffect = 5;
 
     public StickyBomb() 
     {
+        this.areaOfEffect = new();
         this.name = "StickyBomb";
-        this.range = 3;
-        SetTiles();
-    }
-
-    private void SetTiles()
-    {
-        TilesAffected.Clear();
-        TilesAffected.Add(new Vector3Int(0, 0, 0));
-        TilesAffected.Add(new Vector3Int(1, 0, 0));
-        TilesAffected.Add(new Vector3Int(-1, 0, 0));
-        TilesAffected.Add(new Vector3Int(0, 1, 0));
-        TilesAffected.Add(new Vector3Int(0, -1, 0));
+        this.range = 6;
+        SetAreaOfEffect();
     }
 
     public override void UseAbility(Character character, Vector3Int targetTile)
@@ -30,10 +20,13 @@ public class StickyBomb : ActiveAbility
 
     }
 
-    public List<Vector3Int> GetAttackedTiles() 
+    public override void SetAreaOfEffect() //sets tiles that the abilities can affect
     {
-        return this.TilesAffected;
-
+        areaOfEffect.Clear();
+        areaOfEffect.Add(new Vector3Int(0, 0, 0));
+        areaOfEffect.Add(new Vector3Int(1, 0, 0));
+        areaOfEffect.Add(new Vector3Int(-1, 0, 0));
+        areaOfEffect.Add(new Vector3Int(0, 1, 0));
+        areaOfEffect.Add(new Vector3Int(0, -1, 0));
     }
-
 }
