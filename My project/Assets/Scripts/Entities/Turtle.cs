@@ -7,15 +7,19 @@ using UnityEngine.Tilemaps;
 public class Turtle : MonoBehaviour
 {
     private EnemyController controller;
+    
     public int timeThresh;
+    public int spinCD;
+    public int range;
+
     private int elapsedTime = 0;
+    private int spinTime;
+
     private bool isAttacking;
     private bool isSpinning;
     private bool isBackSpinning;
-    public int spinCD;
-    private int spinTime;
-    public int range;
     private bool hasSpun;
+
     public List<Vector2Int> attackTiles;
     private Vector2Int targetCell;
 
@@ -103,7 +107,7 @@ public class Turtle : MonoBehaviour
         if (GameObject.FindAnyObjectByType<Grid>().WorldToCell(transform.position) == new Vector3Int(controller.target.standingOnTile.gridLocation.x, controller.target.standingOnTile.gridLocation.y, 0)
             && !hasSpun)
         {
-            Debug.Log("Hej");
+            controller.target.GetComponentInParent<Health>().decreaseHealthPoints(1);
             hasSpun = true;
         }
         if (transform.position == target && finished2.MapManager.Instance.map.ContainsKey(targetCell))
