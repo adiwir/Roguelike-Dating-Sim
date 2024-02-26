@@ -14,11 +14,11 @@ public class Shield : ActiveAbility
         this.affectsAnArea = false;
     }
 
-    public override void UseAbility(Character character, Vector3Int targetTile)
+    public override void UseAbility(List<Vector3Int> targetedTiles)
     {
 
     }
-    
+
     public override void SetAreaOfEffect()
     {
         throw new System.NotImplementedException();

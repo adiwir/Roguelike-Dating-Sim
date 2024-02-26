@@ -6,9 +6,11 @@ public class StickyBomb : ActiveAbility
 {
     //public __ image
     private int amountOfareaOfEffect = 5;
+    private int damage = 3;
 
     public StickyBomb() 
     {
+        //this.icon = 
         this.areaOfEffect = new();
         this.name = "StickyBomb";
         this.range = 6;
@@ -16,10 +18,24 @@ public class StickyBomb : ActiveAbility
         this.affectsAnArea = true;
     }
 
-    public override void UseAbility(Character character, Vector3Int targetTile)
+    public override void UseAbility(List<Vector3Int> targetedTiles)
     {
+        Vector3Int staticEnemyPos = new Vector3Int(10, -1, 0);
+        Enemy enemy;
+        foreach (Vector3Int tile in targetedTiles)
+        {
+            Debug.Log(tile);
+            if(tile == staticEnemyPos) { Debug.Log("targeted static enemy"); }
 
+            enemy = EnemyPosStorage.Instance.GetEnemyOnCell(tile);
+            if (enemy != null)
+            {
+                Debug.Log("hitting enemy");
+                enemy.TakeDamage(damage);
+            }
+        }
     }
+
 
     public override void SetAreaOfEffect() //sets tiles that the abilities can affect
     {

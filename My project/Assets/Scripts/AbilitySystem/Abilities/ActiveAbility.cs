@@ -6,6 +6,7 @@ public abstract class ActiveAbility : IAbility
 {
     public string name;
     public string Description;
+    public Sprite icon;
     public bool toggled = false;
     public bool affectsAnArea;
 
@@ -14,7 +15,8 @@ public abstract class ActiveAbility : IAbility
     public Vector3Int targetSquare;
     public List<Vector3Int> areaOfEffect;
 
-    public abstract void UseAbility(Character character, Vector3Int targetTile);
+    //public abstract void UseAbility(Character character, List<Vector3Int> targetedTiles);
+    public abstract void UseAbility(List<Vector3Int> targetedTiles);
 
     public void CanIActivate()
     {

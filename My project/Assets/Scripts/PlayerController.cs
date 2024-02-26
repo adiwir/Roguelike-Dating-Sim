@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private float basicCd = 1f;
     private float abilityCd = 1f;
+    private float baseAbilityCd;
     private float movementCd = 0.1f;
     private bool activeAbilitySelected = false;
     private bool isDead = false;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
         character.SetPos(transform.position);
 
         moveSpeed = character.GetMoveSpeed();
+        baseAbilityCd = abilityCd;
     }
 
     void FixedUpdate()
@@ -48,8 +50,6 @@ public class PlayerController : MonoBehaviour
         if (isDead) return;
         origPos = tilemap.WorldToCell(transform.position);
         targetCell = origPos;
-
-        float baseAbilityCd = abilityCd;
 
         //elapsedTime += Time.fixedDeltaTime;
         //elapsedBasicAttackTime += Time.fixedDeltaTime;
@@ -185,7 +185,6 @@ public class PlayerController : MonoBehaviour
     {
         isDead = value;
     }
-
 
 
     void OnCollisionEnter2D(Collision2D collision)

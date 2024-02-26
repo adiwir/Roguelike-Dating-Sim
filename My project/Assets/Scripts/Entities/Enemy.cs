@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour, IEnemyObserver
 {
+    public int hp;
     public Vector3Int pos;
     public Vector3Int GetPos()
     {

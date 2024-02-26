@@ -9,13 +9,14 @@ public class StaticEnemy : Enemy
 {
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private Tilemap col;
-    [SerializeField] private int HP = 3;
+    //[SerializeField] private int hp = 3;
     EnemySubject enemySubject;
 
     public void Awake()
     {
         //tilemap = GetComponent<Tilemap>();
         //col = GetComponent<Col>();
+        this.hp = 3;
         pos = tilemap.WorldToCell(transform.position);
         enemySubject = GetComponent<EnemySubject>();
         if (enemySubject != null)
@@ -27,6 +28,7 @@ public class StaticEnemy : Enemy
         {
             Debug.LogError("EnemySubject not found.");
         }
+        Debug.Log(this.pos);
         UpdateEnemyPosition(this.pos);
     }
 
@@ -39,8 +41,8 @@ public class StaticEnemy : Enemy
     public override void TakeDamage(int damage)
     {
         Debug.Log("Ouch");
-        this.HP -= damage;
-        if (this.HP <= 0)
+        this.hp -= damage;
+        if (this.hp <= 0)
         {
             OnDeath();
         }
