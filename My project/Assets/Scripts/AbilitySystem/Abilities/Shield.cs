@@ -8,7 +8,6 @@ public class Shield : ActiveAbility
     //public __ image
     private float duration = 2;
 
-
     private void Awake()
     {
         this.range = 0;
@@ -18,7 +17,7 @@ public class Shield : ActiveAbility
     {
 
     }
-
+    
     public override void SetAreaOfEffect()
     {
         throw new System.NotImplementedException();

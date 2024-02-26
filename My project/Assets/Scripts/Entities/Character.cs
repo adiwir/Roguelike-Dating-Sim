@@ -21,6 +21,8 @@ public class Character : Entity
     private int maxHealth = 4;
     public bool hasActiveAbilityLeft = true;
 
+    public ImageChooser imageChooser;
+
     enum Orientation
     {
         north,
@@ -113,9 +115,13 @@ public class Character : Entity
         if (abilityQueue.Count <= 0)
         {
             hasActiveAbilityLeft = false;
+            imageChooser.SetOutOfAbilities(spot);
             //TODO: visa på HUD att abilityQueue är använda
         }
-        else { assignedAbilities[spot] = abilityQueue.Dequeue(); }
+        else { 
+            assignedAbilities[spot] = abilityQueue.Dequeue();
+            imageChooser.ImageChange(spot);
+        }
     }
 
     public void ToggleAbilityInSpot(int spot)
@@ -130,6 +136,7 @@ public class Character : Entity
                 toggledAbility = assignedAbilities[spot];
                 areaOfEffect = toggledAbility.GetAreaOfEffect();
                 DisplayAreaOfEffect();
+                //imageChooser.toggleImage(spot);
             } else
             {
                 print("That button doesn't have an ability"); //TODO: fixa så att man inte kan aktivera den alls om den är tom
