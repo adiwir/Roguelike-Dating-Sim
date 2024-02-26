@@ -135,6 +135,17 @@ public class PlayerController : MonoBehaviour
         {
             abilityCd -= Time.fixedDeltaTime;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            character.UnToggleAbility();
+        }
+
+        if (!(character.UsedAbility()))
+        {
+            character.DisplayAreaOfEffect();
+        }
+
     }
 
     private void LateUpdate()//TODO: Ta bort denna? Den gör väl inget?

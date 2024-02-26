@@ -11,6 +11,7 @@ public class Shield : ActiveAbility
     private void Awake()
     {
         this.range = 0;
+        this.affectsAnArea = false;
     }
 
     public override void UseAbility(Character character, Vector3Int targetTile)

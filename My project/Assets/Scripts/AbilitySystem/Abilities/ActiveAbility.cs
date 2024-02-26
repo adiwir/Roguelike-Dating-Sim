@@ -7,6 +7,7 @@ public abstract class ActiveAbility : IAbility
     public string name;
     public string Description;
     public bool toggled = false;
+    public bool affectsAnArea;
 
     public int range;
 

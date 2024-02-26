@@ -13,6 +13,7 @@ public class StickyBomb : ActiveAbility
         this.name = "StickyBomb";
         this.range = 6;
         SetAreaOfEffect();
+        this.affectsAnArea = true;
     }
 
     public override void UseAbility(Character character, Vector3Int targetTile)

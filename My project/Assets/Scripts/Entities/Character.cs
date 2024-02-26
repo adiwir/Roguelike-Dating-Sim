@@ -2,17 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.TextCore.Text;
 using UnityEngine.Tilemaps;
 
 public class Character : Entity
 {
+    [SerializeField] private Tilemap tilemap;
     private readonly int startingAbilityAmount = 3;
     public Queue<ActiveAbility> abilityQueue;
     public List<ActiveAbility> assignedAbilities { get; set; }
     [SerializeField] private BasicAbility basicAbility;
     ActiveAbility toggledAbility;
     public List<Vector3Int> areaOfEffect;
+    List<Vector2Int> twoDAreaOfEffect = new List<Vector2Int>();
+
 
     private Vector3 pos;
     private AbilityManager abilityManager;
@@ -112,15 +116,17 @@ public class Character : Entity
         toggledAbility.CanIActivate();
         toggledAbility = null;
 
+        hideAOE();
+
         if (abilityQueue.Count <= 0)
         {
             hasActiveAbilityLeft = false;
-            imageChooser.SetOutOfAbilities(spot);
+            //imageChooser.SetOutOfAbilities(spot);
             //TODO: visa på HUD att abilityQueue är använda
         }
         else { 
             assignedAbilities[spot] = abilityQueue.Dequeue();
-            imageChooser.ImageChange(spot);
+            //imageChooser.ImageChange(spot);
         }
     }
 
@@ -135,7 +141,7 @@ public class Character : Entity
                 print("toggledAbility");
                 toggledAbility = assignedAbilities[spot];
                 areaOfEffect = toggledAbility.GetAreaOfEffect();
-                DisplayAreaOfEffect();
+                
                 //imageChooser.toggleImage(spot);
             } else
             {
@@ -144,16 +150,52 @@ public class Character : Entity
         }
     }
 
-    private void DisplayAreaOfEffect()
+    public void DisplayAreaOfEffect()
     {
-        Vector3 mousePos = Input.mousePosition;
-        //mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //TODO: Adi hjälp här pls :).
-        //Vector3Int mouseTargetCell = tilemap.WorldToCell(mousePos);
-        
-        foreach (Vector3Int tile in areaOfEffect)
+        hideAOE();
+
+        if (toggledAbility.affectsAnArea)
         {
-            //tile += mouseTargetCell;
+            Vector3 mousePos = MousePos.Instance.GetHoveredNode();
+            //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
+            Vector3Int mouseTargetCell = tilemap.WorldToCell(mousePos);
+
+            List<Vector3Int> newAreaOfEffect = new List<Vector3Int>();
+
+            foreach (Vector3Int tile in areaOfEffect)
+            {
+                //twoDAreaOfEffect.Add(((tile + mouseTargetCell).Vector2Int));
+                Vector3Int someVector = (tile + mouseTargetCell);
+                twoDAreaOfEffect.Add(new Vector2Int(someVector.x, someVector.y));
+                newAreaOfEffect.Add(tile);
+            }
+
+            foreach (Vector2Int node in twoDAreaOfEffect)
+            {
+                if (finished2.MapManager.Instance.map.ContainsKey(node))
+                {
+                    finished2.MapManager.Instance.map[node].ShowTile();
+                }
+            }
+    
+
+            areaOfEffect.Clear();
+            areaOfEffect = newAreaOfEffect;
         }
+        
+    }
+
+    private void hideAOE()
+    {
+        foreach (Vector2Int node in twoDAreaOfEffect)
+        {
+            if (finished2.MapManager.Instance.map.ContainsKey(node))
+            {
+                finished2.MapManager.Instance.map[node].HideTile();
+            }
+        }
+
+        twoDAreaOfEffect.Clear();
     }
 
     private bool ActivesAvailable()
@@ -199,6 +241,11 @@ public class Character : Entity
    {
         return (this.toggledAbility == null);
    }
+
+    public void UnToggleAbility()
+    {
+        this.toggledAbility = null;
+    }
 
     public Vector3 GetPos()
     {
