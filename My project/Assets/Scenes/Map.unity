@@ -496,7 +496,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 4
   numOfHearts: 4
-  isInvincible: 0
   hearts:
   - {fileID: 1519236032}
   - {fileID: 1883865809}
@@ -504,6 +503,7 @@ MonoBehaviour:
   - {fileID: 1158643458}
   fullHeart: {fileID: 21300000, guid: 8f53899772c02cc4f81b42070498d200, type: 3}
   emptyHeart: {fileID: 21300000, guid: f4382d940b00f91459a02acae7d4101a, type: 3}
+  isInvincible: 0
   invincibilityDurationSeconds: 1.5
   invincibilityDeltaTime: 0.15
 --- !u!1 &1148658015

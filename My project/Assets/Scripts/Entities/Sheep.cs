@@ -9,13 +9,13 @@ public class Sheep : MonoBehaviour
     public int timeThresh;
     private int elapsedTime = 0;
     private bool isAttacking;
+    public int range;
     public List<Vector2Int> attackTiles;
 
     private void Start()
     {
         controller = GetComponent<EnemyController>();
         isAttacking = false;
-        timeThresh = 60;
         
     }
     void LateUpdate()
@@ -33,7 +33,7 @@ public class Sheep : MonoBehaviour
             controller.ShowAttack(attackTiles);
             if (elapsedTime > timeThresh)
             {
-                FireBall();
+                FireBlast();
                 elapsedTime = 0;
                 controller.HideAttack(attackTiles);
                 attackTiles.Clear();
@@ -41,37 +41,20 @@ public class Sheep : MonoBehaviour
             }
 
         }
-        /*else if (path.Count > 0 && path[0] == player.standingOnTile && elapsedTime > timeThresh)
-        {
-            BasicAttack();
-        }*/
         else if (!isAttacking && elapsedTime > timeThresh)
         {
             controller.MoveAlongPath();
             elapsedTime = 0;
         }
 
-        /*
-        if (elapsedTime > 90)
-        {
-            Debug.Log(CheckRange());
-            elapsedTime = 0;
-        }*/
-
 
         elapsedTime += 1;
     }
 
-    private void BasicAttack()
-    {
-        //TODO: Deal damage to player
-        Debug.Log("You have activated my trap card");
-        elapsedTime = 0;
-    }
 
-    private void FireBall()
+    private void FireBlast()
     {
-        //TODO: Deal damage to player
+        
         foreach (Vector2Int tilePos in attackTiles)
         {
             if (finished2.MapManager.Instance.map[tilePos] == controller.target.standingOnTile)
@@ -84,12 +67,12 @@ public class Sheep : MonoBehaviour
 
     private bool CheckRange()
     {
-        for (int y = -5; y <= 5; y++)
+        for (int y = range * (-1); y <= range; y++)
         {
-            for (int x = -5; x <= 5; x++)
+            for (int x = range * (-1); x <= range; x++)
             {
                 if (finished2.MapManager.Instance.map.ContainsKey(new Vector2Int(controller.enemyTile.gridLocation.x + x, controller.enemyTile.gridLocation.y + y))
-                    && Mathf.Abs(x) + Mathf.Abs(y) <= 5
+                    && Mathf.Abs(x) + Mathf.Abs(y) <= range
                     && finished2.MapManager.Instance.map[new Vector2Int(controller.enemyTile.gridLocation.x + x, controller.enemyTile.gridLocation.y + y)] == controller.target.standingOnTile)
                 {
                     return true;

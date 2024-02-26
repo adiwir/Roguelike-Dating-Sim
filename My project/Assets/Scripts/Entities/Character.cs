@@ -78,6 +78,7 @@ public class Character : Entity
             assignedAbilities.Add(activeAbilities.Dequeue());
         }
     }
+    
 
     public string GetAndDequeueAbility(int spot)
     {
