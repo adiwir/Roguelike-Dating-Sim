@@ -400,6 +400,7 @@ MonoBehaviour:
   col: {fileID: 1394696974}
   moveSpeed: 3
   standingOnTile: {fileID: 0}
+  movIn: 
 --- !u!4 &918480888 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8610734877936075474, guid: 2b2214b25744df04d86e3add59942a83, type: 3}
@@ -8066,7 +8067,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1605300046}
   - component: {fileID: 1605300045}
-  - component: {fileID: 1605300047}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -8104,22 +8104,6 @@ Transform:
   - {fileID: 1741413152}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1605300047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605300044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c92e26ef3be83429eaeabbe4e238c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkable: {fileID: 1723064605}
-  col: {fileID: 1394696974}
-  overlayPrefab: {fileID: 3822470427676052809, guid: 8c2a2bc51d9196a4295104124a614e21, type: 3}
-  overlayContainer: {fileID: 437681492}
 --- !u!1 &1662898514
 GameObject:
   m_ObjectHideFlags: 0
@@ -106128,6 +106112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca756638d901dca4ebb3ebd74caeb97b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
   pos: {x: 0, y: 0, z: 0}
   tilemap: {fileID: 1723064605}
   col: {fileID: 1394696974}

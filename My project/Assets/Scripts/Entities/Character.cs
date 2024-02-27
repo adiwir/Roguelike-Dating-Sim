@@ -68,6 +68,7 @@ public class Character : Entity
         {
             case Orientation.north:
                 addVector.x = 1;
+                cellToAttack.x = 1;
                 break;
             case Orientation.south:
                 cellToAttack.x = -1;

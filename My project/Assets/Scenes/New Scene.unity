@@ -5744,10 +5744,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c468f8978c831d45a3bf2ccf8d40792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
   pos: {x: 0, y: 0, z: 0}
   tilemap: {fileID: 1723064605}
   col: {fileID: 1394696974}
-  HP: 3
 --- !u!1 &1802520450 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6983315668266302810, guid: 2b2214b25744df04d86e3add59942a83, type: 3}

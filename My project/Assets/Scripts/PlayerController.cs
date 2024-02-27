@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
         //BasicAttack
         if (Input.GetButton("LeftMouse") && (basicCd <= 0) && !(activeAbilitySelected))
         {
-            character.UseBasicAbility(origPos);
+            character.UseBasicAbility(this.origPos);
             basicCd = 1f;
         } else
         {
@@ -194,11 +194,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void LateUpdate()//TODO: Ta bort denna? Den gör väl inget?
-    {
-        
-    }
-
     void MovePlayer(Vector3 target)
     {
         if(movementCd <= 0)
@@ -235,7 +230,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Teleport")
+        if (collision.gameObject.CompareTag("Teleport"))
         {
             Debug.Log("yeet");
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(70, 39), 1000000000);
