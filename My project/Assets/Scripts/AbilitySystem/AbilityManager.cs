@@ -38,7 +38,7 @@ public class AbilityManager : MonoBehaviour
         {
             //print("did we get here");
             ActiveAbilities.Enqueue(GetNotRandomAbility()); //TODO: Make random
-            Debug.Log("daheck " + ActiveAbilities.Count);
+            //Debug.Log("daheck " + ActiveAbilities.Count);
         }
         //ActiveAbilities.Enqueue(new StickyBomb());
     }

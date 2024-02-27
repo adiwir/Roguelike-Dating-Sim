@@ -25,15 +25,10 @@ public class EnemyController : MonoBehaviour
     public PlayerController target;
     public finished2.OverlayTile enemyTile;
     
-    
-    
-
 
     // Start is called before the first frame update
     void Start()
     {
-        
-
         pathFinder = new finished2.PathFinder();
         path = new List<finished2.OverlayTile>();
         currentCell = tilemap.WorldToCell(transform.position);
@@ -41,10 +36,7 @@ public class EnemyController : MonoBehaviour
         tilePos.x = currentCell.x;
         tilePos.y = currentCell.y;
         enemyTile = finished2.MapManager.Instance.map[tilePos];
-
     }
-
-    
 
     private void Move(finished2.OverlayTile tile)
     {
@@ -83,5 +75,10 @@ public class EnemyController : MonoBehaviour
         {           
             finished2.MapManager.Instance.map[tilePos].HideTile();           
         }
+    }
+
+    public Vector3Int GetPos()
+    {
+        return currentCell;
     }
 }

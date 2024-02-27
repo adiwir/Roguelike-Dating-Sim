@@ -16,25 +16,27 @@ public class Sheep : Enemy
 
     public void Awake()
     {
+        controller = GetComponent<EnemyController>();
         this.hp = 3;
+        this.pos = controller.GetPos();
         //pos = tilemap.WorldToCell(transform.position);
-        //enemySubject = GetComponent<EnemySubject>();
-        //if (enemySubject != null)
-        //{
-        //    // Register as an observer
-        //    enemySubject.RegisterObserver(this);
-        //}
-        //else
-        //{
-        //    Debug.LogError("EnemySubject not found.");
-        //}
-        //UpdateEnemyPosition(this.pos);
+        enemySubject = GetComponent<EnemySubject>();
+        if (enemySubject != null)
+        {
+            // Register as an observer
+            enemySubject.RegisterObserver(this);
+        }
+        else
+        {
+            Debug.LogError("EnemySubject not found.");
+        }
+        UpdateEnemyPosition(this.pos);
 
     }
 
     private void Start()
     {
-        controller = GetComponent<EnemyController>();
+        
         isAttacking = false;
         timeThresh = 60;
         
@@ -78,7 +80,7 @@ public class Sheep : Enemy
             Debug.Log(CheckRange());
             elapsedTime = 0;
         }*/
-
+        this.pos=controller.GetPos();
 
         elapsedTime += 1;
     }
@@ -151,8 +153,6 @@ public class Sheep : Enemy
     {
         throw new NotImplementedException();
     }
-
-
 
     public override void OnDeath()
     {

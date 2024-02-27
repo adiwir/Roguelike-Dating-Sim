@@ -42,12 +42,20 @@ public class EnemyPosStorage : MonoBehaviour
     {
         if (enemyList != null)
         {
+            
             foreach (Enemy enemy in enemyList)
             {
-                if(enemy.GetPos() == targetCell)//TODO: gör så att detta kommer funka för Bossen
+                Vector3Int enemyPos = enemy.GetPos();
+                if((enemyPos.x == targetCell.x) && (enemyPos.y == targetCell.y))
                 {
                     return enemy;
                 }
+
+
+                //if(enemy.GetPos() == targetCell)//TODO: gör så att detta kommer funka för Bossen
+                //{
+                //    return enemy;
+                //}
                 //implementera något här som kollar om de är en boss för att se hur stora 
 
             }

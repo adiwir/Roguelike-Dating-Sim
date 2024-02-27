@@ -20,12 +20,12 @@ public class StickyBomb : ActiveAbility
 
     public override void UseAbility(List<Vector3Int> targetedTiles)
     {
-        Vector3Int staticEnemyPos = new Vector3Int(10, -1, 0);
+        //Vector3Int staticEnemyPos = new Vector3Int(10, -1, 0);
         Enemy enemy;
         foreach (Vector3Int tile in targetedTiles)
         {
-            Debug.Log(tile);
-            if(tile == staticEnemyPos) { Debug.Log("targeted static enemy"); }
+            //Debug.Log(tile);
+            //if(tile == staticEnemyPos) { Debug.Log("targeted static enemy"); }
 
             enemy = EnemyPosStorage.Instance.GetEnemyOnCell(tile);
             if (enemy != null)
