@@ -18,9 +18,10 @@ public class PlayerController : MonoBehaviour
     private Vector2Int tilePos;
     private Vector3Int origPos, targetCell;
     private Vector3 targetPosition;
-    private float elapsedTime = 0f;
+
     private float basicCd = 1f;
     private float abilityCd = 1f;
+    private float baseAbilityCd;
     private float movementCd = 0.1f;
     private bool activeAbilitySelected = false;
     private bool isDead = false;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
         character.SetPos(transform.position);
 
         moveSpeed = character.GetMoveSpeed();
+        baseAbilityCd = abilityCd;
     }
 
 
@@ -95,8 +97,6 @@ public class PlayerController : MonoBehaviour
         origPos = tilemap.WorldToCell(transform.position);
         targetCell = origPos;
 
-        float baseAbilityCd = abilityCd;
-
         //elapsedTime += Time.fixedDeltaTime;
         //elapsedBasicAttackTime += Time.fixedDeltaTime;
 
@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
         //BasicAttack
         if (Input.GetButton("LeftMouse") && (basicCd <= 0) && !(activeAbilitySelected))
         {
-            ChooseAttackDirection();
+            character.UseBasicAbility(origPos);
             basicCd = 1f;
         } else
         {
@@ -158,31 +158,43 @@ public class PlayerController : MonoBehaviour
         }
 
         //VariableAbilities
-        if (Input.GetButton("RightMouse") && (abilityCd <= 0))
+        if (Input.GetButtonDown("RightMouse") && (abilityCd <= 0)) //frågan är om man ska använda nya ability systemet här
         {
-            activeAbilitySelected = true;
-            String ability = GetAbilityInSpot(0);
-            UseActiveAbiltiy(ability);
-            abilityCd = baseAbilityCd;
-        } else if(Input.GetButton("LShift") && (abilityCd <= 0))
+            Debug.Log("activated RightMouse");
+            //activeAbilitySelected = true;
+            character.ActivateAbilityInSpot(0); //nyare
+            //character.ToggleAbilityInSpot(0);// nytt
+            if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
+        } else if(Input.GetButtonDown("LShift") && (abilityCd <= 0))
         {
-            activeAbilitySelected = true;
-            String ability = GetAbilityInSpot(1);
-            UseActiveAbiltiy(ability);
-            abilityCd = baseAbilityCd;
-        } else if(Input.GetButton("Space") && (abilityCd <= 0))
+            //activeAbilitySelected = true;
+            character.ActivateAbilityInSpot(1); //nyare
+            //character.ToggleAbilityInSpot(1);// nytt
+            if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
+        } else if(Input.GetButtonDown("Space") && (abilityCd <= 0))
         {
-            activeAbilitySelected = true;
-            String ability = GetAbilityInSpot(2);
-            UseActiveAbiltiy(ability);
-            abilityCd = baseAbilityCd;
+            //activeAbilitySelected = true;
+            character.ActivateAbilityInSpot(2); //nyare
+            //character.ToggleAbilityInSpot(2);// nytt
+            if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
         } else
         {
             abilityCd -= Time.fixedDeltaTime;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            character.UnToggleAbility();
+        }
+
+        if (!(character.UsedAbility()))
+        {
+            character.DisplayAreaOfEffect();
+        }
+
     }
 
-    private void LateUpdate()
+    private void LateUpdate()//TODO: Ta bort denna? Den gör väl inget?
     {
         
     }
@@ -215,78 +227,11 @@ public class PlayerController : MonoBehaviour
         return true;
     }
 
-    void ChooseAttackDirection()
-    {
-        Vector3Int cellToAttack = origPos;
-
-        string orientation = character.GetOrientationAsString();
-        switch (orientation)
-        {
-            case "north":
-                cellToAttack.x += 1;
-                break;
-            case "south":
-                cellToAttack.x -= 1;
-                break;
-            case "west":
-                cellToAttack.y += 1;
-                break;
-            case "east":
-                cellToAttack.y -= 1;
-                break;
-        }
-
-        PerformAttack(cellToAttack);
-
-    }
-
-    private String GetAbilityInSpot(int spot)
-    {
-        string ability = character.GetAndDequeueAbility(spot);
-
-        
-        if (ability == null) // detta �r bara tempor�rt
-        {
-            ability = "";
-        }
-        return ability;
-    }
-
-    void UseActiveAbiltiy(String abilityName)
-    {
-        
-        //cellToAttack =  //h�mta detta p� current mouse/cursor pos som ger en node/cellPos(använd MousePos.cs)
-
-        switch (abilityName)
-        {
-            case "C4":
-                //cellToAttack.x + 1;
-                //cellToAttack.x - 1;
-                //cellToAttack.y + 1;
-                //cellToAttack.y - 1;
-                //cellToAttack;
-                break;
-            case "Shoot Laser":
-                //cellToAttack;
-                break;
-            case "Forcefield":
-                //become invulnerable for 2 seconds
-                break;
-            case "Shove":
-                //push enemies that are in the _ spots in front of you
-                break;
-        }
-    }
-
     public void setDead(bool value)
     {
         isDead = value;
     }
 
-    private void PerformAttack(Vector3Int cellToAttack)
-    {
-        character.UseBasicAbility(cellToAttack);
-    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {

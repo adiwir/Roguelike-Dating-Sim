@@ -2,29 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Enemy
+public abstract class Enemy : MonoBehaviour, IEnemyObserver
 {
-    //Observer stuff
-    // private List<IObserver> _observers = new List<IObserver>();
-    // private Vector3Int position;
+    public int hp;
+    public Vector3Int pos;
+    public Vector3Int GetPos()
+    {
+        return this.pos;
+    }
+    public abstract List<Vector3Int> GetCoveredArea();
 
-    // public void AddObserver(IObserver observer){
-    //     _observers.Add(observer);
-    // }
+    public abstract void TakeDamage(int damage);
 
-    // public void RemoveObserver(IObserver observer){
-    //     _observers.Remove(observer);
-    // }
+    public abstract void OnDeath();
 
-    // protected void NotifyObservers(Vector3Int currentPos){
-    //     _observers.ForEach((_observer) => {
-    //         _observer.OnNotify();
-    //     })
-    // }
-
-    public abstract Vector3Int getPos();
-
-    public abstract void takeDamage(int damage);
+    public void UpdateEnemyPosition(Vector3 newPosition)
+    {
+        EnemyPosStorage.Instance.AddEnemy(this);
+    }
 }
 
 

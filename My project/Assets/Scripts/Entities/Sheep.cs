@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class Sheep : MonoBehaviour
+public class Sheep : Enemy
 {
     private EnemyController controller;
     public int timeThresh;
@@ -11,10 +13,31 @@ public class Sheep : MonoBehaviour
     private bool isAttacking;
     public int range;
     public List<Vector2Int> attackTiles;
+    EnemySubject enemySubject;
+
+    public void Awake()
+    {
+        controller = GetComponent<EnemyController>();
+        this.hp = 3;
+        this.pos = controller.GetPos();
+        //pos = tilemap.WorldToCell(transform.position);
+        enemySubject = GetComponent<EnemySubject>();
+        if (enemySubject != null)
+        {
+            // Register as an observer
+            enemySubject.RegisterObserver(this);
+        }
+        else
+        {
+            Debug.LogError("EnemySubject not found.");
+        }
+        UpdateEnemyPosition(this.pos);
+
+    }
 
     private void Start()
     {
-        controller = GetComponent<EnemyController>();
+        
         isAttacking = false;
         
     }
@@ -47,6 +70,13 @@ public class Sheep : MonoBehaviour
             elapsedTime = 0;
         }
 
+        /*
+        if (elapsedTime > 90)
+        {
+            Debug.Log(CheckRange());
+            elapsedTime = 0;
+        }*/
+        this.pos=controller.GetPos();
 
         elapsedTime += 1;
     }
@@ -98,5 +128,25 @@ public class Sheep : MonoBehaviour
             }
         }
         return aRange;
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        this.hp -= damage;
+        if (this.hp <= 0)
+        {
+            OnDeath();
+        }
+    }
+
+    public override List<Vector3Int> GetCoveredArea()
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void OnDeath()
+    {
+        Debug.Log("Sheep died");
+        Destroy(this.gameObject);
     }
 }

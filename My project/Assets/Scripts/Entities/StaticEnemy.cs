@@ -5,18 +5,18 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
-public class StaticEnemy : MonoBehaviour, IEnemy, IEnemyObserver
+public class StaticEnemy : Enemy
 {
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private Tilemap col;
-    [SerializeField] private int HP = 3;
-    private Vector3Int pos;
+    //[SerializeField] private int hp = 3;
     EnemySubject enemySubject;
 
     public void Awake()
     {
         //tilemap = GetComponent<Tilemap>();
         //col = GetComponent<Col>();
+        this.hp = 3;
         pos = tilemap.WorldToCell(transform.position);
         enemySubject = GetComponent<EnemySubject>();
         if (enemySubject != null)
@@ -28,36 +28,27 @@ public class StaticEnemy : MonoBehaviour, IEnemy, IEnemyObserver
         {
             Debug.LogError("EnemySubject not found.");
         }
+        Debug.Log(this.pos);
         UpdateEnemyPosition(this.pos);
     }
 
-    public Vector3Int getPos()
+    public override void OnDeath()
     {
-        return this.pos;
-    }
-
-    public void OnDeath()
-    {
-        Debug.Log("IEnemy died");
+        Debug.Log("Enemy died");
         Destroy(this.gameObject);
     }
 
-    public void TakeDamage(int damage)
+    public override void TakeDamage(int damage)
     {
         Debug.Log("Ouch");
-        this.HP -= damage;
-        if (this.HP < 0)
+        this.hp -= damage;
+        if (this.hp <= 0)
         {
             OnDeath();
         }
     }
 
-    public void UpdateEnemyPosition(Vector3 newPosition)
-    {
-        EntityPosStorage.Instance.AddEnemy(this);
-    }
-
-    public List<Vector3Int> GetCoveredArea()
+    public override List<Vector3Int> GetCoveredArea()
     {
         throw new NotImplementedException();
     }
