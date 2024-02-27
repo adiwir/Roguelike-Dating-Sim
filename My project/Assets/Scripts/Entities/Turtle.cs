@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Turtle : MonoBehaviour
+public class Turtle : Enemy
 {
     private EnemyController controller;
     
@@ -23,13 +23,28 @@ public class Turtle : MonoBehaviour
     public List<Vector2Int> attackTiles;
     private Vector2Int targetCell;
 
+    EnemySubject enemySubject;
+
     private void Start()
     {
+        this.hp = 6;
         controller = GetComponent<EnemyController>();
         isAttacking = false;
         isSpinning = false;
         isBackSpinning = false;
         hasSpun = false;
+
+        this.pos = controller.GetPos();
+        if (TryGetComponent<EnemySubject>(out enemySubject))
+        {
+            // Register as an observer
+            enemySubject.RegisterObserver(this);
+        }
+        else
+        {
+            Debug.LogError("EnemySubject not found.");
+        }
+        UpdateEnemyPosition(this.pos);
 
     }
     void LateUpdate()
@@ -76,6 +91,8 @@ public class Turtle : MonoBehaviour
             controller.MoveAlongPath();
             elapsedTime = 0;
         }
+
+        this.pos = controller.GetPos();
 
         elapsedTime += 1;
         spinTime += 1;
@@ -213,5 +230,24 @@ public class Turtle : MonoBehaviour
         }
         return false;
     }
-    
+
+    public override List<Vector3Int> GetCoveredArea()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        this.hp -= damage;
+        if (this.hp <= 0)
+        {
+            OnDeath();
+        }
+    }
+
+    public override void OnDeath()
+    {
+        Debug.Log("Turtle died");
+        Destroy(this.gameObject);
+    }
 }
