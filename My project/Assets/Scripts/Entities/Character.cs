@@ -63,24 +63,24 @@ public class Character : Entity
 
     public void UseBasicAbility(Vector3Int cellToAttack)
     {
-        Vector3Int addVector = new();
+        Vector3Int addVector = new Vector3Int(0,0,0);
         switch (orientation)
         {
             case Orientation.north:
                 addVector.x = 1;
-                cellToAttack.x = 1;
+                cellToAttack.x += 1;
                 break;
             case Orientation.south:
                 addVector.x = -1;
-                cellToAttack.x = -1;
+                cellToAttack.x += -1;
                 break;
             case Orientation.west:
                 addVector.y = 1;
-                cellToAttack.y = 1;
+                cellToAttack.y += 1;
                 break;
             case Orientation.east:
                 addVector.y = -1;
-                cellToAttack.y = -1;
+                cellToAttack.y += -1;
                 break;
         }
         AttackNextCell(cellToAttack, addVector);
@@ -91,9 +91,9 @@ public class Character : Entity
     {
         Enemy enemy;
         
-        for(int i = 1; i <= basicAbility.GetRange(); i++)
+        for(int i = 0; i <= basicAbility.GetRange()-1; i++)
         {
-            
+            //Debug.Log(i);
             enemy = EnemyPosStorage.Instance.GetEnemyOnCell(closestTargetCell + (addVec*i));
             if (enemy != null)
             {
