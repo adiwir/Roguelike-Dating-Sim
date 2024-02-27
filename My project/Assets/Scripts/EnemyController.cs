@@ -16,7 +16,6 @@ public class EnemyController : MonoBehaviour
 
     public float moveSpeed = 1;
 
-
     private Vector3Int currentCell;
     public Vector2Int tilePos;
 
@@ -35,7 +34,11 @@ public class EnemyController : MonoBehaviour
         target = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         tilePos.x = currentCell.x;
         tilePos.y = currentCell.y;
-        enemyTile = finished2.MapManager.Instance.map[tilePos];
+        try
+        {
+            enemyTile = finished2.MapManager.Instance.map[tilePos];
+        } catch (NullReferenceException e) { Debug.Log(tilePos); }
+        
     }
 
     private void Update()

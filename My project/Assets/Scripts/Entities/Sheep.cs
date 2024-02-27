@@ -21,8 +21,7 @@ public class Sheep : Enemy
         this.hp = 3;
         this.pos = controller.GetPos();
         //pos = tilemap.WorldToCell(transform.position);
-        enemySubject = GetComponent<EnemySubject>();
-        if (enemySubject != null)
+        if (TryGetComponent<EnemySubject>(out enemySubject))
         {
             // Register as an observer
             enemySubject.RegisterObserver(this);
