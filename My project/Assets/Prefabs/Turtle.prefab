@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2100779132282354527
+--- !u!1001 &5969685855907605788
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4346601964389275026, guid: b0aad21ae64e36e4f95c099450cfdf24, type: 3}
       propertyPath: m_Name
-      value: Sheep
+      value: Turtle
       objectReference: {fileID: 0}
     - target: {fileID: 7337168982101740383, guid: b0aad21ae64e36e4f95c099450cfdf24, type: 3}
       propertyPath: m_LocalPosition.x
@@ -58,25 +58,25 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4346601964389275026, guid: b0aad21ae64e36e4f95c099450cfdf24, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1854136813064267559}
+      addedObject: {fileID: 2009545663873669673}
   m_SourcePrefab: {fileID: 100100000, guid: b0aad21ae64e36e4f95c099450cfdf24, type: 3}
---- !u!1 &2410916775325478605 stripped
+--- !u!1 &7965371155932248206 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4346601964389275026, guid: b0aad21ae64e36e4f95c099450cfdf24, type: 3}
-  m_PrefabInstance: {fileID: 2100779132282354527}
+  m_PrefabInstance: {fileID: 5969685855907605788}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1854136813064267559
+--- !u!114 &2009545663873669673
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2410916775325478605}
+  m_GameObject: {fileID: 7965371155932248206}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 939f28d2cc6953146a94b4ff4fee9678, type: 3}
+  m_Script: {fileID: 11500000, guid: c88f5e8c1e864774b958dec1a54c8ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeThresh: 60
-  range: 5
+  timeThresh: 150
+  range: 4
   attackTiles: []

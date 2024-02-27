@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     Character character;
     
     public float moveSpeed;
-    //public Node currentNode;
     public finished2.OverlayTile standingOnTile;
     private Vector2Int tilePos;
     private Vector3Int origPos, targetCell;
@@ -27,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private bool activeAbilitySelected = false;
     private bool isDead = false;
 
+    public List<KeyCode> movIn;
 
 
     private void Start()
@@ -45,6 +45,52 @@ public class PlayerController : MonoBehaviour
         baseAbilityCd = abilityCd;
     }
 
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            movIn.Add(KeyCode.W);
+        }
+
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            movIn.Add(KeyCode.A);
+        }
+
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            movIn.Add(KeyCode.S);
+        }
+
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            movIn.Add(KeyCode.D);
+        }
+
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            movIn.Remove(KeyCode.W);
+        }
+
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            movIn.Remove(KeyCode.A);
+        }
+
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            movIn.Remove(KeyCode.S);
+        }
+
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            movIn.Remove(KeyCode.D);
+        }
+    }
+
+
+
     void FixedUpdate()
     {
         if (isDead) return;
@@ -56,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
         //PlayerMovement
 
-        if (Input.GetKey(KeyCode.W))
+        if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.W)
         {
             targetCell.x += 1;
             if (CanMove(targetCell))
@@ -67,7 +113,7 @@ public class PlayerController : MonoBehaviour
             }   
         }
 
-        else if (Input.GetKey(KeyCode.S))
+        else if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.S)
         {
             targetCell.x -= 1;
             if (CanMove(targetCell))
@@ -78,7 +124,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        else if (Input.GetKey(KeyCode.A))
+        else if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.A)
         {
             targetCell.y += 1;
             if (CanMove(targetCell))
@@ -89,7 +135,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        else if (Input.GetKey(KeyCode.D))
+        else if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.D)
         {
             targetCell.y -= 1;
             if (CanMove(targetCell))

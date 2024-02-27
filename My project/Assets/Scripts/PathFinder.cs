@@ -8,14 +8,16 @@ namespace finished2
 {
     public class PathFinder
     {
+        int i;
         public List<OverlayTile> FindPath(OverlayTile start, OverlayTile end)
         {
             List<OverlayTile> openList = new List<OverlayTile>();
             List<OverlayTile> closedList = new List<OverlayTile>();
-
+            
+            i = 0;
             openList.Add(start);
 
-            while (openList.Count > 0)
+            while (openList.Count > 0 && i < 900)
             {
                 OverlayTile currentOverlayTile = openList.OrderBy(x => x.F).First();
 
@@ -45,6 +47,7 @@ namespace finished2
                         openList.Add(tile);
                     }
                 }
+                i++;
             }
 
             return new List<OverlayTile>();

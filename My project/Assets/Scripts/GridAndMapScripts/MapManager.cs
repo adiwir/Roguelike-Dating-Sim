@@ -9,6 +9,9 @@ namespace finished2
     {
         private static MapManager _instance;
         public static MapManager Instance { get { return _instance; } }
+        //public Dictionary<Vector3Int, IEnemy> enemyPositions { get; set; }
+        //private Boss boss;
+        //private StaticEnemy tempStaticEnemy;
 
         public Tilemap walkable, col;
         public GameObject overlayPrefab;

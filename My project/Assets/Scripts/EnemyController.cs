@@ -38,15 +38,41 @@ public class EnemyController : MonoBehaviour
         enemyTile = finished2.MapManager.Instance.map[tilePos];
     }
 
-    private void Move(finished2.OverlayTile tile)
+    private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, tilemap.GetCellCenterWorld(tile.gridLocation), moveSpeed);
+        if (target.standingOnTile == enemyTile && finished2.MapManager.Instance.map.ContainsKey(new Vector2Int(enemyTile.gridLocation.x + 1, enemyTile.gridLocation.y)))
+        {
+            Move(finished2.MapManager.Instance.map[new Vector2Int(enemyTile.gridLocation.x + 1, enemyTile.gridLocation.y)]);
+        }
 
+        else if (target.standingOnTile == enemyTile && finished2.MapManager.Instance.map.ContainsKey(new Vector2Int(enemyTile.gridLocation.x, enemyTile.gridLocation.y + 1)))
+        {
+            Move(finished2.MapManager.Instance.map[new Vector2Int(enemyTile.gridLocation.x, enemyTile.gridLocation.y + 1)]);
+        }
+
+        else if (target.standingOnTile == enemyTile && finished2.MapManager.Instance.map.ContainsKey(new Vector2Int(enemyTile.gridLocation.x, enemyTile.gridLocation.y - 1)))
+        {
+            Move(finished2.MapManager.Instance.map[new Vector2Int(enemyTile.gridLocation.x, enemyTile.gridLocation.y - 1)]);
+        }
+
+        else if (target.standingOnTile == enemyTile && finished2.MapManager.Instance.map.ContainsKey(new Vector2Int(enemyTile.gridLocation.x - 1, enemyTile.gridLocation.y)))
+        {
+            Move(finished2.MapManager.Instance.map[new Vector2Int(enemyTile.gridLocation.x - 1, enemyTile.gridLocation.y)]);
+        }
+    }
+
+    public void SetPos()
+    {
+        
         currentCell = tilemap.WorldToCell(transform.position);
         tilePos.x = currentCell.x;
         tilePos.y = currentCell.y;
         enemyTile = finished2.MapManager.Instance.map[tilePos];
-        
+    }
+    private void Move(finished2.OverlayTile tile)
+    {
+        transform.position = Vector3.MoveTowards(transform.position, tilemap.GetCellCenterWorld(tile.gridLocation), moveSpeed);
+        SetPos();    
     }
 
     public void MoveAlongPath()
@@ -65,15 +91,21 @@ public class EnemyController : MonoBehaviour
     {
         foreach (Vector2Int tilePos in attackTiles)
         {            
-            finished2.MapManager.Instance.map[tilePos].ShowHurtTile();           
+            if (finished2.MapManager.Instance.map.ContainsKey(tilePos))
+            {
+                finished2.MapManager.Instance.map[tilePos].ShowHurtTile();
+            }                       
         }
     }
 
     public void HideAttack(List<Vector2Int> attackTiles)
     {
         foreach (Vector2Int tilePos in attackTiles)
-        {           
-            finished2.MapManager.Instance.map[tilePos].HideTile();           
+        {
+            if (finished2.MapManager.Instance.map.ContainsKey(tilePos))
+            {
+                finished2.MapManager.Instance.map[tilePos].HideTile();
+            }
         }
     }
 

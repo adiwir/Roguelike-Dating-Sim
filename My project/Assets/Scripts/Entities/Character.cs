@@ -59,6 +59,7 @@ public class Character : Entity
             assignedAbilities.Add(abilityQueue.Dequeue());
         }
     }
+    
 
     public void UseBasicAbility(Vector3Int cellToAttack)
     {
