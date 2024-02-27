@@ -102,6 +102,8 @@ public class Boss : Enemy
                 StartCoroutine(Burrow(targetPosition));
             } 
         }
+        this.pos = tilemap.WorldToCell(transform.position);
+        UpdateCoveredArea();
         elapsedTime += 1;
     }
 
@@ -169,12 +171,22 @@ public class Boss : Enemy
 
     public override void TakeDamage(int damage)
     {
-        throw new NotImplementedException();
+        this.hp -= damage;
+        if (this.hp <= 0)
+        {
+            OnDeath();
+        }
     }
 
     public override void OnDeath()
     {
-        throw new NotImplementedException();
+        Debug.Log("Bullmole died, RIP BullMole. You were like a father to me");
+        Destroy(this.gameObject);
     }
+
+    //private void UpdateCoveredTiles(Vector3 newPosition)
+    //{
+    //    EnemyPosStorage.Instance.AddEnemy(this);
+    //}
 
 }
