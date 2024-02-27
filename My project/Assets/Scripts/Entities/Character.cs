@@ -71,12 +71,15 @@ public class Character : Entity
                 cellToAttack.x = 1;
                 break;
             case Orientation.south:
+                addVector.x = -1;
                 cellToAttack.x = -1;
                 break;
             case Orientation.west:
+                addVector.y = 1;
                 cellToAttack.y = 1;
                 break;
             case Orientation.east:
+                addVector.y = -1;
                 cellToAttack.y = -1;
                 break;
         }

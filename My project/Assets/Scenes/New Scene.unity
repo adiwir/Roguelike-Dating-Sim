@@ -5765,6 +5765,10 @@ PrefabInstance:
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 1723064605}
+    - target: {fileID: -8668151527730129067, guid: 2b2214b25744df04d86e3add59942a83, type: 3}
+      propertyPath: basicAbility
+      value: 
+      objectReference: {fileID: 11400000, guid: 47327a7eca4acdd4d80a6064ded1c119, type: 2}
     - target: {fileID: 4890004839089338117, guid: 2b2214b25744df04d86e3add59942a83, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5
