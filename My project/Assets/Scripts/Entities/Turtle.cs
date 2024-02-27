@@ -27,7 +27,8 @@ public class Turtle : Enemy
 
     private void Start()
     {
-        this.hp = 6;
+        this.maxHp = 6;
+        this.hp = maxHp;
         controller = GetComponent<EnemyController>();
         isAttacking = false;
         isSpinning = false;
@@ -234,15 +235,6 @@ public class Turtle : Enemy
     public override List<Vector3Int> GetCoveredArea()
     {
         throw new System.NotImplementedException();
-    }
-
-    public override void TakeDamage(int damage)
-    {
-        this.hp -= damage;
-        if (this.hp <= 0)
-        {
-            OnDeath();
-        }
     }
 
     public override void OnDeath()

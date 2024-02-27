@@ -18,7 +18,8 @@ public class Sheep : Enemy
     public void Awake()
     {
         controller = GetComponent<EnemyController>();
-        this.hp = 3;
+        this.maxHp = 3;
+        this.hp = maxHp;
         this.pos = controller.GetPos();
         //pos = tilemap.WorldToCell(transform.position);
         if (TryGetComponent<EnemySubject>(out enemySubject))
@@ -31,14 +32,13 @@ public class Sheep : Enemy
             Debug.LogError("EnemySubject not found.");
         }
         UpdateEnemyPosition(this.pos);
-
+        healthBar = GetComponentInChildren<FloatingHealthBar>();
     }
 
     private void Start()
     {
-        
+        healthBar.UpdateHealthBar(hp, maxHp);
         isAttacking = false;
-        
     }
     void LateUpdate()
     {
@@ -127,15 +127,6 @@ public class Sheep : Enemy
             }
         }
         return aRange;
-    }
-
-    public override void TakeDamage(int damage)
-    {
-        this.hp -= damage;
-        if (this.hp <= 0)
-        {
-            OnDeath();
-        }
     }
 
     public override List<Vector3Int> GetCoveredArea()
