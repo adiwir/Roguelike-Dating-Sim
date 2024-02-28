@@ -265,6 +265,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 762384128}
     - target: {fileID: 2410916775325478605, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: m_Name
       value: Sheep (4)
@@ -440,6 +444,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3704822144809599675, guid: 93a10161f05e1d04ab90653707e87a02, type: 3}
   m_PrefabInstance: {fileID: 200406767}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &310395334 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6889363518670842153, guid: 93a10161f05e1d04ab90653707e87a02, type: 3}
+  m_PrefabInstance: {fileID: 603200604}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f7c4d5aad17cc41895b07e0da4cc2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &388440250 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2203465141026753818, guid: df95552e9fb615641889591e79aa03fc, type: 3}
@@ -497,6 +512,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &454113396 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6889363518670842153, guid: 93a10161f05e1d04ab90653707e87a02, type: 3}
+  m_PrefabInstance: {fileID: 200406767}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f7c4d5aad17cc41895b07e0da4cc2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &546434345 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6889363518670842153, guid: 93a10161f05e1d04ab90653707e87a02, type: 3}
+  m_PrefabInstance: {fileID: 2090780685}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f7c4d5aad17cc41895b07e0da4cc2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &565678272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -729,6 +766,10 @@ PrefabInstance:
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 1723064605}
+    - target: {fileID: 2009545663873669673, guid: 894f274c500d00642a35a68f01193a76, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 737447934}
     - target: {fileID: 3966063753723356739, guid: 894f274c500d00642a35a68f01193a76, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.74
@@ -786,6 +827,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3966063753723356739, guid: 894f274c500d00642a35a68f01193a76, type: 3}
   m_PrefabInstance: {fileID: 671573087}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &737447934 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6889363518670842153, guid: 93a10161f05e1d04ab90653707e87a02, type: 3}
+  m_PrefabInstance: {fileID: 1819684947}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f7c4d5aad17cc41895b07e0da4cc2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &762384128 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6889363518670842153, guid: 93a10161f05e1d04ab90653707e87a02, type: 3}
+  m_PrefabInstance: {fileID: 1079441864}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f7c4d5aad17cc41895b07e0da4cc2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &918480886 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6983315668266302810, guid: 2b2214b25744df04d86e3add59942a83, type: 3}
@@ -1260,6 +1323,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 454113396}
     - target: {fileID: 2410916775325478605, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: m_Name
       value: Sheep
@@ -106373,6 +106440,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 546434345}
     - target: {fileID: 2410916775325478605, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: m_Name
       value: Sheep (1)
@@ -107026,6 +107097,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 310395334}
     - target: {fileID: 2410916775325478605, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: m_Name
       value: Sheep (3)
@@ -107099,6 +107174,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 2119215724}
     - target: {fileID: 2410916775325478605, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: m_Name
       value: Sheep (2)
@@ -112311,6 +112390,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2093300064}
   m_CullTransparentMesh: 1
+--- !u!114 &2119215724 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6889363518670842153, guid: 93a10161f05e1d04ab90653707e87a02, type: 3}
+  m_PrefabInstance: {fileID: 565678272}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f7c4d5aad17cc41895b07e0da4cc2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7872124022325080491
 PrefabInstance:
   m_ObjectHideFlags: 0
