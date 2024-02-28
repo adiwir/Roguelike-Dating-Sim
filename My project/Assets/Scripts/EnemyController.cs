@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour
     private List<finished2.OverlayTile> path;
     public PlayerController target;
     public finished2.OverlayTile enemyTile;
-    
+    public bool isFlipped;
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +64,8 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+
+
     public void SetPos()
     {
         
@@ -74,6 +76,7 @@ public class EnemyController : MonoBehaviour
     }
     private void Move(finished2.OverlayTile tile)
     {
+        
         transform.position = Vector3.MoveTowards(transform.position, tilemap.GetCellCenterWorld(tile.gridLocation), moveSpeed);
         SetPos();    
     }
@@ -86,7 +89,6 @@ public class EnemyController : MonoBehaviour
         {
             Move(path[0]);
             path.RemoveAt(0);
-
         }
     }
 
