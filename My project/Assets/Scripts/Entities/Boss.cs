@@ -28,12 +28,15 @@ public class Boss : Enemy
 
     void Start()
     {
+        this.maxHp = 20;
+        this.hp = maxHp;
         dirtParticles = GameObject.FindWithTag("Dirt");
         playerTarget = GameObject.FindWithTag("Player");
         targetPosition = playerTarget.transform.position;
         coveredArea = new List<Vector3Int>();
         UpdateEnemyPosition(this.pos);
         UpdateCoveredArea();
+        healthBar.UpdateHealthBar(hp, maxHp);
     }
 
     private void Update()
@@ -165,15 +168,6 @@ public class Boss : Enemy
     public override List<Vector3Int> GetCoveredArea()
     {
         return this.coveredArea;
-    }
-
-    public override void TakeDamage(int damage)
-    {
-        this.hp -= damage;
-        if (this.hp <= 0)
-        {
-            OnDeath();
-        }
     }
 
     public override void OnDeath()

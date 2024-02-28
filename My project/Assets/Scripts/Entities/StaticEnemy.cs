@@ -16,7 +16,8 @@ public class StaticEnemy : Enemy
     {
         //tilemap = GetComponent<Tilemap>();
         //col = GetComponent<Col>();
-        this.hp = 3;
+        this.maxHp = 6;
+        this.hp = maxHp;
         pos = tilemap.WorldToCell(transform.position);
         enemySubject = GetComponent<EnemySubject>();
         if (enemySubject != null)
@@ -32,20 +33,15 @@ public class StaticEnemy : Enemy
         UpdateEnemyPosition(this.pos);
     }
 
+    private void Start()
+    {
+        healthBar.UpdateHealthBar(hp, maxHp);
+    }
+
     public override void OnDeath()
     {
         Debug.Log("Enemy died");
         Destroy(this.gameObject);
-    }
-
-    public override void TakeDamage(int damage)
-    {
-        Debug.Log("Ouch");
-        this.hp -= damage;
-        if (this.hp <= 0)
-        {
-            OnDeath();
-        }
     }
 
     public override List<Vector3Int> GetCoveredArea()
