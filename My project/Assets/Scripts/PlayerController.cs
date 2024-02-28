@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Tilemap col;
     
     Character character;
-    
+    public Animator animator;
+
     public float moveSpeed;
     public finished2.OverlayTile standingOnTile;
     private Vector2Int tilePos;
@@ -25,6 +27,8 @@ public class PlayerController : MonoBehaviour
     private float movementCd = 0.1f;
     private bool activeAbilitySelected = false;
     private bool isDead = false;
+    public bool isFlipped = false;
+    public bool isRunning = false;
 
     public List<KeyCode> movIn;
 
@@ -48,6 +52,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        
+
         if (Input.GetKeyDown(KeyCode.W))
         {
             movIn.Add(KeyCode.W);
@@ -96,6 +102,7 @@ public class PlayerController : MonoBehaviour
         if (isDead) return;
         origPos = tilemap.WorldToCell(transform.position);
         targetCell = origPos;
+        Vector3 scale = transform.localScale;
 
         //elapsedTime += Time.fixedDeltaTime;
         //elapsedBasicAttackTime += Time.fixedDeltaTime;
@@ -104,6 +111,9 @@ public class PlayerController : MonoBehaviour
 
         if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.W)
         {
+            isFlipped = true;
+            isRunning = true;
+            scale.x = Mathf.Abs(scale.x);
             targetCell.x += 1;
             if (CanMove(targetCell))
             {
@@ -116,6 +126,9 @@ public class PlayerController : MonoBehaviour
         else if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.S)
         {
             targetCell.x -= 1;
+            isFlipped = false;
+            isRunning = true;
+            scale.x = Mathf.Abs(scale.x);
             if (CanMove(targetCell))
             {
                 targetPosition = tilemap.GetCellCenterWorld(targetCell);
@@ -127,6 +140,9 @@ public class PlayerController : MonoBehaviour
         else if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.A)
         {
             targetCell.y += 1;
+            isFlipped = true;
+            isRunning = true;
+            scale.x = Mathf.Abs(scale.x) * -1;
             if (CanMove(targetCell))
             {
                 targetPosition = tilemap.GetCellCenterWorld(targetCell);
@@ -138,6 +154,9 @@ public class PlayerController : MonoBehaviour
         else if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.D)
         {
             targetCell.y -= 1;
+            scale.x = Mathf.Abs(scale.x) * -1;
+            isFlipped = false;
+            isRunning = true;
             if (CanMove(targetCell))
             {
                 targetPosition = tilemap.GetCellCenterWorld(targetCell);
@@ -145,12 +164,21 @@ public class PlayerController : MonoBehaviour
                 character.SetOrientation("D");
             }
         }
+        else
+        {
+            isRunning = false;
+        }
+
+        animator.SetBool("isRunning", isRunning);
+        animator.SetBool("isFlipped", isFlipped);
+        transform.localScale = scale;
 
         //BasicAttack
         if (Input.GetButton("LeftMouse") && (basicCd <= 0) && !(activeAbilitySelected))
         {
             character.UseBasicAbility(this.origPos);
-            basicCd = 1f;
+            basicCd = 0.1f;
+            animator.SetTrigger("Shoot");
         } else
         {
             basicCd -= Time.fixedDeltaTime; //d�ligt system, kan bli -massa om man bara inte trycker in den knappen men f�r fixa det senare

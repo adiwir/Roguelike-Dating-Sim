@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9086118547842901634}
   - component: {fileID: 8346764444976798391}
+  - component: {fileID: 4544810956341372626}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -84,6 +85,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4544810956341372626
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2203465141026753818}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 942dae2edaa557b4d93c306baaa2ee0c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4346601964389275026
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,8 +153,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 0}
-  col: {fileID: 0}
-  player: {fileID: 0}
+  moveSpeed: 1
+  tilePos: {x: 0, y: 0}
+  target: {fileID: 0}
+  enemyTile: {fileID: 0}
+  animator: {fileID: 0}
+  isFlipped: 0
+  isRunning: 0
 --- !u!114 &1145685758732040085
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,9 +11,12 @@ public class Sheep : Enemy
     public int timeThresh;
     private int elapsedTime = 0;
     private bool isAttacking;
+    private bool isFlipped;
     public int range;
     public List<Vector2Int> attackTiles;
     EnemySubject enemySubject;
+    public GameObject playerTarget;
+    public Animator animator;
 
     public void Awake()
     {
@@ -38,7 +41,35 @@ public class Sheep : Enemy
     {
         
         isAttacking = false;
-        
+        playerTarget = GameObject.FindWithTag("Player");
+    }
+
+    private void Update()
+    {
+        Vector3 scale = transform.localScale;
+
+        if (playerTarget.transform.position.y > transform.position.y)
+        {
+            isFlipped = true;
+
+        }
+        else
+        {
+            isFlipped = false;
+        }
+
+        if (playerTarget.transform.position.x > transform.position.x)
+        {
+            scale.x = Mathf.Abs(scale.x) * -1 * (isFlipped ? -1 : 1);
+        }
+        else
+        {
+            scale.x = Mathf.Abs(scale.x) * (isFlipped ? -1 : 1);
+        }
+
+        animator.SetBool("isFlipped", isFlipped);
+        transform.localScale = scale;
+
     }
     void LateUpdate()
     {
@@ -52,6 +83,7 @@ public class Sheep : Enemy
         }
         else if (isAttacking)
         {
+            animator.SetBool("isRunning", false);
             controller.ShowAttack(attackTiles);
             if (elapsedTime > timeThresh)
             {
@@ -61,11 +93,11 @@ public class Sheep : Enemy
                 attackTiles.Clear();
                 isAttacking = false;
             }
-
         }
         else if (!isAttacking && elapsedTime > timeThresh)
         {
             controller.MoveAlongPath();
+            animator.SetBool("isRunning", true);
             elapsedTime = 0;
         }
 

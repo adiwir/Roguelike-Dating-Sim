@@ -58,10 +58,8 @@ public class Boss : Enemy
         animator.SetBool("isFlipped", isFlipped);
 
         if (playerTarget.transform.position.x > transform.position.x)
-        {
-            
+        { 
             scale.x = Mathf.Abs(scale.x) * -1 * (isFlipped ? -1 : 1);
-
         }
         else
         {
