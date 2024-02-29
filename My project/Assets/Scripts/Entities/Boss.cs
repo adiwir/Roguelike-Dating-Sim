@@ -1,8 +1,11 @@
+using BarthaSzabolcs.Tutorial_SpriteFlash;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
 
 public class Boss : Enemy
@@ -16,20 +19,25 @@ public class Boss : Enemy
     private Vector3 currentPosition;
     private Vector3 outOfSightPosition = new Vector3(100f, 100f);
 
-    private int tilesCovered = 3;
-    [SerializeField] private bool inAttack = false;
-
+    public GameObject firePrefab;
     public GameObject dirtParticles;
     public GameObject playerTarget;
+
     public Animator animator;
 
-    [SerializeField] public bool isInSecondPhase = false;
-    public bool isFlipped = false;
+    private DamageFlash damageFlash;
+
+    private float movementSpeed = 4;
+    private float timeThreshold = 150;
+    private bool hasTransformed = false;
+    private bool isFlipped = false;
+    private bool inAttack = false;
 
     void Start()
     {
         this.maxHp = 20;
         this.hp = maxHp;
+        damageFlash = GetComponent<DamageFlash>();
         dirtParticles = GameObject.FindWithTag("Dirt");
         playerTarget = GameObject.FindWithTag("Player");
         targetPosition = playerTarget.transform.position;
@@ -41,15 +49,17 @@ public class Boss : Enemy
 
     private void Update()
     {
-
         if (!(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1))
         {
             return;
         }
+        currentPosition = targetPosition;
+        updateDirection(transform.localScale);
+    }
 
-        Vector3 scale = transform.localScale;
-
-        if(playerTarget.transform.position.y > transform.position.y)
+    private void updateDirection(Vector3 scale)
+    {
+        if (playerTarget.transform.position.y > transform.position.y)
         {
             isFlipped = true;
 
@@ -61,7 +71,7 @@ public class Boss : Enemy
         animator.SetBool("isFlipped", isFlipped);
 
         if (playerTarget.transform.position.x > transform.position.x)
-        { 
+        {
             scale.x = Mathf.Abs(scale.x) * -1 * (isFlipped ? -1 : 1);
         }
         else
@@ -69,12 +79,6 @@ public class Boss : Enemy
             scale.x = Mathf.Abs(scale.x) * (isFlipped ? -1 : 1);
         }
         transform.localScale = scale;
-
-        if(isInSecondPhase)
-        {
-            StartCoroutine(AnimatorSetFire("isTransforming", 2.0f));
-            isInSecondPhase = false;
-        }
     }
 
     private IEnumerator AnimatorSetFire(string animation, float animationLength)
@@ -87,14 +91,8 @@ public class Boss : Enemy
 
     void FixedUpdate()
     {
-        if (!(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1))
-        {
-            return;
-        }
-
         targetPosition = playerTarget.transform.position;
-        currentPosition = targetPosition;
-        if (elapsedTime > 150)
+        if (elapsedTime > timeThreshold)
         {
             float distance = Vector3.Distance(targetPosition, transform.position);
             if(distance < 50 && !inAttack)
@@ -102,6 +100,14 @@ public class Boss : Enemy
                 inAttack = true;
                 StartCoroutine(Burrow(targetPosition));
             } 
+        }
+
+        if (hp <= 10 && !hasTransformed && !inAttack)
+        {
+            StartCoroutine(AnimatorSetFire("isTransforming", 2.0f));
+            movementSpeed = 8;
+            hasTransformed = true;
+            timeThreshold = 50;
         }
         this.pos = tilemap.WorldToCell(transform.position);
         UpdateCoveredArea();
@@ -119,8 +125,15 @@ public class Boss : Enemy
         animator.SetBool("isUnburrowing", true);
         dirtParticles.transform.position = Vector3.MoveTowards(dirtParticles.transform.position, outOfSightPosition, 10000000000);
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPos.x, playerPos.y, 5), 100000000000000000);
+        if (hasTransformed)
+        {
+            SpawnFire();
+        }
         yield return new WaitForSeconds(1.1f);
         animator.SetBool("isUnburrowing", false);
+        
+        
+        updateDirection(transform.localScale);
         yield return Charge(new Vector3(currentPosition.x, currentPosition.y, 5));
     }
 
@@ -130,7 +143,7 @@ public class Boss : Enemy
         Vector3 pos = transform.position;
         while (pos != playerPos)
         {
-            pos = Vector3.MoveTowards(transform.position, playerPos, 3 * Time.fixedDeltaTime);
+            pos = Vector3.MoveTowards(transform.position, playerPos, movementSpeed * Time.fixedDeltaTime);
             transform.position = pos;
             yield return null;
             
@@ -140,11 +153,20 @@ public class Boss : Enemy
         elapsedTime = 0;
     }
 
+    void SpawnFire()
+    {
+        for(int i = 0; i < 15; i++)
+        {
+            Vector3 posToAdd = new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f),UnityEngine.Random.Range(-0.5f, 0.5f), 0);
+            GameObject fire = Instantiate(firePrefab, transform.position + posToAdd, transform.rotation);
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
-            Debug.Log("ouch");
+            playerTarget.GetComponentInParent<Health>().decreaseHealthPoints(1);
         }
     }
 

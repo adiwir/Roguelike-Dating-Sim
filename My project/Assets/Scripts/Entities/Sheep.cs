@@ -1,3 +1,4 @@
+using BarthaSzabolcs.Tutorial_SpriteFlash;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ public class Sheep : Enemy
     EnemySubject enemySubject;
     public GameObject playerTarget;
     public Animator animator;
+    private DamageFlash damageFlash;
 
     public void Awake()
     {
@@ -43,6 +45,7 @@ public class Sheep : Enemy
         healthBar.UpdateHealthBar(hp, maxHp);
         isAttacking = false;
         playerTarget = GameObject.FindWithTag("Player");
+        damageFlash = GetComponent<DamageFlash>();
     }
 
     private void Update()

@@ -1322,6 +1322,10 @@ PrefabInstance:
       propertyPath: isRunning
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5315487635550584994, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
+      propertyPath: flashMaterial
+      value: 
+      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 7151460916557356509, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.07
@@ -106231,7 +106235,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1760127583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106788,6 +106792,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 4346601964389275026, guid: df95552e9fb615641889591e79aa03fc, type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 7337168982101740383, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 70.2
@@ -106887,7 +106895,10 @@ PrefabInstance:
       addedObject: {fileID: 2037969256}
     - targetCorrespondingSourceObject: {fileID: 4346601964389275026, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2037969258}
+      addedObject: {fileID: 2037969260}
+    - targetCorrespondingSourceObject: {fileID: 4346601964389275026, guid: df95552e9fb615641889591e79aa03fc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2037969261}
     - targetCorrespondingSourceObject: {fileID: 2203465141026753818, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 388440252}
@@ -106915,12 +106926,10 @@ MonoBehaviour:
   healthBar: {fileID: 1151154514}
   tilemap: {fileID: 1723064605}
   col: {fileID: 1394696974}
-  inAttack: 0
+  firePrefab: {fileID: 7017403990644954728, guid: 2b4e7a0b567fc394cbca813b58a48a87, type: 3}
   dirtParticles: {fileID: 0}
   playerTarget: {fileID: 0}
   animator: {fileID: 388440252}
-  isInSecondPhase: 0
-  isFlipped: 0
 --- !u!50 &2037969256
 Rigidbody2D:
   serializedVersion: 4
@@ -106948,8 +106957,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!60 &2037969258
-PolygonCollider2D:
+--- !u!114 &2037969260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037969252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d8ec55ce5532e940b76b5c4a9c3f0f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 42df1c7856584b6b8db9a509b6b10074, type: 2}
+  duration: 0.125
+--- !u!70 &2037969261
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
