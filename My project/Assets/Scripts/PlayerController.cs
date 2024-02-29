@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour
         //elapsedBasicAttackTime += Time.fixedDeltaTime;
 
         //PlayerMovement
+        CleanMovIn();
 
         if (currentRechargeTime > 0) { 
             currentRechargeTime -= Time.fixedDeltaTime;
@@ -299,4 +300,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void CleanMovIn()
+    {
+        if (movIn.Count > 0)
+        {
+            if (movIn.Contains(KeyCode.W) && !Input.GetKey(KeyCode.W))
+            {
+                movIn.Remove(KeyCode.W);
+            }
+
+            if (movIn.Contains(KeyCode.A) && !Input.GetKey(KeyCode.A))
+            {
+                movIn.Remove(KeyCode.A);
+            }
+
+            if (movIn.Contains(KeyCode.D) && !Input.GetKey(KeyCode.D))
+            {
+                movIn.Remove(KeyCode.D);
+            }
+
+            if (movIn.Contains(KeyCode.S) && !Input.GetKey(KeyCode.S))
+            {
+                movIn.Remove(KeyCode.S);
+            }
+        }
+    }
 }
