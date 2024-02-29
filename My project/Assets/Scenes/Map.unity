@@ -775,6 +775,10 @@ PrefabInstance:
       propertyPath: isRunning
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5315487635550584994, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
+      propertyPath: flashMaterial
+      value: 
+      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 7151460916557356509, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.07
@@ -105665,7 +105669,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1760127583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106107,6 +106111,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 4346601964389275026, guid: df95552e9fb615641889591e79aa03fc, type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 7337168982101740383, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 70.2
@@ -106203,7 +106211,10 @@ PrefabInstance:
       addedObject: {fileID: 2037969256}
     - targetCorrespondingSourceObject: {fileID: 4346601964389275026, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2037969258}
+      addedObject: {fileID: 2037969260}
+    - targetCorrespondingSourceObject: {fileID: 4346601964389275026, guid: df95552e9fb615641889591e79aa03fc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2037969261}
     - targetCorrespondingSourceObject: {fileID: 2203465141026753818, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 388440252}
@@ -106225,16 +106236,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca756638d901dca4ebb3ebd74caeb97b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
+  hp: 20
   pos: {x: 0, y: 0, z: 0}
   tilemap: {fileID: 1723064605}
   col: {fileID: 1394696974}
-  inAttack: 0
+  firePrefab: {fileID: 7017403990644954728, guid: 2b4e7a0b567fc394cbca813b58a48a87, type: 3}
   dirtParticles: {fileID: 0}
   playerTarget: {fileID: 0}
   animator: {fileID: 388440252}
-  isInSecondPhase: 0
-  isFlipped: 0
 --- !u!50 &2037969256
 Rigidbody2D:
   serializedVersion: 4
@@ -106262,8 +106271,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!60 &2037969258
-PolygonCollider2D:
+--- !u!114 &2037969260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037969252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d8ec55ce5532e940b76b5c4a9c3f0f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 42df1c7856584b6b8db9a509b6b10074, type: 2}
+  duration: 0.125
+--- !u!70 &2037969261
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -106294,36 +106317,9 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 1.3941422, y: 1.222187}
-      - {x: 1.0784073, y: 1.4529228}
-      - {x: 0.12947083, y: 1.6586342}
-      - {x: -0.6050635, y: 1.3126485}
-      - {x: -1.3043137, y: 0.5969887}
-      - {x: -1.4153748, y: 0.4986801}
-      - {x: -1.5705795, y: 0.36406326}
-      - {x: -1.8152618, y: -0.44900513}
-      - {x: -1.5514374, y: -1.0206757}
-      - {x: -1.2780304, y: -1.091507}
-      - {x: -1.145462, y: -1.0719681}
-      - {x: -0.8041916, y: -1.0798721}
-      - {x: -0.6816878, y: -1.1412963}
-      - {x: -0.006752014, y: -0.90953827}
-      - {x: 0.7719284, y: -0.59743476}
-      - {x: 1.4021301, y: -0.01984787}
-      - {x: 1.5514975, y: 0.4481048}
-  m_UseDelaunayMesh: 0
+  m_Offset: {x: -0.016677856, y: 0.07831955}
+  m_Size: {x: 2.9229279, y: 3.079567}
+  m_Direction: 0
 --- !u!1001 &2041296363
 PrefabInstance:
   m_ObjectHideFlags: 0
