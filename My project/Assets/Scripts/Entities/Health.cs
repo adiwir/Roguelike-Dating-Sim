@@ -67,7 +67,7 @@ public class Health : MonoBehaviour
 
         if(health <= 0)
         {
-            playerController.setDead(true);
+            playerController.SetDead(true);
         }
 
         StartCoroutine(BecomeTemporarilyInvincible());

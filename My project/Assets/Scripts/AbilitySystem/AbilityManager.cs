@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +12,7 @@ public class AbilityManager : MonoBehaviour
 
     [SerializeField] private int TotalAbilityAmount = 6;
     private readonly int startingAbilityAmount = 3;
+    public bool HasADiscardedAbility { get; set; }
 
     private void Awake()
     {
@@ -25,12 +25,13 @@ public class AbilityManager : MonoBehaviour
         //    _instance = this;
         //}
         AssignAbilities();
+        HasADiscardedAbility = false;
     }
 
-    private void Start()
-    {
-        //AssignAbilities();
-    }
+    //private void Start()
+    //{
+    //    //AssignAbilities();
+    //}
 
     private void AssignAbilities()
     {
@@ -55,7 +56,32 @@ public class AbilityManager : MonoBehaviour
 
     public void SendActiveToDiscard(ActiveAbility activeAbility)
     {
+        HasADiscardedAbility = true;
         UsedAbilities.Add(activeAbility);
+    }
+
+    public Queue<ActiveAbility> Recharge()
+    {
+        return ShuffleAndEnqueue(UsedAbilities);
+    }
+
+    private static Queue<ActiveAbility> ShuffleAndEnqueue<ActiveAbility>(List<ActiveAbility> list)
+    {
+        System.Random random = new();
+        int n = list.Count;
+
+        //Fisher-Yates shuffle algorithm
+        for (int i = n - 1; i > 0; i--)
+        {
+            int j = random.Next(0, i + 1);
+            ActiveAbility temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
+        }
+
+        // Enqueue shuffled items into a queue
+        Queue<ActiveAbility> queue = new(list);
+        return queue;
     }
 
 }

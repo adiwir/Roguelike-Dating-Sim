@@ -10,7 +10,7 @@ public class Character : Entity
 {
     [SerializeField] private Tilemap tilemap;
     private readonly int startingAbilityAmount = 3;
-    public Queue<ActiveAbility> abilityQueue;
+    public Queue<ActiveAbility> abilityQueue = new();
     public List<ActiveAbility> assignedAbilities { get; set; }
     [SerializeField] private BasicAbility basicAbility;
     ActiveAbility toggledAbility;
@@ -40,7 +40,7 @@ public class Character : Entity
     public void Start()
     {
         this.healthPoints = maxHealth;
-        abilityQueue = abilityManager.GetAbilityQueue();
+        CombineAbilityQueues(abilityManager.GetAbilityQueue());
         Debug.Log("ability amount " + abilityQueue.Count);
         AssignAbilities();
     }
@@ -51,7 +51,7 @@ public class Character : Entity
         abilityManager = GetComponent<AbilityManager>();
     }
 
-    void AssignAbilities()
+    private void AssignAbilities()
     {
         assignedAbilities = new List<ActiveAbility>(3);
         for (int i = 0; i < startingAbilityAmount; i++)
@@ -59,7 +59,14 @@ public class Character : Entity
             assignedAbilities.Add(abilityQueue.Dequeue());
         }
     }
-    
+
+    private void CombineAbilityQueues(Queue<ActiveAbility> queueToAdd) 
+    {
+        while (queueToAdd.Count > 0)
+        {
+            abilityQueue.Enqueue(queueToAdd.Dequeue());
+        }
+    }
 
     public void UseBasicAbility(Vector3Int cellToAttack)
     {
@@ -108,6 +115,7 @@ public class Character : Entity
     {
         if(toggledAbility != null && ReferenceEquals(toggledAbility, assignedAbilities[spot]))
         {
+            Debug.Log(toggledAbility.ToString());
             ActivateToggledAbility(spot);
         }
         else
@@ -125,6 +133,8 @@ public class Character : Entity
         toggledAbility = null;
 
         HideAOE();
+
+        abilityManager.SendActiveToDiscard(assignedAbilities[spot]);
 
         if (abilityQueue.Count <= 0)
         {
@@ -155,6 +165,7 @@ public class Character : Entity
                 print("toggledAbility");
                 toggledAbility = assignedAbilities[spot];
                 areaOfEffect = toggledAbility.GetAreaOfEffect();
+                DisplayAreaOfEffect();
                 
                 //imageChooser.toggleImage(spot);
             } else
@@ -203,7 +214,6 @@ public class Character : Entity
             areaOfEffect.Clear();
             areaOfEffect = newAreaOfEffect;
         }
-        
     }
 
     private void HideAOE()
@@ -229,8 +239,16 @@ public class Character : Entity
         return hasAssignedAbility;
     }
 
-    //getters and setters
+    public void RechargeAbilities()
+    {
+        if (abilityManager.HasADiscardedAbility)
+        {
+            CombineAbilityQueues(abilityManager.Recharge());
+            AssignAbilities();
+        }
+    }
 
+    //getters and setters
 
     public void SetOrientation(string key)
     {
@@ -258,14 +276,15 @@ public class Character : Entity
         }
     }
 
-    public bool UsedAbility()
+    public bool UsedAbility() //kan vara buggig
    {
         return (this.toggledAbility == null);
    }
 
     public void UnToggleAbility()
     {
-        this.toggledAbility = null;
+        toggledAbility = null;
+        HideAOE();
     }
 
     public Vector3 GetPos()
@@ -286,5 +305,10 @@ public class Character : Entity
     public int getHealthPoints()
     {
         return this.healthPoints;
+    }
+
+    public ActiveAbility GetToggledAbility()
+    {
+        return this.toggledAbility;
     }
 }

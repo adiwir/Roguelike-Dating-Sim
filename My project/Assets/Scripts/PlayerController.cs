@@ -25,16 +25,21 @@ public class PlayerController : MonoBehaviour
     private float abilityCd = 1f;
     private float baseAbilityCd;
     private float movementCd = 0.1f;
+    private float fullRechargeTime = 2f; //how long the player can't do anything else while recharging
+    private float currentRechargeTime;
     private bool activeAbilitySelected = false;
     private bool isDead = false;
     public bool isFlipped = false;
     public bool isRunning = false;
+    public bool isRecharging = false;
 
     public List<KeyCode> movIn;
 
 
     private void Start()
     {
+        currentRechargeTime = 0;
+
         tilePos = new Vector2Int();
         targetCell = tilemap.WorldToCell(transform.position);
         targetPosition = tilemap.GetCellCenterWorld(targetCell);
@@ -46,14 +51,12 @@ public class PlayerController : MonoBehaviour
         character.SetPos(transform.position);
 
         moveSpeed = character.GetMoveSpeed();
-        baseAbilityCd = abilityCd;
+        baseAbilityCd = 0;
     }
 
 
     private void Update()
     {
-        
-
         if (Input.GetKeyDown(KeyCode.W))
         {
             movIn.Add(KeyCode.W);
@@ -95,8 +98,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-
     void FixedUpdate()
     {
         if (isDead) return;
@@ -109,6 +110,13 @@ public class PlayerController : MonoBehaviour
 
         //PlayerMovement
 
+        if (currentRechargeTime > 0) { 
+            currentRechargeTime -= Time.fixedDeltaTime;
+        } else 
+        {
+            isRecharging = false;
+        }
+
         if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.W)
         {
             isFlipped = true;
@@ -120,7 +128,7 @@ public class PlayerController : MonoBehaviour
                 targetPosition = tilemap.GetCellCenterWorld(targetCell);
                 MovePlayer(targetPosition);
                 character.SetOrientation("W");
-            }   
+            }
         }
 
         else if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.S)
@@ -179,40 +187,56 @@ public class PlayerController : MonoBehaviour
             character.UseBasicAbility(this.origPos);
             basicCd = 0.1f;
             animator.SetTrigger("Shoot");
-        } else
+        }
+        else
         {
             basicCd -= Time.fixedDeltaTime; //d�ligt system, kan bli -massa om man bara inte trycker in den knappen men f�r fixa det senare
-            //tror nog inte ens att detta systemet kommer funka lol, TODO: fixa
+                                            //tror nog inte ens att detta systemet kommer funka lol, TODO: fixa
         }
 
         //VariableAbilities
         if (Input.GetButtonDown("RightMouse") && (abilityCd <= 0)) //frågan är om man ska använda nya ability systemet här
         {
-            Debug.Log("activated RightMouse");
-            //activeAbilitySelected = true;
-            character.ActivateAbilityInSpot(0); //nyare
-            //character.ToggleAbilityInSpot(0);// nytt
+            if(!isRecharging)
+            {
+                Debug.Log("activated RightMouse");
+                character.ActivateAbilityInSpot(0);
+            }
+            
             if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
-        } else if(Input.GetButtonDown("LShift") && (abilityCd <= 0))
+        }
+        else if (Input.GetButtonDown("LShift") && (abilityCd <= 0))
         {
-            //activeAbilitySelected = true;
-            character.ActivateAbilityInSpot(1); //nyare
-            //character.ToggleAbilityInSpot(1);// nytt
+            if (!isRecharging)
+            {
+                Debug.Log("activated LShift");
+                character.ActivateAbilityInSpot(1);
+            }
+            
             if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
-        } else if(Input.GetButtonDown("Space") && (abilityCd <= 0))
+        }
+        else if (Input.GetButtonDown("Space") && (abilityCd <= 0))
         {
-            //activeAbilitySelected = true;
-            character.ActivateAbilityInSpot(2); //nyare
-            //character.ToggleAbilityInSpot(2);// nytt
+            if (!isRecharging)
+            {
+                Debug.Log("activated LShift");
+                character.ActivateAbilityInSpot(2);
+            }
+            
             if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
-        } else
+        }
+    
+        if(abilityCd > 0)
         {
             abilityCd -= Time.fixedDeltaTime;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Debug.Log("pressed esc");
+            Debug.Log("before " +character.GetToggledAbility());
             character.UnToggleAbility();
+            Debug.Log("after " +character.GetToggledAbility());
         }
 
         if (!(character.UsedAbility()))
@@ -220,7 +244,16 @@ public class PlayerController : MonoBehaviour
             character.DisplayAreaOfEffect();
         }
 
+        //Recharge
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            isRecharging = true;
+            character.RechargeAbilities();
+            currentRechargeTime = fullRechargeTime;
+        }
     }
+
+    //void ShowAreaOfEffect()
 
     void MovePlayer(Vector3 target)
     {
@@ -234,7 +267,6 @@ public class PlayerController : MonoBehaviour
             tilePos.y = targetCell.y;
             standingOnTile = finished2.MapManager.Instance.map[tilePos];
             movementCd = 0.1f;
-
         } else
         {
             movementCd -= Time.fixedDeltaTime;
@@ -243,14 +275,14 @@ public class PlayerController : MonoBehaviour
 
     private bool CanMove(Vector3Int target)
     {
-        if (!tilemap.HasTile(target) || col.HasTile(target))
+        if (!tilemap.HasTile(target) || col.HasTile(target) || isRecharging)
         {
             return false;
         }
         return true;
     }
 
-    public void setDead(bool value)
+    public void SetDead(bool value)
     {
         isDead = value;
     }
