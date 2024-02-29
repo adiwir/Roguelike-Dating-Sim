@@ -890,6 +890,7 @@ MonoBehaviour:
   standingOnTile: {fileID: 0}
   isFlipped: 0
   isRunning: 0
+  isRecharging: 0
   movIn: 
 --- !u!4 &918480888 stripped
 Transform:
@@ -1400,7 +1401,7 @@ PrefabInstance:
     - target: {fileID: 5315487635550584994, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: flashMaterial
       value: 
-      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: 42df1c7856584b6b8db9a509b6b10074, type: 2}
     - target: {fileID: 7151460916557356509, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.07
