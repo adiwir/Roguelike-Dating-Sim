@@ -37,6 +37,7 @@ public class Sheep : Enemy
         }
         UpdateEnemyPosition(this.pos);
         healthBar = GetComponentInChildren<FloatingHealthBar>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -45,7 +46,6 @@ public class Sheep : Enemy
         isAttacking = false;
         playerTarget = GameObject.FindWithTag("Player");
         damageFlash = GetComponent<DamageFlash>();
-        animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
