@@ -108,7 +108,7 @@ public class Boss : Enemy
     private IEnumerator WaitForTransformation()
     {
         isTransforming = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.2f);
         isTransforming = false;
     }
 
@@ -156,7 +156,7 @@ public class Boss : Enemy
         for(int i = 0; i < 15; i++)
         {
             Vector3 posToAdd = new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f),UnityEngine.Random.Range(-0.5f, 0.5f), 0);
-            GameObject fire = Instantiate(firePrefab, transform.position + posToAdd, transform.rotation);
+            Instantiate(firePrefab, transform.position + posToAdd, transform.rotation);
         }
     }
 

@@ -83,7 +83,6 @@ public class Health : MonoBehaviour
         isInvincible = true;
         for (float i = 0; i < invincibilityDurationSeconds; i += invincibilityDeltaTime)
         {
-            // Alternate between 0 and 1 scale to simulate flashing
             if (transform.localScale == Vector3.one) 
             {
                 ScaleModelTo(Vector3.zero);
