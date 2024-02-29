@@ -18,7 +18,6 @@ public class Sheep : Enemy
     EnemySubject enemySubject;
     public GameObject playerTarget;
     public Animator animator;
-    private DamageFlash damageFlash;
 
     public void Awake()
     {
@@ -46,6 +45,7 @@ public class Sheep : Enemy
         isAttacking = false;
         playerTarget = GameObject.FindWithTag("Player");
         damageFlash = GetComponent<DamageFlash>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()

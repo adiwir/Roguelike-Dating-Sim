@@ -1,3 +1,4 @@
+using BarthaSzabolcs.Tutorial_SpriteFlash;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -29,6 +30,7 @@ public class Turtle : Enemy
     {
         this.maxHp = 6;
         this.hp = maxHp;
+        damageFlash = GetComponent<DamageFlash>();
         controller = GetComponent<EnemyController>();
         isAttacking = false;
         isSpinning = false;

@@ -22,14 +22,12 @@ public class Boss : Enemy
     public GameObject firePrefab;
     public GameObject dirtParticles;
     public GameObject playerTarget;
-
     public Animator animator;
-
-    private DamageFlash damageFlash;
 
     private float movementSpeed = 4;
     private float timeThreshold = 150;
     private bool hasTransformed = false;
+    private bool isTransforming = false;
     private bool isFlipped = false;
     private bool inAttack = false;
 
@@ -81,21 +79,13 @@ public class Boss : Enemy
         transform.localScale = scale;
     }
 
-    private IEnumerator AnimatorSetFire(string animation, float animationLength)
-    {
-        animator.SetBool(animation, true);
-        yield return new WaitForSeconds(animationLength);
-        animator.SetBool(animation, false);
-        
-    }
-
     void FixedUpdate()
     {
         targetPosition = playerTarget.transform.position;
         if (elapsedTime > timeThreshold)
         {
             float distance = Vector3.Distance(targetPosition, transform.position);
-            if(distance < 50 && !inAttack)
+            if(distance < 50 && !inAttack && !isTransforming)
             {
                 inAttack = true;
                 StartCoroutine(Burrow(targetPosition));
@@ -104,7 +94,8 @@ public class Boss : Enemy
 
         if (hp <= 10 && !hasTransformed && !inAttack)
         {
-            StartCoroutine(AnimatorSetFire("isTransforming", 2.0f));
+            animator.SetTrigger("Transform");
+            WaitForTransformation();
             movementSpeed = 8;
             hasTransformed = true;
             timeThreshold = 50;
@@ -114,7 +105,14 @@ public class Boss : Enemy
         elapsedTime += 1;
     }
 
-    public IEnumerator Burrow(Vector3 playerPos)
+    private IEnumerator WaitForTransformation()
+    {
+        isTransforming = true;
+        yield return new WaitForSeconds(2f);
+        isTransforming = false;
+    }
+
+    private IEnumerator Burrow(Vector3 playerPos)
     {
         animator.SetBool("isBurrowing", true);
         yield return new WaitForSeconds(1.1f);
@@ -125,6 +123,7 @@ public class Boss : Enemy
         animator.SetBool("isUnburrowing", true);
         dirtParticles.transform.position = Vector3.MoveTowards(dirtParticles.transform.position, outOfSightPosition, 10000000000);
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPos.x, playerPos.y, 5), 100000000000000000);
+
         if (hasTransformed)
         {
             SpawnFire();
@@ -132,12 +131,11 @@ public class Boss : Enemy
         yield return new WaitForSeconds(1.1f);
         animator.SetBool("isUnburrowing", false);
         
-        
         updateDirection(transform.localScale);
         yield return Charge(new Vector3(currentPosition.x, currentPosition.y, 5));
     }
 
-    public IEnumerator Charge(Vector3 playerPos)
+    private IEnumerator Charge(Vector3 playerPos)
     {
         animator.SetBool("isCharging", true);
         Vector3 pos = transform.position;
@@ -153,7 +151,7 @@ public class Boss : Enemy
         elapsedTime = 0;
     }
 
-    void SpawnFire()
+    private void SpawnFire()
     {
         for(int i = 0; i < 15; i++)
         {

@@ -1,3 +1,4 @@
+using BarthaSzabolcs.Tutorial_SpriteFlash;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public abstract class Enemy : MonoBehaviour, IEnemyObserver
     public int hp;
     public Vector3Int pos;
     public FloatingHealthBar healthBar;
+    public DamageFlash damageFlash;
     public Vector3Int GetPos()
     {
         return this.pos;
@@ -16,6 +18,7 @@ public abstract class Enemy : MonoBehaviour, IEnemyObserver
 
     public  void TakeDamage(int damage)
     {
+        damageFlash.Flash();
         this.hp -= damage;
         //healthBar.UpdateHealthBar(hp, maxHp);
         if (this.hp > 0) { healthBar.UpdateHealthBar(hp, maxHp); }
