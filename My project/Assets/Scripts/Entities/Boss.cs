@@ -126,7 +126,7 @@ public class Boss : Enemy
 
     private void SpawnFire()
     {
-        for(int i = 0; i < 15; i++)
+        for(int i = 0; i < 20; i++)
         {
             Vector3 posToAdd = new Vector3(UnityEngine.Random.Range(-0.5f, 0.5f),UnityEngine.Random.Range(-0.5f, 0.5f), 0);
             Instantiate(firePrefab, transform.position + posToAdd, transform.rotation);
