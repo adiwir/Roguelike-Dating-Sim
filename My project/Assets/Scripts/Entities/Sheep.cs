@@ -10,6 +10,7 @@ public class Sheep : Enemy
 {
     private EnemyController controller;
     public int timeThresh;
+    public int attackThresh;
     private int elapsedTime = 0;
     private bool isAttacking;
     public int range;
@@ -55,26 +56,34 @@ public class Sheep : Enemy
 
         if (CheckRange() && !isAttacking)
         {
-            attackTiles = GetAttackRange();
-            controller.ShowAttack(attackTiles);
-            isAttacking = true;
-            elapsedTime = 0;
+            if (elapsedTime > (timeThresh + 15))
+            {
+                controller.HideAttack(attackTiles);
+                attackTiles.Clear();
+                attackTiles = GetAttackRange();
+                controller.WarnAttack(attackTiles);
+                isAttacking = true;
+                elapsedTime = 0;
+            }
+            
         }
         else if (isAttacking)
         {
             animator.SetBool("isRunning", false);
-            controller.ShowAttack(attackTiles);
-            if (elapsedTime > timeThresh)
+            controller.WarnAttack(attackTiles);
+            if (elapsedTime > attackThresh)
             {
                 FireBlast();
                 elapsedTime = 0;
-                controller.HideAttack(attackTiles);
-                attackTiles.Clear();
+                controller.ShowAttack(attackTiles);
+                
                 isAttacking = false;
             }
         }
         else if (!isAttacking && elapsedTime > timeThresh)
         {
+            controller.HideAttack(attackTiles);
+            attackTiles.Clear();
             controller.MoveAlongPath();
             animator.SetBool("isRunning", true);
             elapsedTime = 0;

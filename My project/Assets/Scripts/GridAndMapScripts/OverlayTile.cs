@@ -39,5 +39,10 @@ namespace finished2
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 1);
         }
 
+        public void ShowWarnTile()
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0, 1);
+        }
+
     }
 }

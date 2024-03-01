@@ -21,7 +21,7 @@ public class Turtle : Enemy
     private bool isBackSpinning;
     private bool hasSpun;
 
-    public List<Vector2Int> attackTiles;
+    private List<Vector2Int> attackTiles;
     private Vector2Int targetCell;
 
     EnemySubject enemySubject;
@@ -78,7 +78,7 @@ public class Turtle : Enemy
         {
             animator.SetBool("isSpinning", true);
             attackTiles = GetAttackRange();
-            controller.ShowAttack(attackTiles);
+            controller.WarnAttack(attackTiles);
             isAttacking = true;
             elapsedTime = 0;
             spinTime = 0;
@@ -88,7 +88,7 @@ public class Turtle : Enemy
         {
             animator.SetBool("isRunning", false);
             animator.SetBool("isSpinning", true);
-            controller.ShowAttack(attackTiles);
+            controller.WarnAttack(attackTiles);
             if (elapsedTime > timeThresh)
             {
                 isSpinning = true;
@@ -197,7 +197,7 @@ public class Turtle : Enemy
                 {
                     aRange.Add(new Vector2Int(controller.enemyTile.gridLocation.x + x, controller.enemyTile.gridLocation.y));
                 }
-                targetCell = new Vector2Int(controller.enemyTile.gridLocation.x + 6, controller.enemyTile.gridLocation.y);
+                targetCell = new Vector2Int(controller.enemyTile.gridLocation.x + range, controller.enemyTile.gridLocation.y);
             }
 
             else if (controller.target.standingOnTile.gridLocation.x < controller.enemyTile.gridLocation.x)
@@ -206,7 +206,7 @@ public class Turtle : Enemy
                 {
                     aRange.Add(new Vector2Int(controller.enemyTile.gridLocation.x - x, controller.enemyTile.gridLocation.y));
                 }
-                targetCell = new Vector2Int(controller.enemyTile.gridLocation.x - 6, controller.enemyTile.gridLocation.y);
+                targetCell = new Vector2Int(controller.enemyTile.gridLocation.x - range, controller.enemyTile.gridLocation.y);
             }
 
             else if (controller.target.standingOnTile.gridLocation.y > controller.enemyTile.gridLocation.y)
@@ -215,7 +215,7 @@ public class Turtle : Enemy
                 {
                     aRange.Add(new Vector2Int(controller.enemyTile.gridLocation.x, controller.enemyTile.gridLocation.y + y));
                 }
-                targetCell = new Vector2Int(controller.enemyTile.gridLocation.x, controller.enemyTile.gridLocation.y + 6);
+                targetCell = new Vector2Int(controller.enemyTile.gridLocation.x, controller.enemyTile.gridLocation.y + range);
             }
 
             else if (controller.target.standingOnTile.gridLocation.y < controller.enemyTile.gridLocation.y)
@@ -224,7 +224,7 @@ public class Turtle : Enemy
                 {
                     aRange.Add(new Vector2Int(controller.enemyTile.gridLocation.x, controller.enemyTile.gridLocation.y - y));
                 }
-                targetCell = new Vector2Int(controller.enemyTile.gridLocation.x, controller.enemyTile.gridLocation.y - 6);
+                targetCell = new Vector2Int(controller.enemyTile.gridLocation.x, controller.enemyTile.gridLocation.y - range);
             }
         }   
         return aRange;

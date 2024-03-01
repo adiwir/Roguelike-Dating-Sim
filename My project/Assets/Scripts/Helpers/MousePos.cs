@@ -12,7 +12,7 @@ public class MousePos : MonoBehaviour
     private static MousePos _instance;
     public static MousePos Instance { get { return _instance; } }
 
-    Vector3 nodeSelected;
+    public Vector3 nodeSelected;
     //Vector3 nodeSelected = new Vector3(10000,0,0);
     public bool hasSelectedNode = false;
 

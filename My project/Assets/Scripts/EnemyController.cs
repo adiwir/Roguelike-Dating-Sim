@@ -101,6 +101,17 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void WarnAttack(List<Vector2Int> attackTiles)
+    {
+        foreach (Vector2Int tilePos in attackTiles)
+        {
+            if (finished2.MapManager.Instance.map.ContainsKey(tilePos))
+            {
+                finished2.MapManager.Instance.map[tilePos].ShowWarnTile();
+            }
+        }
+    }
+
     public void HideAttack(List<Vector2Int> attackTiles)
     {
         foreach (Vector2Int tilePos in attackTiles)

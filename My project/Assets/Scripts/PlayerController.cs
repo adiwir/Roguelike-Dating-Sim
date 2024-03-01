@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
@@ -27,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private float movementCd = 0.1f;
     private float fullRechargeTime = 2f; //how long the player can't do anything else while recharging
     private float currentRechargeTime;
+    public int timeThresh;
+    private int elapsedTime = 0;
     private bool activeAbilitySelected = false;
     private bool isDead = false;
     public bool isFlipped = false;
@@ -117,66 +120,70 @@ public class PlayerController : MonoBehaviour
         {
             isRecharging = false;
         }
-
-        if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.W)
+        if (elapsedTime > timeThresh)
         {
-            isFlipped = true;
-            isRunning = true;
-            scale.x = Mathf.Abs(scale.x);
-            targetCell.x += 1;
-            if (CanMove(targetCell))
+            if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.W)
             {
-                targetPosition = tilemap.GetCellCenterWorld(targetCell);
-                MovePlayer(targetPosition);
-                character.SetOrientation("W");
+                isFlipped = true;
+                isRunning = true;
+                scale.x = Mathf.Abs(scale.x);
+                targetCell.x += 1;
+                if (CanMove(targetCell))
+                {
+                    targetPosition = tilemap.GetCellCenterWorld(targetCell);
+                    MovePlayer(targetPosition);
+                    character.SetOrientation("W");
+                }
             }
-        }
 
-        else if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.S)
-        {
-            targetCell.x -= 1;
-            isFlipped = false;
-            isRunning = true;
-            scale.x = Mathf.Abs(scale.x);
-            if (CanMove(targetCell))
+            else if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.S)
             {
-                targetPosition = tilemap.GetCellCenterWorld(targetCell);
-                MovePlayer(targetPosition);
-                character.SetOrientation("S");
+                targetCell.x -= 1;
+                isFlipped = false;
+                isRunning = true;
+                scale.x = Mathf.Abs(scale.x);
+                if (CanMove(targetCell))
+                {
+                    targetPosition = tilemap.GetCellCenterWorld(targetCell);
+                    MovePlayer(targetPosition);
+                    character.SetOrientation("S");
+                }
             }
-        }
 
-        else if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.A)
-        {
-            targetCell.y += 1;
-            isFlipped = true;
-            isRunning = true;
-            scale.x = Mathf.Abs(scale.x) * -1;
-            if (CanMove(targetCell))
+            else if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.A)
             {
-                targetPosition = tilemap.GetCellCenterWorld(targetCell);
-                MovePlayer(targetPosition);
-                character.SetOrientation("A");
+                targetCell.y += 1;
+                isFlipped = true;
+                isRunning = true;
+                scale.x = Mathf.Abs(scale.x) * -1;
+                if (CanMove(targetCell))
+                {
+                    targetPosition = tilemap.GetCellCenterWorld(targetCell);
+                    MovePlayer(targetPosition);
+                    character.SetOrientation("A");
+                }
             }
-        }
 
-        else if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.D)
-        {
-            targetCell.y -= 1;
-            scale.x = Mathf.Abs(scale.x) * -1;
-            isFlipped = false;
-            isRunning = true;
-            if (CanMove(targetCell))
+            else if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.D)
             {
-                targetPosition = tilemap.GetCellCenterWorld(targetCell);
-                MovePlayer(targetPosition);
-                character.SetOrientation("D");
+                targetCell.y -= 1;
+                scale.x = Mathf.Abs(scale.x) * -1;
+                isFlipped = false;
+                isRunning = true;
+                if (CanMove(targetCell))
+                {
+                    targetPosition = tilemap.GetCellCenterWorld(targetCell);
+                    MovePlayer(targetPosition);
+                    character.SetOrientation("D");
+                }
             }
+            else
+            {
+                isRunning = false;
+            }
+            elapsedTime = 0;
         }
-        else
-        {
-            isRunning = false;
-        }
+        elapsedTime += 1;
 
         animator.SetBool("isRunning", isRunning);
         animator.SetBool("isFlipped", isFlipped);
