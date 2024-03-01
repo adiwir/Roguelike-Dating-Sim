@@ -9,6 +9,7 @@ public class AbilityManager : MonoBehaviour
 
     private Queue<ActiveAbility> ActiveAbilities = new();
     private List<ActiveAbility> UsedAbilities = new();
+    
 
     [SerializeField] private int TotalAbilityAmount = 6;
     private readonly int startingAbilityAmount = 3;
@@ -24,6 +25,7 @@ public class AbilityManager : MonoBehaviour
         //{
         //    _instance = this;
         //}
+        //ChooseRandomAbility();
         AssignAbilities();
         HasADiscardedAbility = false;
     }
@@ -85,4 +87,31 @@ public class AbilityManager : MonoBehaviour
         return queue;
     }
 
+    //private void ChooseUsableAbilities()
+    //{
+    //    List<Type> typeList = new List<Type>
+    //    {
+    //        typeof(StickyBomb)
+    //    }
+    ////UnlockedAbilities.Add()
+    ///
+    //private ActiveAbility ChooseRandomAbility()
+    //{
+    //    System.Random random = new System.Random();
+    //    int randomNumber = random.Next(1, 5); // Generate a random number between 1 and 4
+
+    //    switch (randomNumber)
+    //    {
+    //        case 1:
+    //            return new StickyBomb();
+    //        case 2:
+    //            return new ClassB();
+    //        case 3:
+    //            return new ClassC();
+    //        case 4:
+    //            return new ClassD();
+    //        default:
+    //            throw new InvalidOperationException("Unexpected random number");
+    //    }
+    //}
 }
