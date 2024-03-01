@@ -10,13 +10,17 @@ public abstract class Enemy : MonoBehaviour, IEnemyObserver
     public Vector3Int pos;
     public FloatingHealthBar healthBar;
     public DamageFlash damageFlash;
+    public Animator animator;
+    public GameObject playerTarget;
+    private bool isFlipped = false;
+
     public Vector3Int GetPos()
     {
         return this.pos;
     }
     public abstract List<Vector3Int> GetCoveredArea();
 
-    public  void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         damageFlash.Flash();
         this.hp -= damage;
@@ -29,6 +33,33 @@ public abstract class Enemy : MonoBehaviour, IEnemyObserver
         
         
         Debug.Log(this.hp);
+    }
+
+    public void updateTargetDirection()
+    {
+        Vector3 scale = transform.localScale;
+
+        if (playerTarget.transform.position.y > transform.position.y)
+        {
+            isFlipped = true;
+
+        }
+        else
+        {
+            isFlipped = false;
+        }
+
+        if (playerTarget.transform.position.x > transform.position.x)
+        {
+            scale.x = Mathf.Abs(scale.x) * -1 * (isFlipped ? -1 : 1);
+        }
+        else
+        {
+            scale.x = Mathf.Abs(scale.x) * (isFlipped ? -1 : 1);
+        }
+
+        animator.SetBool("isFlipped", isFlipped);
+        transform.localScale = scale;
     }
 
     public abstract void OnDeath();

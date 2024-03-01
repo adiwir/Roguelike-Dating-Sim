@@ -257,6 +257,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 77137481}
   m_CullTransparentMesh: 1
+--- !u!1 &88176858 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5498000654524801030, guid: 894f274c500d00642a35a68f01193a76, type: 3}
+  m_PrefabInstance: {fileID: 671573087}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &88176862
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88176858}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 27f5216023d5f83409a18e9d13824c07, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &104081633
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,13 +368,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
+      propertyPath: range
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: healthBar
       value: 
-      objectReference: {fileID: 762384128}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
+      propertyPath: timeThresh
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2410916775325478605, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: m_Name
       value: Sheep (4)
@@ -544,17 +578,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3704822144809599675, guid: 93a10161f05e1d04ab90653707e87a02, type: 3}
   m_PrefabInstance: {fileID: 200406767}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &310395334 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6889363518670842153, guid: 93a10161f05e1d04ab90653707e87a02, type: 3}
-  m_PrefabInstance: {fileID: 603200604}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40f7c4d5aad17cc41895b07e0da4cc2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &388440250 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2203465141026753818, guid: df95552e9fb615641889591e79aa03fc, type: 3}
@@ -612,17 +635,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &454113396 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6889363518670842153, guid: 93a10161f05e1d04ab90653707e87a02, type: 3}
-  m_PrefabInstance: {fileID: 200406767}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40f7c4d5aad17cc41895b07e0da4cc2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &603200604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -761,6 +773,14 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 737447934}
+    - target: {fileID: 2381629743380838315, guid: 894f274c500d00642a35a68f01193a76, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1157578800, guid: 1c268b4457f771b4f912a452a6d71a5c, type: 3}
+    - target: {fileID: 3224846739068963742, guid: 894f274c500d00642a35a68f01193a76, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3966063753723356739, guid: 894f274c500d00642a35a68f01193a76, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.74
@@ -805,13 +825,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turtle
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7911413685007682510, guid: 894f274c500d00642a35a68f01193a76, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3966063753723356739, guid: 894f274c500d00642a35a68f01193a76, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1819684948}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5498000654524801030, guid: 894f274c500d00642a35a68f01193a76, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 88176862}
   m_SourcePrefab: {fileID: 100100000, guid: 894f274c500d00642a35a68f01193a76, type: 3}
 --- !u!4 &671573088 stripped
 Transform:
@@ -855,17 +879,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &762384128 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6889363518670842153, guid: 93a10161f05e1d04ab90653707e87a02, type: 3}
-  m_PrefabInstance: {fileID: 1079441864}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40f7c4d5aad17cc41895b07e0da4cc2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &918480886 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6983315668266302810, guid: 2b2214b25744df04d86e3add59942a83, type: 3}
@@ -1363,13 +1376,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
+      propertyPath: range
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: healthBar
       value: 
-      objectReference: {fileID: 454113396}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
+      propertyPath: timeThresh
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2410916775325478605, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: m_Name
       value: Sheep
@@ -111735,12 +111756,12 @@ MonoBehaviour:
   pos: {x: 0, y: 0, z: 0}
   healthBar: {fileID: 1151154514}
   damageFlash: {fileID: 0}
+  animator: {fileID: 388440252}
+  playerTarget: {fileID: 0}
   tilemap: {fileID: 1723064605}
   col: {fileID: 1394696974}
   firePrefab: {fileID: 7017403990644954728, guid: 2b4e7a0b567fc394cbca813b58a48a87, type: 3}
   dirtParticles: {fileID: 0}
-  playerTarget: {fileID: 0}
-  animator: {fileID: 388440252}
 --- !u!50 &2037969256
 Rigidbody2D:
   serializedVersion: 4
@@ -111831,13 +111852,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
+      propertyPath: range
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: healthBar
       value: 
-      objectReference: {fileID: 310395334}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
+      propertyPath: timeThresh
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2410916775325478605, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: m_Name
       value: Sheep (3)

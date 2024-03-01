@@ -21,14 +21,11 @@ public class Boss : Enemy
 
     public GameObject firePrefab;
     public GameObject dirtParticles;
-    public GameObject playerTarget;
-    public Animator animator;
 
     private float movementSpeed = 4;
     private float timeThreshold = 150;
     private bool hasTransformed = false;
     private bool isTransforming = false;
-    private bool isFlipped = false;
     private bool inAttack = false;
 
     void Start()
@@ -52,32 +49,9 @@ public class Boss : Enemy
             return;
         }
         currentPosition = targetPosition;
-        updateDirection(transform.localScale);
+        updateTargetDirection();
     }
 
-    private void updateDirection(Vector3 scale)
-    {
-        if (playerTarget.transform.position.y > transform.position.y)
-        {
-            isFlipped = true;
-
-        }
-        else
-        {
-            isFlipped = false;
-        }
-        animator.SetBool("isFlipped", isFlipped);
-
-        if (playerTarget.transform.position.x > transform.position.x)
-        {
-            scale.x = Mathf.Abs(scale.x) * -1 * (isFlipped ? -1 : 1);
-        }
-        else
-        {
-            scale.x = Mathf.Abs(scale.x) * (isFlipped ? -1 : 1);
-        }
-        transform.localScale = scale;
-    }
 
     void FixedUpdate()
     {
@@ -130,8 +104,7 @@ public class Boss : Enemy
         }
         yield return new WaitForSeconds(1.1f);
         animator.SetBool("isUnburrowing", false);
-        
-        updateDirection(transform.localScale);
+        updateTargetDirection();
         yield return Charge(new Vector3(currentPosition.x, currentPosition.y, 5));
     }
 

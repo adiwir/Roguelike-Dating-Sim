@@ -32,6 +32,8 @@ public class Turtle : Enemy
         this.hp = maxHp;
         damageFlash = GetComponent<DamageFlash>();
         controller = GetComponent<EnemyController>();
+        animator = GetComponentInChildren<Animator>();
+        playerTarget = GameObject.FindWithTag("Player");
         isAttacking = false;
         isSpinning = false;
         isBackSpinning = false;
@@ -48,8 +50,13 @@ public class Turtle : Enemy
             Debug.LogError("EnemySubject not found.");
         }
         UpdateEnemyPosition(this.pos);
-
     }
+
+    private void Update()
+    {
+        updateTargetDirection();
+    }
+
     void LateUpdate()
     {
         if (isSpinning || isBackSpinning)
@@ -69,6 +76,7 @@ public class Turtle : Enemy
         
         else if (CheckRange() && !isAttacking && spinTime > spinCD)
         {
+            animator.SetBool("isSpinning", true);
             attackTiles = GetAttackRange();
             controller.ShowAttack(attackTiles);
             isAttacking = true;
@@ -78,6 +86,8 @@ public class Turtle : Enemy
         
         else if (isAttacking)
         {
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isSpinning", true);
             controller.ShowAttack(attackTiles);
             if (elapsedTime > timeThresh)
             {
@@ -91,6 +101,7 @@ public class Turtle : Enemy
 
         else if (!isAttacking && elapsedTime > timeThresh)
         {
+            animator.SetBool("isRunning", true);
             controller.MoveAlongPath();
             elapsedTime = 0;
         }
@@ -133,6 +144,7 @@ public class Turtle : Enemy
         if (transform.position == target && finished2.MapManager.Instance.map.ContainsKey(targetCell))
         {
             isSpinning = false;
+            animator.SetBool("isSpinning", false);
             controller.SetPos();
             hasSpun = false;
         }
@@ -152,6 +164,7 @@ public class Turtle : Enemy
         {
             isBackSpinning = false;
             controller.SetPos();
+            animator.SetBool("isSpinning", false);
         }
     }
 

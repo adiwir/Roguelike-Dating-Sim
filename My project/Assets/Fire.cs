@@ -12,7 +12,7 @@ public class Fire : MonoBehaviour
 
     public GameObject spawnPoint;
     public GameObject player;
-    private float movementSpeed = 1f;
+    private float movementSpeed = 3f;
     private bool isMoving = false;
     void Start()
     {
