@@ -39,18 +39,18 @@ public class Character : Entity
     }
     Orientation orientation = Orientation.south;
 
+    public void Awake()
+    {
+        moveDistance = 1;
+        abilityManager = GetComponent<AbilityManager>();
+    }
+
     public void Start()
     {
         this.healthPoints = maxHealth;
         CombineAbilityQueues(abilityManager.GetAbilityQueue());
         Debug.Log("ability amount " + abilityQueue.Count);
         AssignAbilities();
-    }
-
-    public void Awake()
-    {
-        moveDistance = 1;
-        abilityManager = GetComponent<AbilityManager>();
     }
 
     private void AssignAbilities()
