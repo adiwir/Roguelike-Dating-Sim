@@ -16,6 +16,7 @@ public class StickyBomb : ActiveAbility
         this.range = 6;
         SetAreaOfEffect();
         this.affectsAnArea = true;
+        isAttackAbility = true;
     }
 
     public override void UseAbility(List<Vector3Int> targetedTiles)
@@ -36,6 +37,10 @@ public class StickyBomb : ActiveAbility
         }
     }
 
+    public override void UseAbility(MonoBehaviour entity)
+    {
+        throw new System.NotImplementedException();
+    }
 
     public override void SetAreaOfEffect() //sets tiles that the abilities can affect
     {

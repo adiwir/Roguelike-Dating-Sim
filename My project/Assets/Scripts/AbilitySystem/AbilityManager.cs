@@ -46,7 +46,8 @@ public class AbilityManager : MonoBehaviour
 
     private ActiveAbility GetNotRandomAbility()
     {
-        return (new StickyBomb());
+        return new Shield();
+        //return (new StickyBomb());
     }
 
     public Queue<ActiveAbility> GetAbilityQueue() 

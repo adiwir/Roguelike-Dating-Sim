@@ -97,6 +97,11 @@ public class Health : MonoBehaviour
         isInvincible = false;
     }
 
+    public void setInvincible(bool invincibilityValue)
+    {
+        isInvincible = invincibilityValue;
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
