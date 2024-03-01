@@ -165,7 +165,6 @@ public class Boss : Enemy
 
     public override void OnDeath()
     {
-        Debug.Log("Bullmole died, RIP BullMole. You were like a father to me");
         Destroy(this.gameObject);
     }
 
