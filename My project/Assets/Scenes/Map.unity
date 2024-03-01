@@ -369,7 +369,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: range
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: animator
@@ -381,7 +381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: timeThresh
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2410916775325478605, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: m_Name
@@ -1377,7 +1377,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: range
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: animator
@@ -1389,7 +1389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: timeThresh
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2410916775325478605, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: m_Name
@@ -111853,7 +111853,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: range
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: animator
@@ -111865,7 +111865,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1854136813064267559, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: timeThresh
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2410916775325478605, guid: a0f733f6efcb0bd47b51c65daf0f8683, type: 3}
       propertyPath: m_Name
