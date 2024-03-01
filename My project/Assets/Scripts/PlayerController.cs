@@ -21,8 +21,6 @@ public class PlayerController : MonoBehaviour
     private Vector2Int tilePos;
     private Vector3Int origPos, targetCell;
     private Vector3 targetPosition;
-    [SerializeField] private ImageChooser imageChooser;
-
     private float basicCd = 1f;
     private float abilityCd = 1f;
     private float baseAbilityCd;
@@ -211,19 +209,7 @@ public class PlayerController : MonoBehaviour
             if(!isRecharging)
             {
                 Debug.Log("activated RightMouse");
-                character.ActivateAbilityInSpot(0);
-                imageChooser.ToggleBorder("Mouse2");
-            }
-            
-            if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
-        }
-        else if (Input.GetButtonDown("LShift") && (abilityCd <= 0))
-        {
-            if (!isRecharging)
-            {
-                Debug.Log("activated LShift");
-                character.ActivateAbilityInSpot(1);
-                imageChooser.ToggleBorder("Shift");
+                character.ActivateAbilityInSpot(2);
             }
             
             if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
@@ -233,8 +219,17 @@ public class PlayerController : MonoBehaviour
             if (!isRecharging)
             {
                 Debug.Log("activated LShift");
-                character.ActivateAbilityInSpot(2);
-                imageChooser.ToggleBorder("Space");
+                character.ActivateAbilityInSpot(1);
+            }
+
+            if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
+        }
+        else if (Input.GetButtonDown("LShift") && (abilityCd <= 0))
+        {
+            if (!isRecharging)
+            {
+                Debug.Log("activated LShift");
+                character.ActivateAbilityInSpot(0);
             }
             
             if (character.UsedAbility()) { abilityCd = baseAbilityCd; }

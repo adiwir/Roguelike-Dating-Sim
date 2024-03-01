@@ -117,7 +117,8 @@ public class Character : Entity
 
     public void ActivateAbilityInSpot(int spot)
     {
-        if(toggledAbility != null && ReferenceEquals(toggledAbility, assignedAbilities[spot]))
+        imageChooser.ToggleBorder(spot);
+        if (toggledAbility != null && ReferenceEquals(toggledAbility, assignedAbilities[spot]))
         {
             Debug.Log(toggledAbility.ToString());
             ActivateToggledAbility(spot);
@@ -189,6 +190,7 @@ public class Character : Entity
             if (assignedAbilities[spot] != null) 
             {
                 print("toggledAbility");
+                
                 toggledAbility = assignedAbilities[spot];
                 areaOfEffect = toggledAbility.GetAreaOfEffect();
                 DisplayAreaOfEffect();

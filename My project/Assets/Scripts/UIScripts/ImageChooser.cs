@@ -18,6 +18,7 @@ public class ImageChooser : MonoBehaviour
     public Sprite outOfAbilties;
     
     private List<Image> imageList = new List<Image>();
+    private List<Image> borderImages = new List<Image>();
 
     private Dictionary<string, Sprite> spriteDict = new();
 
@@ -42,6 +43,9 @@ public class ImageChooser : MonoBehaviour
         imageList.Add(Shift);
         imageList.Add(Space);
         imageList.Add(Mouse2);
+        borderImages.Add(SpaceBorder);
+        borderImages.Add(ShiftBorder);
+        borderImages.Add(Mouse2Border);
     }
 
     private void ImageSetup()
@@ -105,17 +109,17 @@ public class ImageChooser : MonoBehaviour
         imageList[buttonNum + 1].overrideSprite = outOfAbilties;
     }
 
-    public void ToggleBorder(string name)
+    public void ToggleBorder(int spot)
     {
-        switch (name)
+        switch (spot)
         {
-            case "Shift":
+            case 0:
                 ToggleBorderColor(ShiftBorder);
                 break;
-            case "Space":
+            case 1:
                 ToggleBorderColor(SpaceBorder);
                 break;
-            case "Mouse2":
+            case 2:
                 ToggleBorderColor(Mouse2Border);
                 break;
         }
@@ -123,11 +127,17 @@ public class ImageChooser : MonoBehaviour
 
     private void ToggleBorderColor(Image border)
     {
+        foreach(Image borderImage in borderImages)
+        {
+            if (border == borderImage) continue;
+            borderImage.color = Color.black;
+        }
+
         if(border.color == Color.red)
         {
             border.color = Color.black;
         }
-        else 
+        else if (border.color == Color.black)
         {
             border.color = Color.red;
         }
