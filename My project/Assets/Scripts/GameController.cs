@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-
     public GameOverScreen gameOverScreen;
+    public GameWonScreen gameWonScreen;
     public Health healthController;
+    public Boss bossController;
 
     void Update()
     {
@@ -16,6 +17,16 @@ public class GameController : MonoBehaviour
         {
             GameOver();
         }
+
+        if (bossController.hp <= 0) 
+        {
+            GameWon();
+        }
+    }
+
+    public void GameWon()
+    {
+        gameWonScreen.Setup();
     }
 
     public void GameOver()

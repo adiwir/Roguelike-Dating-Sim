@@ -17,6 +17,12 @@ public class StickyBomb : ActiveAbility
         SetAreaOfEffect();
         this.affectsAnArea = true;
         isAttackAbility = true;
+        //this.icon = Assets/Prefabs/sticky_bomb.png;
+    }
+
+    private static void CreateSprite(Sprite sprite)
+    {
+
     }
 
     public override void UseAbility(List<Vector3Int> targetedTiles)
