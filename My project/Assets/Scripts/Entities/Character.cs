@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
@@ -160,6 +161,10 @@ public class Character : Entity
             if(abilityQueue.Count > 0)
             {
                 imageChooser.ImageChange(-1, abilityQueue.Peek().GetName());
+            } 
+            else
+            {
+                imageChooser.SetOutOfAbilities(-1);
             }
         }
     }
@@ -191,6 +196,7 @@ public class Character : Entity
                 //imageChooser.toggleImage(spot);
             } else
             {
+                imageChooser.SetOutOfAbilities(spot);
                 print("That button doesn't have an ability"); //TODO: fixa så att man inte kan aktivera den alls om den är tom
             }
         }
@@ -295,6 +301,13 @@ public class Character : Entity
                 //do nothing
                 break;
         }
+    }
+
+    public bool CheckIfAllAbilitiesUsed()
+    {
+        bool noAssignedAbilities = assignedAbilities.All(item => item == null);
+        //TODO: change the discard box to say something like can reload
+        return (noAssignedAbilities && abilityQueue.Count <= 0);
     }
 
     public bool UsedAbility() //kan vara buggig

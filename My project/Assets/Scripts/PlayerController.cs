@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public bool isFlipped = false;
     public bool isRunning = false;
     public bool isRecharging = false;
+    public bool allOutOfAbilities = false;
 
     public List<KeyCode> movIn;
 
@@ -245,8 +246,10 @@ public class PlayerController : MonoBehaviour
             character.DisplayAreaOfEffect();
         }
 
+        allOutOfAbilities = character.CheckIfAllAbilitiesUsed();
+
         //Recharge
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && allOutOfAbilities)
         {
             isRecharging = true;
             character.RechargeAbilities();

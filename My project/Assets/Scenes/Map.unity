@@ -13711,16 +13711,20 @@ PrefabInstance:
       value: SpaceImage
       objectReference: {fileID: 0}
     - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Color.b
-      value: 0.21960786
+      value: 0.99812955
       objectReference: {fileID: 0}
     - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Color.g
-      value: 0.21960786
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Color.r
-      value: 0.21960786
+      value: 0.995283
       objectReference: {fileID: 0}
     - target: {fileID: 8447299543363674847, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Pivot.x
@@ -113327,16 +113331,20 @@ PrefabInstance:
       value: Mouse2Image
       objectReference: {fileID: 0}
     - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Color.b
-      value: 0.5686275
+      value: 0.99812955
       objectReference: {fileID: 0}
     - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Color.g
-      value: 0.82745105
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Color.r
-      value: 0.83921576
+      value: 0.995283
       objectReference: {fileID: 0}
     - target: {fileID: 8447299543363674847, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Pivot.x
@@ -113446,19 +113454,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Color.a
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Color.b
-      value: 0.21960786
+      value: 0.99812955
       objectReference: {fileID: 0}
     - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Color.g
-      value: 0.21960786
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Color.r
-      value: 0.21960786
+      value: 0.995283
       objectReference: {fileID: 0}
     - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Enabled
@@ -113628,16 +113636,20 @@ PrefabInstance:
       value: NextImage
       objectReference: {fileID: 0}
     - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Color.b
-      value: 0.21960786
+      value: 0.99812955
       objectReference: {fileID: 0}
     - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Color.g
-      value: 0.21960786
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4785813695202183114, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Color.r
-      value: 0.21960786
+      value: 0.995283
       objectReference: {fileID: 0}
     - target: {fileID: 8447299543363674847, guid: 4b4343a00eb0cb84fab041fa5b365416, type: 3}
       propertyPath: m_Pivot.x
