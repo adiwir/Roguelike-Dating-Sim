@@ -33,7 +33,7 @@ public class Sheep : Enemy
         {
             Debug.LogError("EnemySubject not found.");
         }
-        UpdateEnemyPosition(this.pos);
+        
         healthBar = GetComponentInChildren<FloatingHealthBar>();
         animator = GetComponentInChildren<Animator>();
     }
@@ -44,6 +44,7 @@ public class Sheep : Enemy
         isAttacking = false;
         playerTarget = GameObject.FindWithTag("Player");
         damageFlash = GetComponent<DamageFlash>();
+        UpdateEnemyPosition(this.pos);
     }
 
     private void Update()
