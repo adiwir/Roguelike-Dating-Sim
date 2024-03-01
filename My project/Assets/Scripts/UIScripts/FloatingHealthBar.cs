@@ -15,8 +15,8 @@ public class FloatingHealthBar : MonoBehaviour
         float currentVal = (float)currentValue;
         float maxVal = (float)maxValue;
         slider.value = currentVal/maxVal;
-        Debug.Log(slider.value);
-        Debug.Log(currentValue/maxValue);
+        //Debug.Log(slider.value);
+        //Debug.Log(currentValue/maxValue);
     }
 
     // Update is called once per frame

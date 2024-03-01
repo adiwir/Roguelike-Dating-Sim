@@ -829,6 +829,7 @@ MonoBehaviour:
   standingOnTile: {fileID: 0}
   isFlipped: 0
   isRunning: 0
+  isRecharging: 0
   movIn: 
 --- !u!4 &918480888 stripped
 Transform:
@@ -106235,7 +106236,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1760127583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106957,6 +106958,11 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!4 &2037969259 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7337168982101740383, guid: df95552e9fb615641889591e79aa03fc, type: 3}
+  m_PrefabInstance: {fileID: 2037969251}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2037969260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107004,40 +107010,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 1.3941422, y: 1.222187}
-      - {x: 1.0784073, y: 1.4529228}
-      - {x: 0.12947083, y: 1.6586342}
-      - {x: -0.6050635, y: 1.3126485}
-      - {x: -1.3043137, y: 0.5969887}
-      - {x: -1.4153748, y: 0.4986801}
-      - {x: -1.5705795, y: 0.36406326}
-      - {x: -1.8152618, y: -0.44900513}
-      - {x: -1.5514374, y: -1.0206757}
-      - {x: -1.2780304, y: -1.091507}
-      - {x: -1.145462, y: -1.0719681}
-      - {x: -0.8041916, y: -1.0798721}
-      - {x: -0.6816878, y: -1.1412963}
-      - {x: -0.006752014, y: -0.90953827}
-      - {x: 0.7719284, y: -0.59743476}
-      - {x: 1.4021301, y: -0.01984787}
-      - {x: 1.5514975, y: 0.4481048}
-  m_UseDelaunayMesh: 0
---- !u!4 &2037969259 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7337168982101740383, guid: df95552e9fb615641889591e79aa03fc, type: 3}
-  m_PrefabInstance: {fileID: 2037969251}
-  m_PrefabAsset: {fileID: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
 --- !u!1001 &2041296363
 PrefabInstance:
   m_ObjectHideFlags: 0

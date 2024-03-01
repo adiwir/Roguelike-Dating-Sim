@@ -127,8 +127,8 @@ public class PlayerController : MonoBehaviour
             {
                 targetPosition = tilemap.GetCellCenterWorld(targetCell);
                 MovePlayer(targetPosition);
-                character.SetOrientation("W");
             }
+            character.SetOrientation("W");
         }
 
         else if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.S)
@@ -141,8 +141,8 @@ public class PlayerController : MonoBehaviour
             {
                 targetPosition = tilemap.GetCellCenterWorld(targetCell);
                 MovePlayer(targetPosition);
-                character.SetOrientation("S");
             }
+            character.SetOrientation("S");
         }
 
         else if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.A)
@@ -155,8 +155,8 @@ public class PlayerController : MonoBehaviour
             {
                 targetPosition = tilemap.GetCellCenterWorld(targetCell);
                 MovePlayer(targetPosition);
-                character.SetOrientation("A");
             }
+            character.SetOrientation("A");
         }
 
         else if (movIn.Count > 0 && movIn[movIn.Count - 1] == KeyCode.D)
@@ -169,8 +169,8 @@ public class PlayerController : MonoBehaviour
             {
                 targetPosition = tilemap.GetCellCenterWorld(targetCell);
                 MovePlayer(targetPosition);
-                character.SetOrientation("D");
             }
+            character.SetOrientation("D");
         }
         else
         {

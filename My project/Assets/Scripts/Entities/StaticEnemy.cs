@@ -16,7 +16,7 @@ public class StaticEnemy : Enemy
     {
         //tilemap = GetComponent<Tilemap>();
         //col = GetComponent<Col>();
-        this.maxHp = 6;
+        this.maxHp = 30;
         this.hp = maxHp;
         pos = tilemap.WorldToCell(transform.position);
         enemySubject = GetComponent<EnemySubject>();

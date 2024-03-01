@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.TextCore.Text;
 using UnityEngine.Tilemaps;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class Character : Entity
 {
@@ -68,30 +70,66 @@ public class Character : Entity
         }
     }
 
-    public void UseBasicAbility(Vector3Int cellToAttack)
+    public void UseBasicAbility(Vector3Int currentCell)
     {
-        Vector3Int addVector = new Vector3Int(0,0,0);
-        switch (orientation)
-        {
-            case Orientation.north:
-                addVector.x = 1;
-                cellToAttack.x += 1;
-                break;
-            case Orientation.south:
-                addVector.x = -1;
-                cellToAttack.x += -1;
-                break;
-            case Orientation.west:
-                addVector.y = 1;
-                cellToAttack.y += 1;
-                break;
-            case Orientation.east:
-                addVector.y = -1;
-                cellToAttack.y += -1;
-                break;
-        }
-        AttackNextCell(cellToAttack, addVector);
+        Vector3 mousePos = MousePos.Instance.GetHoveredNode();
+        print("mousePos " +mousePos);
+        print("pos " + pos);
+        print("v3mousePos " + tilemap.WorldToCell(mousePos));
+        print("v3pos " + tilemap.WorldToCell(pos));
 
+        //Vector3Int playerToMouseDist = tilemap.WorldToCell(mousePos - pos);
+        Vector3Int mouseTargetCell = tilemap.WorldToCell(mousePos);
+        Vector3Int playerToMouseDist = mouseTargetCell - currentCell;
+        //print()
+
+        float xComp = Math.Abs(playerToMouseDist.x);
+        float yComp = Math.Abs(playerToMouseDist.y);
+
+        if (xComp <= basicAbility.GetRange() && yComp <= basicAbility.GetRange())
+        {
+            AttackCell(mouseTargetCell);
+        }
+        else
+        {
+            print(mouseTargetCell + " mouse target cell");
+            Enemy enemy = EnemyPosStorage.Instance.GetEnemyOnCell(mouseTargetCell);
+            print(EnemyPosStorage.Instance.GetEnemyOnCell(mouseTargetCell).name);
+
+        }
+
+        //Vector3Int addVector = new Vector3Int(0,0,0);
+        //switch (orientation)
+        //{
+        //    case Orientation.north:
+        //        addVector.x = 1;
+        //        cellToAttack.x += 1;
+        //        break;
+        //    case Orientation.south:
+        //        addVector.x = -1;
+        //        cellToAttack.x += -1;
+        //        break;
+        //    case Orientation.west:
+        //        addVector.y = 1;
+        //        cellToAttack.y += 1;
+        //        break;
+        //    case Orientation.east:
+        //        addVector.y = -1;
+        //        cellToAttack.y += -1;
+        //        break;
+        //}
+        //AttackNextCell(cellToAttack, addVector);
+
+    }
+
+    private void AttackCell(Vector3Int cellToAttack)
+    {
+        Enemy enemy = EnemyPosStorage.Instance.GetEnemyOnCell(cellToAttack);
+        if(enemy != null) 
+        {
+            Debug.Log("hit enemy");
+            enemy.TakeDamage(basicAbility.GetDamage());
+        }
     }
 
     private void AttackNextCell(Vector3Int closestTargetCell, Vector3Int addVec) //TODO: Loopa denna(för basic loopa 2 gånger).
@@ -104,7 +142,7 @@ public class Character : Entity
             enemy = EnemyPosStorage.Instance.GetEnemyOnCell(closestTargetCell + (addVec*i));
             if (enemy != null)
             {
-                Debug.Log("hitting enemy");
+                Debug.Log("hit enemy");
                 enemy.TakeDamage(basicAbility.GetDamage());
                 break;
             }
@@ -115,7 +153,7 @@ public class Character : Entity
     {
         if(toggledAbility != null && ReferenceEquals(toggledAbility, assignedAbilities[spot]))
         {
-            Debug.Log(toggledAbility.ToString());
+            //Debug.Log(toggledAbility.ToString());
             ActivateToggledAbility(spot);
         }
         else
