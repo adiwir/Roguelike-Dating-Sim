@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.TextCore.Text;
@@ -129,7 +130,15 @@ public class Character : Entity
         print("ActivatedAbility");
         //CalculateTargetArea();
         //toggledAbility.CanIActivate();
-        AttackEnemiesInArea();
+        if(toggledAbility.isAttackAbility)
+        {
+            AttackEnemiesInArea();
+        }
+        else 
+        {
+            useBuffAbility();
+        }
+        
         toggledAbility = null;
 
         HideAOE();
@@ -146,6 +155,11 @@ public class Character : Entity
             assignedAbilities[spot] = abilityQueue.Dequeue();
             //imageChooser.ImageChange(spot);
         }
+    }
+
+    private void useBuffAbility()
+    {
+        toggledAbility.UseAbility(this);
     }
 
     private void AttackEnemiesInArea()

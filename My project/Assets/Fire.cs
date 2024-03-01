@@ -54,4 +54,9 @@ public class Fire : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    public void setMovementSpeed(float velocity)
+    {
+        movementSpeed = velocity;
+    }
 }

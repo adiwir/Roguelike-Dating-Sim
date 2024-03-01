@@ -9,6 +9,7 @@ public abstract class ActiveAbility : IAbility
     public Sprite icon;
     public bool toggled = false;
     public bool affectsAnArea;
+    public bool isAttackAbility;
 
     public int range;
 
@@ -17,6 +18,8 @@ public abstract class ActiveAbility : IAbility
 
     //public abstract void UseAbility(Character character, List<Vector3Int> targetedTiles);
     public abstract void UseAbility(List<Vector3Int> targetedTiles);
+
+    public abstract void UseAbility(MonoBehaviour entity);
 
     public void CanIActivate()
     {
