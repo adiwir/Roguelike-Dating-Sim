@@ -16,6 +16,22 @@ public class Health : MonoBehaviour
     [SerializeField] private float invincibilityDeltaTime;
 
     private PlayerController playerController;
+    
+    //Simons tillägg under
+    private static Health _instance;
+    public static Health Instance { get { return _instance; } }
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
 
     private void Start()
     {
@@ -70,7 +86,7 @@ public class Health : MonoBehaviour
             playerController.SetDead(true);
         }
 
-        StartCoroutine(BecomeTemporarilyInvincible());
+        StartCoroutine(BecomeTemporarilyInvincible(invincibilityDurationSeconds, false));
     }
 
     private void ScaleModelTo(Vector3 scale)
@@ -78,23 +94,31 @@ public class Health : MonoBehaviour
         transform.localScale = scale;
     }
 
-    private IEnumerator BecomeTemporarilyInvincible()
+    private IEnumerator BecomeTemporarilyInvincible(float duration, bool usedShield) //detta är skitfult
     {
         isInvincible = true;
-        for (float i = 0; i < invincibilityDurationSeconds; i += invincibilityDeltaTime)
+        for (float i = 0; i < duration; i += invincibilityDeltaTime)
         {
-            if (transform.localScale == Vector3.one) 
+            if (!usedShield)
             {
-                ScaleModelTo(Vector3.zero);
-            }
-            else
-            {
-                ScaleModelTo(Vector3.one);
+                startFlashingOnInjury();
             }
             yield return new WaitForSeconds(invincibilityDeltaTime);
         }
         ScaleModelTo(Vector3.one);
         isInvincible = false;
+    }
+
+    private void startFlashingOnInjury()
+    {
+        if (transform.localScale == Vector3.one)
+        {
+            ScaleModelTo(Vector3.zero);
+        }
+        else
+        {
+            ScaleModelTo(Vector3.one);
+        }
     }
 
     public void setInvincible(bool invincibilityValue)
@@ -108,6 +132,12 @@ public class Health : MonoBehaviour
         {
             decreaseHealthPoints(1);
         }
+    }
+
+    public void BecomeInvincible(float seconds)
+    {
+        Debug.Log("in health.cs");
+        StartCoroutine(BecomeTemporarilyInvincible(seconds, true));
     }
 
 }

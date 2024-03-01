@@ -9,27 +9,25 @@ public class Shield : ActiveAbility
     string Name = "Shield";
     //public __ image
     private float invincibilityDurationSeconds = 3;
+    //private Health health;
    
    public Shield() 
    {
         isAttackAbility = false;
    }
- 
-    private void Awake()
-    {
-        this.range = 0;
-        this.affectsAnArea = false;
-    }
     
-    private IEnumerator BecomeTemporarilyInvincible()
+    private void BecomeTemporarilyInvincible()
     {
-        health.setInvincible(true);
-        yield return new WaitForSeconds(invincibilityDurationSeconds);
-        health.setInvincible(false);
+        //Debug.Log("shouldBecomeInvincible");
+        //Health.Instance.setInvincible(true);
+        //yield return new WaitForSeconds(invincibilityDurationSeconds);
+        //Health.Instance.setInvincible(false);
+        Health.Instance.BecomeInvincible(invincibilityDurationSeconds);
     }
 
     public override void UseAbility(MonoBehaviour entity)
     {
+        Debug.Log("trying to use shield");
         BecomeTemporarilyInvincible();
     }
 

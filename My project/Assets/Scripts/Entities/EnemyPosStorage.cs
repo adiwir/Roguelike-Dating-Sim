@@ -8,7 +8,6 @@ using UnityEngine.Tilemaps;
 
 public class EnemyPosStorage : MonoBehaviour
 {
-
     //använd observer pattern
     //GridManager gridManager = GridManager.Instance;
     private static EnemyPosStorage _instance;
