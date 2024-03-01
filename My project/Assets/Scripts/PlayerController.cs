@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private Vector2Int tilePos;
     private Vector3Int origPos, targetCell;
     private Vector3 targetPosition;
+    [SerializeField] private ImageChooser imageChooser;
 
     private float basicCd = 1f;
     private float abilityCd = 1f;
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
     public bool isRunning = false;
     public bool isRecharging = false;
     public bool allOutOfAbilities = false;
+    
 
     public List<KeyCode> movIn;
 
@@ -203,6 +205,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("activated RightMouse");
                 character.ActivateAbilityInSpot(0);
+                imageChooser.ToggleBorder("Mouse2");
             }
             
             if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
@@ -213,6 +216,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("activated LShift");
                 character.ActivateAbilityInSpot(1);
+                imageChooser.ToggleBorder("Shift");
             }
             
             if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
@@ -223,6 +227,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("activated LShift");
                 character.ActivateAbilityInSpot(2);
+                imageChooser.ToggleBorder("Space");
             }
             
             if (character.UsedAbility()) { abilityCd = baseAbilityCd; }

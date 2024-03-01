@@ -9,6 +9,9 @@ public class ImageChooser : MonoBehaviour
     public Image Shift;
     public Image Space;
     public Image Mouse2;
+    public Image SpaceBorder;
+    public Image ShiftBorder;
+    public Image Mouse2Border;
 
     //public Image oldImage;
     //public Sprite icon;
@@ -56,6 +59,18 @@ public class ImageChooser : MonoBehaviour
             {
                 Mouse2 = image;
             }
+            else if (imageName == "Border")
+            {
+                ShiftBorder = image; 
+            }
+            else if (imageName == "Border1")
+            {
+                SpaceBorder = image; 
+            }
+            else if(imageName == "Border2")
+            {
+                Mouse2Border = image; 
+            }
         }
     }
 
@@ -83,4 +98,31 @@ public class ImageChooser : MonoBehaviour
         imageList[buttonNum + 1].overrideSprite = outOfAbilties;
     }
 
+    public void ToggleBorder(string name)
+    {
+        switch (name)
+        {
+            case "Shift":
+                ToggleBorderColor(ShiftBorder);
+                break;
+            case "Space":
+                ToggleBorderColor(SpaceBorder);
+                break;
+            case "Mouse2":
+                ToggleBorderColor(Mouse2Border);
+                break;
+        }
+    }
+
+    private void ToggleBorderColor(Image border)
+    {
+        if(border.color == Color.red)
+        {
+            border.color = Color.black;
+        }
+        else 
+        {
+            border.color = Color.red;
+        }
+    }
 }
