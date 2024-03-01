@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,4 +33,8 @@ public abstract class ActiveAbility : IAbility
 
     public Sprite GetIcon() { return this.icon; }
 
+    internal string GetName()
+    {
+        return this.name;
+    }
 }

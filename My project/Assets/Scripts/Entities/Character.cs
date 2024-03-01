@@ -16,7 +16,7 @@ public class Character : Entity
     [SerializeField] private BasicAbility basicAbility;
     ActiveAbility toggledAbility;
     public List<Vector3Int> areaOfEffect;
-    List<Vector2Int> twoDAreaOfEffect = new List<Vector2Int>();
+    List<Vector2Int> twoDAreaOfEffect = new();
     List<Vector3Int> newAreaOfEffect;
 
 
@@ -27,7 +27,7 @@ public class Character : Entity
     private int maxHealth = 4;
     public bool hasActiveAbilityLeft = true;
 
-    public ImageChooser imageChooser;
+    [SerializeField] private ImageChooser imageChooser;
 
     enum Orientation
     {
@@ -58,7 +58,9 @@ public class Character : Entity
         for (int i = 0; i < startingAbilityAmount; i++)
         { 
             assignedAbilities.Add(abilityQueue.Dequeue());
+            imageChooser.ImageChange(i, assignedAbilities[i].GetName());
         }
+        imageChooser.ImageChange(-1, abilityQueue.Peek().GetName());
     }
 
     private void CombineAbilityQueues(Queue<ActiveAbility> queueToAdd) 
@@ -153,8 +155,12 @@ public class Character : Entity
         }
         else { 
             assignedAbilities[spot] = abilityQueue.Dequeue();
-            //imageChooser.ImageChange(spot,assignedAbilities(spot).getIcon();
-            imageChooser.ImageChange(spot,);
+
+            imageChooser.ImageChange(spot, assignedAbilities[spot].GetName());
+            if(abilityQueue.Count > 0)
+            {
+                imageChooser.ImageChange(-1, abilityQueue.Peek().GetName());
+            }
         }
     }
 

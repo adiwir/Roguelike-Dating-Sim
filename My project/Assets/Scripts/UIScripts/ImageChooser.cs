@@ -5,24 +5,72 @@ using UnityEngine.UI;
 
 public class ImageChooser : MonoBehaviour
 {
-    public Image AbilityImage0;
-    public Image AbilityImage1;
-    public Image AbilityImage2;
+    public Image NextAbility;
+    public Image Shift;
+    public Image Space;
+    public Image Mouse2;
 
-    public Image oldImage;
+    //public Image oldImage;
     //public Sprite icon;
     public Sprite outOfAbilties;
+    
+    private List<Image> imageList = new List<Image>();
 
-    private void Awake()
+    private Dictionary<string, Sprite> spriteDict = new();
+
+    private void Start()
     {
-        //AbilityImage0 = GetComponent<Image>();
-        //AbilityImage0 = GetComponent<Image>();
-        //AbilityImage0 = GetComponent<Image>();
+        ImageSetup();
+        ImageListSetup();
+        SpriteDictSetup();
+        //outOfAbilties = Resources.Load<Sprite>("Empty");
     }
 
-    public void ImageChange(int abilityNum, Sprite icon)
+    private void ImageListSetup()
     {
-        oldImage.sprite = icon;
+        imageList.Add(NextAbility);
+        imageList.Add(Shift);
+        imageList.Add(Space);
+        imageList.Add(Mouse2);
+    }
+
+    private void ImageSetup()
+    {
+        Image[] images = GetComponentsInChildren<Image>();
+        foreach (Image image in images)
+        {
+            string imageName = image.gameObject.name;
+            if (imageName == "NextImage")
+            {
+                NextAbility = image;
+            }
+            else if (imageName == "ShiftImage")
+            {
+                Shift = image;
+            }
+            else if (imageName == "SpaceImage")
+            {
+                Space = image;
+            }
+            else if (imageName == "Mouse2Image")
+            {
+                Mouse2 = image;
+            }
+        }
+    }
+
+    private void SpriteDictSetup()
+    {
+        spriteDict.Add("StickyBomb", Resources.Load<Sprite>("Sticky_bomb"));
+    }
+
+    //public void ImageChange(int abilityNum, Sprite icon)
+    public void ImageChange(int buttonNum, string name)
+    {
+        if (spriteDict.ContainsKey(name))
+        {
+            imageList[buttonNum + 1].overrideSprite = spriteDict[name];
+        }
     }
 
     public void ToggleImage(int abilityNum) 
@@ -30,8 +78,9 @@ public class ImageChooser : MonoBehaviour
         //set toggled state here
     }
 
-    public void SetOutOfAbilities(int abilityNum)
+    public void SetOutOfAbilities(int buttonNum)
     {
-        oldImage.sprite = outOfAbilties;
+        imageList[buttonNum + 1].overrideSprite = outOfAbilties;
     }
+
 }
