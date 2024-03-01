@@ -7,21 +7,17 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class Shield : ActiveAbility
 {
     string Name = "Shield";
-    //public __ image
     private float invincibilityDurationSeconds = 3;
     //private Health health;
    
    public Shield() 
    {
+        this.name = "Shield";
         isAttackAbility = false;
    }
     
     private void BecomeTemporarilyInvincible()
     {
-        //Debug.Log("shouldBecomeInvincible");
-        //Health.Instance.setInvincible(true);
-        //yield return new WaitForSeconds(invincibilityDurationSeconds);
-        //Health.Instance.setInvincible(false);
         Health.Instance.BecomeInvincible(invincibilityDurationSeconds);
     }
 

@@ -5,11 +5,22 @@ using UnityEngine.UI;
 
 public class ImageChooser : MonoBehaviour
 {
+    public Image AbilityImage0;
+    public Image AbilityImage1;
+    public Image AbilityImage2;
+
     public Image oldImage;
-    public Sprite icon;
+    //public Sprite icon;
     public Sprite outOfAbilties;
 
-    public void ImageChange(int abilityNum)
+    private void Awake()
+    {
+        //AbilityImage0 = GetComponent<Image>();
+        //AbilityImage0 = GetComponent<Image>();
+        //AbilityImage0 = GetComponent<Image>();
+    }
+
+    public void ImageChange(int abilityNum, Sprite icon)
     {
         oldImage.sprite = icon;
     }

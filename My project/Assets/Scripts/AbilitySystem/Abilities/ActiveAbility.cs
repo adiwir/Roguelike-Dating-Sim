@@ -30,4 +30,6 @@ public abstract class ActiveAbility : IAbility
 
     public abstract void SetAreaOfEffect();
 
+    public Sprite GetIcon() { return this.icon; }
+
 }

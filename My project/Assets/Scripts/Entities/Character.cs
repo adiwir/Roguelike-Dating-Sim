@@ -153,7 +153,8 @@ public class Character : Entity
         }
         else { 
             assignedAbilities[spot] = abilityQueue.Dequeue();
-            //imageChooser.ImageChange(spot);
+            //imageChooser.ImageChange(spot,assignedAbilities(spot).getIcon();
+            imageChooser.ImageChange(spot,);
         }
     }
 
