@@ -21,11 +21,18 @@ public class ImageChooser : MonoBehaviour
 
     private Dictionary<string, Sprite> spriteDict = new();
 
-    private void Start()
+    private void Awake()
     {
         ImageSetup();
         ImageListSetup();
         SpriteDictSetup();
+    }
+
+    private void Start()
+    {
+        //ImageSetup();
+        //ImageListSetup();
+        //SpriteDictSetup();
         //outOfAbilties = Resources.Load<Sprite>("Empty");
     }
 
