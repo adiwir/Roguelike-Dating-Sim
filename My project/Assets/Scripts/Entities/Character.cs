@@ -204,23 +204,29 @@ public class Character : Entity
         }
     }
 
-    private List<Vector3Int> CalculateTargetArea()//kanske borde returna egentligen men då måste metoden ändras
+    private bool CalculateTargetArea()//kanske borde returna egentligen men då måste metoden ändras
     {
         Vector3 mousePos = MousePos.Instance.GetHoveredNode();
-        //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
         Vector3Int mouseTargetCell = tilemap.WorldToCell(mousePos);
-        List<Vector3Int> tilesToTarget = new List<Vector3Int>();
 
-        newAreaOfEffect = new List<Vector3Int>();
-
-        foreach (Vector3Int tile in areaOfEffect)
+        if(Math.Abs(mouseTargetCell.x) + Math.Abs(mouseTargetCell.y) <= toggledAbility.range)
         {
-            //twoDAreaOfEffect.Add(((tile + mouseTargetCell).Vector2Int));
-            twoDAreaOfEffect.Add(new Vector2Int(tile.x + mouseTargetCell.x + 1, tile.y + mouseTargetCell.y + 1));
-            tilesToTarget.Add(tile+mouseTargetCell);
-            newAreaOfEffect.Add(tile);
+            List<Vector3Int> tilesToTarget = new List<Vector3Int>();
+
+            newAreaOfEffect = new List<Vector3Int>();
+
+            foreach (Vector3Int tile in areaOfEffect)
+            {
+                //twoDAreaOfEffect.Add(((tile + mouseTargetCell).Vector2Int));
+                twoDAreaOfEffect.Add(new Vector2Int(tile.x + mouseTargetCell.x + 1, tile.y + mouseTargetCell.y + 1));
+                tilesToTarget.Add(tile + mouseTargetCell);
+                newAreaOfEffect.Add(tile);
+            }
+            return true;
         }
-        return tilesToTarget;
+        return false;
+
+        
     }
 
     public void DisplayAreaOfEffect()
