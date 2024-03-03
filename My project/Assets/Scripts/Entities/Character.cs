@@ -220,7 +220,7 @@ public class Character : Entity
             //twoDAreaOfEffect.Add(((tile + mouseTargetCell).Vector2Int));
             
             tilesToTarget.Add(tile+mouseTargetCell);
-            twoDAreaOfEffect.Add(new Vector2Int(tile.x + mouseTargetCell.x + 1, tile.y + mouseTargetCell.y + 1));
+            twoDAreaOfEffect.Add(new Vector2Int(tile.x + mouseTargetCell.x , tile.y + mouseTargetCell.y ));
             newAreaOfEffect.Add(tile);
         }
         return tilesToTarget;
