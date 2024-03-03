@@ -215,7 +215,7 @@ public class Character : Entity
         foreach (Vector3Int tile in areaOfEffect)
         {
             //twoDAreaOfEffect.Add(((tile + mouseTargetCell).Vector2Int));
-            twoDAreaOfEffect.Add(new Vector2Int(tile.x + mouseTargetCell.x + 1, tile.y + mouseTargetCell.y + 1));
+            twoDAreaOfEffect.Add(new Vector2Int(tile.x + mouseTargetCell.x, tile.y + mouseTargetCell.y));
             tilesToTarget.Add(tile+mouseTargetCell);
             newAreaOfEffect.Add(tile);
         }

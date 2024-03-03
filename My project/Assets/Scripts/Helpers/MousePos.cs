@@ -1,3 +1,4 @@
+using finished2;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,13 @@ public class MousePos : MonoBehaviour
 {
     //[SerializeField] private Camera mainCamera;
     //public Vector3 pos;
+    [SerializeField] private Grid grid;
 
     private static MousePos _instance;
     public static MousePos Instance { get { return _instance; } }
 
     public Vector3 nodeSelected;
+    public Vector3Int nodeCell;
     //Vector3 nodeSelected = new Vector3(10000,0,0);
     public bool hasSelectedNode = false;
 
@@ -35,9 +38,13 @@ public class MousePos : MonoBehaviour
         if (focusedTileHit.HasValue)
         {
             GameObject overlayTile = focusedTileHit.Value.collider.gameObject;
+            
+            nodeCell = overlayTile.GetComponentInChildren<OverlayTile>().gridLocation;
+            nodeSelected = grid.CellToWorld(nodeCell);
             transform.position = overlayTile.transform.position;
-            nodeSelected = transform.position;
+            
             hasSelectedNode = true;
+            
             //gameObject.GetComponent<SpriteRenderer>().sortingOrder = overlayTile.GetComponent<SpriteRenderer>().sortingOrder;
             //raden ovan är för om vi skaffar en cursor
         }
