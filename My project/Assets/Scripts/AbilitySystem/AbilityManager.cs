@@ -25,31 +25,16 @@ public class AbilityManager : MonoBehaviour
         //{
         //    _instance = this;
         //}
-        //ChooseRandomAbility();
         AssignAbilities();
         HasADiscardedAbility = false;
     }
-
-    //private void Start()
-    //{
-    //    //AssignAbilities();
-    //}
 
     private void AssignAbilities()
     {
         for(int i = 0; i < TotalAbilityAmount; i++)
         {
-            //print("did we get here");
-            ActiveAbilities.Enqueue(GetNotRandomAbility()); //TODO: Make random
-            //Debug.Log("daheck " + ActiveAbilities.Count);
+            ActiveAbilities.Enqueue(ChooseRandomAbility()); ;
         }
-        //ActiveAbilities.Enqueue(new StickyBomb());
-    }
-
-    private ActiveAbility GetNotRandomAbility()
-    {
-        //return new Shield();
-        return (new StickyBomb());
     }
 
     public Queue<ActiveAbility> GetAbilityQueue() 
@@ -87,31 +72,24 @@ public class AbilityManager : MonoBehaviour
         return queue;
     }
 
-    //private void ChooseUsableAbilities()
-    //{
-    //    List<Type> typeList = new List<Type>
-    //    {
-    //        typeof(StickyBomb)
-    //    }
-    ////UnlockedAbilities.Add()
-    ///
-    //private ActiveAbility ChooseRandomAbility()
-    //{
-    //    System.Random random = new System.Random();
-    //    int randomNumber = random.Next(1, 5); // Generate a random number between 1 and 4
+    private ActiveAbility ChooseRandomAbility()
+    {
+            System.Random random = new System.Random();
 
-    //    switch (randomNumber)
-    //    {
-    //        case 1:
-    //            return new StickyBomb();
-    //        case 2:
-    //            return new ClassB();
-    //        case 3:
-    //            return new ClassC();
-    //        case 4:
-    //            return new ClassD();
-    //        default:
-    //            throw new InvalidOperationException("Unexpected random number");
-    //    }
-    //}
+            int randomNumber = random.Next(1, 5); // Generate a random number between 1 and 4
+
+                switch (randomNumber)
+                {
+                    case 1:
+                        return new StickyBomb();
+                    case 2:
+                        return new Shield();
+                    case 3:
+                        return new StickyBomb();
+                    case 4:
+                        return new Shield();
+                    default:
+                        throw new InvalidOperationException("Unexpected random number");
+                    }
+    }  
 }
