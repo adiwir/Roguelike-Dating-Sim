@@ -20,7 +20,6 @@ public class Character : Entity
     List<Vector2Int> twoDAreaOfEffect = new();
     List<Vector3Int> newAreaOfEffect;
 
-
     private Vector3 pos;
     private AbilityManager abilityManager;
 

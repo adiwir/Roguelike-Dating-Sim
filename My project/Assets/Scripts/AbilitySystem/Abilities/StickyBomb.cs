@@ -20,11 +20,6 @@ public class StickyBomb : ActiveAbility
         //this.icon = Assets/Prefabs/sticky_bomb.png;
     }
 
-    private static void CreateSprite(Sprite sprite)
-    {
-
-    }
-
     public override void UseAbility(List<Vector3Int> targetedTiles)
     {
         //Vector3Int staticEnemyPos = new Vector3Int(10, -1, 0);
