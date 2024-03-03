@@ -18,6 +18,7 @@ public abstract class Enemy : MonoBehaviour, IEnemyObserver
     {
         return this.pos;
     }
+
     public abstract List<Vector3Int> GetCoveredArea();
 
     public void TakeDamage(int damage)

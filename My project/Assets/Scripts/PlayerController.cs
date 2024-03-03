@@ -303,7 +303,6 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Teleport"))
         {
-            Debug.Log("yeet");
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(70, 39), 1000000000);
             float newSize = Mathf.MoveTowards(Camera.main.orthographicSize, 5, 100 * Time.fixedDeltaTime);
             Camera.main.orthographicSize = newSize;

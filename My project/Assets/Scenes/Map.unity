@@ -833,6 +833,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3704822144809599675, guid: 93a10161f05e1d04ab90653707e87a02, type: 3}
   m_PrefabInstance: {fileID: 200406767}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &274510628 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3704822144809599675, guid: 93a10161f05e1d04ab90653707e87a02, type: 3}
+  m_PrefabInstance: {fileID: 2046466017}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &337384615
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,11 +971,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 337384615}
   m_CullTransparentMesh: 1
---- !u!224 &274510628 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3704822144809599675, guid: 93a10161f05e1d04ab90653707e87a02, type: 3}
-  m_PrefabInstance: {fileID: 2046466017}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &388440250 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2203465141026753818, guid: df95552e9fb615641889591e79aa03fc, type: 3}
@@ -1401,7 +1401,6 @@ MonoBehaviour:
   moveSpeed: 0
   standingOnTile: {fileID: 0}
   timeThresh: 0
-  imageChooser: {fileID: 104081637}
   isFlipped: 0
   isRunning: 0
   isRecharging: 0
@@ -114618,11 +114617,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7337168982101740383, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 70.2
+      value: 70.425
       objectReference: {fileID: 0}
     - target: {fileID: 7337168982101740383, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 50
+      value: 49.978
       objectReference: {fileID: 0}
     - target: {fileID: 7337168982101740383, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -114676,6 +114675,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1284995393, guid: a9f532d2e5e58c54f9588e207a6125cf, type: 3}
+    - target: {fileID: 8346764444976798391, guid: df95552e9fb615641889591e79aa03fc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8346764444976798391, guid: df95552e9fb615641889591e79aa03fc, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1

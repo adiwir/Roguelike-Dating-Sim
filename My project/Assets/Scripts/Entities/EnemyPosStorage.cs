@@ -37,27 +37,38 @@ public class EnemyPosStorage : MonoBehaviour
         this.enemyList.Add(enemy);
     }
 
-    public Enemy GetEnemyOnCell(Vector3Int targetCell)
+    public HashSet<Enemy> GetEnemyOnCell(List<Vector3Int> targetCells)
     {
+        //I apologise for this function
+        HashSet<Enemy> enemySet = new HashSet<Enemy>();
         if (enemyList != null)
         {
-            
-            foreach (Enemy enemy in enemyList)
+            foreach (Vector3Int targetCell in targetCells)
             {
-                Vector3Int enemyPos = enemy.GetPos();
-                if((enemyPos.x == targetCell.x) && (enemyPos.y == targetCell.y))
+                foreach (Enemy enemy in enemyList)
                 {
-                    return enemy;
+                    Vector3Int enemyPos = enemy.GetPos();
+                    if (enemy.GetType() == typeof(Boss))
+                    {
+                        List<Vector3Int> coveredArea = enemy.GetCoveredArea();
+                        foreach (Vector3Int enemyCell in coveredArea)
+                        {
+                            if ((enemyCell.x == targetCell.x) && (enemyCell.y == targetCell.y))
+                            {
+                                enemySet.Add(enemy);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if ((enemyPos.x == targetCell.x) && (enemyPos.y == targetCell.y))
+                        {
+                            enemySet.Add(enemy);
+                        }
+                    }
                 }
-
-
-                //if(enemy.GetPos() == targetCell)//TODO: gör så att detta kommer funka för Bossen
-                //{
-                //    return enemy;
-                //}
-                //implementera något här som kollar om de är en boss för att se hur stora 
-
             }
+            return enemySet;
         }
         return null;
     }
