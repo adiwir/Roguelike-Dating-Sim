@@ -23,6 +23,11 @@ public abstract class Enemy : MonoBehaviour, IEnemyObserver
 
     public void TakeDamage(int damage)
     {
+        if (this == null)
+        {
+            return;
+        }
+
         damageFlash.Flash();
         this.hp -= damage;
         //healthBar.UpdateHealthBar(hp, maxHp);

@@ -157,7 +157,7 @@ public class Sheep : Enemy
 
     public override void OnDeath()
     {
-        Debug.Log("Sheep died");
+        EnemyPosStorage.Instance.RemoveEnemy(this);
         Destroy(this.gameObject);
     }
 }

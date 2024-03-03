@@ -36,8 +36,8 @@ public class Health : MonoBehaviour
     private void Start()
     {
         playerController = GetComponent<PlayerController>();
-        health = 10000;
-        numOfHearts = 10000;
+        health = 4;
+        numOfHearts = 4;
     }
 
     void Update()

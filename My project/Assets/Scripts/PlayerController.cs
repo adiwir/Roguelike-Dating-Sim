@@ -301,7 +301,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Teleport"))
+        if (collision.gameObject.CompareTag("Teleport") && EnemyPosStorage.Instance.enemyList.Count == 1)
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(70, 39), 1000000000);
             float newSize = Mathf.MoveTowards(Camera.main.orthographicSize, 5, 100 * Time.fixedDeltaTime);

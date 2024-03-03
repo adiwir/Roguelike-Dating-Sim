@@ -254,6 +254,7 @@ public class Turtle : Enemy
 
     public override void OnDeath()
     {
+        EnemyPosStorage.Instance.RemoveEnemy(this);
         Debug.Log("Turtle died");
         Destroy(this.gameObject);
     }
