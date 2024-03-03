@@ -19,6 +19,7 @@ public class Character : Entity
     public List<Vector3Int> areaOfEffect;
     List<Vector2Int> twoDAreaOfEffect = new();
     List<Vector3Int> newAreaOfEffect;
+    ClosestSpot closestSpotFinder;
 
     private Vector3 pos;
     private AbilityManager abilityManager;
@@ -42,6 +43,7 @@ public class Character : Entity
     {
         moveDistance = 1;
         abilityManager = GetComponent<AbilityManager>();
+        closestSpotFinder = new();
     }
 
     public void Start()
@@ -151,8 +153,6 @@ public class Character : Entity
         if (abilityQueue.Count <= 0)
         {
             hasActiveAbilityLeft = false;
-            //imageChooser.SetOutOfAbilities(spot);
-            //TODO: visa på HUD att abilityQueue är använda
         }
         else { 
             assignedAbilities[spot] = abilityQueue.Dequeue();
@@ -184,8 +184,6 @@ public class Character : Entity
     {
         if (ActivesAvailable())
         {
-            //assignedAbilities[spot].UseAbility(this,);
-            //Debug.Log(assignedAbilities[spot]);
             if (assignedAbilities[spot] != null) 
             {
                 print("toggledAbility");
@@ -194,7 +192,6 @@ public class Character : Entity
                 areaOfEffect = toggledAbility.GetAreaOfEffect();
                 DisplayAreaOfEffect();
                 
-                //imageChooser.toggleImage(spot);
             } else
             {
                 imageChooser.SetOutOfAbilities(spot);
@@ -206,21 +203,25 @@ public class Character : Entity
     private List<Vector3Int> CalculateTargetArea()//kanske borde returna egentligen men då måste metoden ändras
     {
         Vector3 mousePos = MousePos.Instance.GetHoveredNode();
-        //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
         Vector3Int mouseTargetCell = tilemap.WorldToCell(mousePos);
         List<Vector3Int> tilesToTarget = new List<Vector3Int>();
+
+        (int targetCellX, int targetCellY) adjustedMouseTargetCell = closestSpotFinder.FindClosestSpot(tilemap.WorldToCell(this.pos), mouseTargetCell, toggledAbility.range);
+        
+        int targetCellX = adjustedMouseTargetCell.Item1;
+        int targetCellY = adjustedMouseTargetCell.Item2;
 
         newAreaOfEffect = new List<Vector3Int>();
 
         foreach (Vector3Int tile in areaOfEffect)
         {
-            //twoDAreaOfEffect.Add(((tile + mouseTargetCell).Vector2Int));
-            twoDAreaOfEffect.Add(new Vector2Int(tile.x + mouseTargetCell.x + 1, tile.y + mouseTargetCell.y + 1));
+            twoDAreaOfEffect.Add(new Vector2Int(tile.x + targetCellX + 1, tile.y + mouseTargetCell.y + 1));
             tilesToTarget.Add(tile+mouseTargetCell);
             newAreaOfEffect.Add(tile);
         }
         return tilesToTarget;
     }
+
 
     public void DisplayAreaOfEffect()
     {
