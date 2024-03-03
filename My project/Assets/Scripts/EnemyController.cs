@@ -11,7 +11,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyController : MonoBehaviour
 {
-
     [SerializeField] Tilemap tilemap;
 
     public float moveSpeed = 1;
@@ -36,7 +35,7 @@ public class EnemyController : MonoBehaviour
         try
         {
             enemyTile = finished2.MapManager.Instance.map[tilePos];
-        } catch (NullReferenceException e) { Debug.Log(tilePos); }
+        } catch (NullReferenceException e) { Debug.Log("tilepos" + tilePos); }
         
     }
 
