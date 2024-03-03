@@ -20,11 +20,6 @@ public class StickyBomb : ActiveAbility
         //this.icon = Assets/Prefabs/sticky_bomb.png;
     }
 
-    private static void CreateSprite(Sprite sprite)
-    {
-
-    }
-
     public override void UseAbility(List<Vector3Int> targetedTiles)
     {
         Debug.Log("Nr of tiles: " + targetedTiles.Count);
