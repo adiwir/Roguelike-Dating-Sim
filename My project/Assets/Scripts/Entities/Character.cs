@@ -99,17 +99,19 @@ public class Character : Entity
 
     private void AttackNextCell(Vector3Int closestTargetCell, Vector3Int addVec) //TODO: Loopa denna(för basic loopa 2 gånger).
     {
-        Enemy enemy;
-        
-        for(int i = 0; i <= basicAbility.GetRange()-1; i++)
+        List<Vector3Int> targetCells = new List<Vector3Int>();
+
+        for (int i = 0; i <= basicAbility.GetRange()-1; i++)
         {
-            //Debug.Log(i);
-            enemy = EnemyPosStorage.Instance.GetEnemyOnCell(closestTargetCell + (addVec*i));
-            if (enemy != null)
+            targetCells.Add(closestTargetCell + addVec * i);
+        }
+
+        HashSet<Enemy> hitEnemies = EnemyPosStorage.Instance.GetEnemyOnCell(targetCells);
+        if (hitEnemies != null)
+        {
+            foreach (Enemy enemy in hitEnemies)
             {
-                Debug.Log("hitting enemy");
                 enemy.TakeDamage(basicAbility.GetDamage());
-                break;
             }
         }
     }
@@ -215,8 +217,9 @@ public class Character : Entity
         foreach (Vector3Int tile in areaOfEffect)
         {
             //twoDAreaOfEffect.Add(((tile + mouseTargetCell).Vector2Int));
-            twoDAreaOfEffect.Add(new Vector2Int(tile.x + mouseTargetCell.x + 1, tile.y + mouseTargetCell.y + 1));
+            
             tilesToTarget.Add(tile+mouseTargetCell);
+            twoDAreaOfEffect.Add(new Vector2Int(tile.x + mouseTargetCell.x + 1, tile.y + mouseTargetCell.y + 1));
             newAreaOfEffect.Add(tile);
         }
         return tilesToTarget;

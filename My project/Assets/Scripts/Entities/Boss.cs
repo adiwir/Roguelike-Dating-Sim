@@ -150,10 +150,7 @@ public class Boss : Enemy
         {
             for (int y = pos.y - 1; y <= pos.y + 1; y++)
             {
-                for (int z = pos.z - 1; z <= pos.z + 1; z++)
-                {
-                    coveredArea.Add(new Vector3Int(x, y, z));
-                }
+                coveredArea.Add(new Vector3Int(x, y, 5));
             }
         }
     }

@@ -22,17 +22,14 @@ public class StickyBomb : ActiveAbility
 
     public override void UseAbility(List<Vector3Int> targetedTiles)
     {
-        //Vector3Int staticEnemyPos = new Vector3Int(10, -1, 0);
-        Enemy enemy;
-        foreach (Vector3Int tile in targetedTiles)
+        Debug.Log("Nr of tiles: " + targetedTiles.Count);
+        HashSet<Enemy> hitEnemies = EnemyPosStorage.Instance.GetEnemyOnCell(targetedTiles);
+        Debug.Log("Nr. of enemies: " + hitEnemies.Count);
+        if (hitEnemies != null)
         {
-            //Debug.Log(tile);
-            //if(tile == staticEnemyPos) { Debug.Log("targeted static enemy"); }
-
-            enemy = EnemyPosStorage.Instance.GetEnemyOnCell(tile);
-            if (enemy != null)
+            foreach (Enemy enemy in hitEnemies)
             {
-                Debug.Log("hitting enemy");
+                Debug.Log(enemy);
                 enemy.TakeDamage(damage);
             }
         }
