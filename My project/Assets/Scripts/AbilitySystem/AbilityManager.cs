@@ -9,6 +9,7 @@ public class AbilityManager : MonoBehaviour
 
     private Queue<ActiveAbility> ActiveAbilities = new();
     private List<ActiveAbility> UsedAbilities = new();
+    
 
     [SerializeField] private int TotalAbilityAmount = 6;
     private readonly int startingAbilityAmount = 3;
@@ -28,26 +29,12 @@ public class AbilityManager : MonoBehaviour
         HasADiscardedAbility = false;
     }
 
-    //private void Start()
-    //{
-    //    //AssignAbilities();
-    //}
-
     private void AssignAbilities()
     {
         for(int i = 0; i < TotalAbilityAmount; i++)
         {
-            //print("did we get here");
-            ActiveAbilities.Enqueue(GetNotRandomAbility()); //TODO: Make random
-            //Debug.Log("daheck " + ActiveAbilities.Count);
+            ActiveAbilities.Enqueue(ChooseRandomAbility()); ;
         }
-        //ActiveAbilities.Enqueue(new StickyBomb());
-    }
-
-    private ActiveAbility GetNotRandomAbility()
-    {
-        //return new Shield();
-        return (new StickyBomb());
     }
 
     public Queue<ActiveAbility> GetAbilityQueue() 
@@ -85,4 +72,24 @@ public class AbilityManager : MonoBehaviour
         return queue;
     }
 
+    private ActiveAbility ChooseRandomAbility()
+    {
+            System.Random random = new System.Random();
+
+            int randomNumber = random.Next(1, 5); // Generate a random number between 1 and 4
+
+                switch (randomNumber)
+                {
+                    case 1:
+                        return new StickyBomb();
+                    case 2:
+                        return new Shield();
+                    case 3:
+                        return new StickyBomb();
+                    case 4:
+                        return new Shield();
+                    default:
+                        throw new InvalidOperationException("Unexpected random number");
+                    }
+    }  
 }
