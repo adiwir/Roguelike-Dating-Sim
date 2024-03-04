@@ -190,9 +190,18 @@ public class Character : Entity
         Vector3Int characterCell = tilemap.WorldToCell(this.pos);
         Vector2Int twoDCharacterCell = new(characterCell.x, characterCell.y);
 
+        List<Vector3Int> charactersTileList = new List<Vector3Int>();
+        charactersTileList.Add(characterCell);
+
         List<Vector3Int> tilesToAttack = CalculateTargetArea(mouseTargetCell);
         HashSet<Vector2Int> areaInRange = AreaInRange.CalcAreaInRange(toggledAbility.range, twoDCharacterCell);
-        if (areaInRange.Contains(new Vector2Int(mouseTargetCell.x, mouseTargetCell.y)))
+        if(toggledAbility.GetName() == "Stomp")
+        {
+            tilesToAttack = CalculateTargetArea(characterCell);
+            toggledAbility.UseAbility(tilesToAttack);
+            return true;
+        }
+        else if (areaInRange.Contains(new Vector2Int(mouseTargetCell.x, mouseTargetCell.y)))
         {
             toggledAbility.UseAbility(tilesToAttack);
             return true;
@@ -252,7 +261,20 @@ public class Character : Entity
             Vector2Int twoDCharacterCell = new(characterCell.x, characterCell.y);
             
             HashSet<Vector2Int> areaInRange = AreaInRange.CalcAreaInRange(toggledAbility.range, twoDCharacterCell);
-            if (areaInRange.Contains(new Vector2Int(mouseTargetCell.x, mouseTargetCell.y)))
+            if (toggledAbility.GetName() == "Stomp")
+            {
+                CalculateTargetArea(characterCell);
+
+                foreach (Vector2Int node in twoDAreaOfEffect)
+                {
+                    if (finished2.MapManager.Instance.map.ContainsKey(node))
+                    {
+                        finished2.MapManager.Instance.map[node].ShowTile();
+                    }
+                }
+                areaOfEffect = newAreaOfEffect;
+            }
+            else if (areaInRange.Contains(new Vector2Int(mouseTargetCell.x, mouseTargetCell.y)))
             {
                 CalculateTargetArea(mouseTargetCell);
 
@@ -263,8 +285,6 @@ public class Character : Entity
                         finished2.MapManager.Instance.map[node].ShowTile();
                     }
                 }
-
-                //areaOfEffect.Clear();
                 areaOfEffect = newAreaOfEffect;
             }
         }

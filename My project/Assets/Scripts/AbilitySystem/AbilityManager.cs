@@ -90,8 +90,9 @@ public class AbilityManager : MonoBehaviour
                     case 3:
                         return new Sniper();
                     case 4:
-                        return new StickyBomb();
-            default:
+
+                        return new Stomp();
+                    default:
                         throw new InvalidOperationException("Unexpected random number");
                 }
     }  
