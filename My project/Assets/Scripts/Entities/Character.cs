@@ -19,7 +19,6 @@ public class Character : Entity
     public List<Vector3Int> areaOfEffect;
     List<Vector2Int> twoDAreaOfEffect = new();
     List<Vector3Int> newAreaOfEffect;
-    ClosestSpot closestSpotFinder;
 
     private Vector3 pos;
     private AbilityManager abilityManager;
@@ -223,17 +222,6 @@ public class Character : Entity
     {
 
         List<Vector3Int> tilesToTarget = new List<Vector3Int>();
-
-        //(int targetCellX, int targetCellY) adjustedMouseTargetCell = closestSpotFinder.FindClosestSpot(tilemap.WorldToCell(this.pos), mouseTargetCell, toggledAbility.range);
-
-        //int targetCellX = adjustedMouseTargetCell.targetCellX;
-        //int targetCellY = adjustedMouseTargetCell.targetCellY;
-
-        //Vector3Int newMouseTargetCell = new Vector3Int(targetCellX, targetCellY);
-
-
-
-
         newAreaOfEffect = new List<Vector3Int>();
 
         foreach (Vector3Int tile in areaOfEffect)
