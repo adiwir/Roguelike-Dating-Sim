@@ -357,6 +357,7 @@ public class Character : Entity
 
     public void UnToggleAbility()
     {
+        imageChooser.UntoggleAllBorders();
         toggledAbility = null;
         HideAOE();
     }

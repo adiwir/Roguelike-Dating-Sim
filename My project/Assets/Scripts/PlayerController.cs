@@ -100,6 +100,76 @@ public class PlayerController : MonoBehaviour
         {
             movIn.Remove(KeyCode.D);
         }
+
+        //BasicAttack
+        if (Input.GetButton("LeftMouse") && (basicCd <= 0) && !(activeAbilitySelected))
+        {
+            character.UseBasicAbility(this.origPos);
+            basicCd = 1f;
+            animator.SetTrigger("Shoot");
+        }
+        else
+        {
+            basicCd -= Time.deltaTime; //d�ligt system, kan bli -massa om man bara inte trycker in den knappen men f�r fixa det senare
+                                            //tror nog inte ens att detta systemet kommer funka lol, TODO: fixa
+        }
+
+        //VariableAbilities
+        if (Input.GetButtonDown("RightMouse") && (abilityCd <= 0)) //frågan är om man ska använda nya ability systemet här
+        {
+            if (!isRecharging)
+            {
+                Debug.Log("activated RightMouse");
+                character.ActivateAbilityInSpot(2);
+            }
+
+            if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
+        }
+        else if (Input.GetButtonDown("Space") && (abilityCd <= 0))
+        {
+            if (!isRecharging)
+            {
+                Debug.Log("activated LShift");
+                character.ActivateAbilityInSpot(1);
+            }
+
+            if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
+        }
+        else if (Input.GetButtonDown("LShift") && (abilityCd <= 0))
+        {
+            if (!isRecharging)
+            {
+                Debug.Log("activated LShift");
+                character.ActivateAbilityInSpot(0);
+            }
+
+            if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
+        }
+
+        if (abilityCd > 0)
+        {
+            abilityCd -= Time.deltaTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("pressed esc");
+            character.UnToggleAbility();
+        }
+
+        if (!(character.UsedAbility()))
+        {
+            character.DisplayAreaOfEffect();
+        }
+
+        //Recharge
+        if (Input.GetKeyDown(KeyCode.R) && character.CheckIfAllAbilitiesUsed())
+        {
+            Debug.Log("made it to Recharge");
+            isRecharging = true;
+            character.RechargeAbilities();
+            currentRechargeTime = fullRechargeTime;
+        }
     }
 
     void FixedUpdate()
@@ -190,79 +260,6 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isFlipped", isFlipped);
         transform.localScale = scale;
 
-        //BasicAttack
-        if (Input.GetButton("LeftMouse") && (basicCd <= 0) && !(activeAbilitySelected))
-        {
-            character.UseBasicAbility(this.origPos);
-            basicCd = 0.1f;
-            animator.SetTrigger("Shoot");
-        }
-        else
-        {
-            basicCd -= Time.fixedDeltaTime; //d�ligt system, kan bli -massa om man bara inte trycker in den knappen men f�r fixa det senare
-                                            //tror nog inte ens att detta systemet kommer funka lol, TODO: fixa
-        }
-
-        //VariableAbilities
-        if (Input.GetButtonDown("RightMouse") && (abilityCd <= 0)) //frågan är om man ska använda nya ability systemet här
-        {
-            if(!isRecharging)
-            {
-                Debug.Log("activated RightMouse");
-                character.ActivateAbilityInSpot(2);
-            }
-            
-            if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
-        }
-        else if (Input.GetButtonDown("Space") && (abilityCd <= 0))
-        {
-            if (!isRecharging)
-            {
-                Debug.Log("activated LShift");
-                character.ActivateAbilityInSpot(1);
-            }
-
-            if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
-        }
-        else if (Input.GetButtonDown("LShift") && (abilityCd <= 0))
-        {
-            if (!isRecharging)
-            {
-                Debug.Log("activated LShift");
-                character.ActivateAbilityInSpot(0);
-            }
-            
-            if (character.UsedAbility()) { abilityCd = baseAbilityCd; }
-        }
-    
-        if(abilityCd > 0)
-        {
-            abilityCd -= Time.fixedDeltaTime;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Debug.Log("pressed esc");
-            //Debug.Log("before " +character.GetToggledAbility());
-            character.UnToggleAbility();
-            //Debug.Log("after " +character.GetToggledAbility());
-        }
-
-        if (!(character.UsedAbility()))
-        {
-            character.DisplayAreaOfEffect();
-        }
-
-        //allOutOfAbilities = character.CheckIfAllAbilitiesUsed();
-
-        //Recharge
-        if (Input.GetKeyDown(KeyCode.R) && character.CheckIfAllAbilitiesUsed())
-        {
-            Debug.Log("made it to Recharge");
-            isRecharging = true;
-            character.RechargeAbilities();
-            currentRechargeTime = fullRechargeTime;
-        }
     }
 
     void MovePlayer(Vector3 target)
