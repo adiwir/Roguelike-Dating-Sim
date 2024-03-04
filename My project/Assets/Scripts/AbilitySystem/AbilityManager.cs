@@ -86,10 +86,10 @@ public class AbilityManager : MonoBehaviour
                     case 2:
                         return new Shield();
                     case 3:
-                        return new StickyBomb();
-                        //return new Sniper();
+                        //return new StickyBomb();
+                        return new Sniper();
                     case 4:
-                        return new Shield();
+                        return new StickyBomb();
             default:
                         throw new InvalidOperationException("Unexpected random number");
                 }

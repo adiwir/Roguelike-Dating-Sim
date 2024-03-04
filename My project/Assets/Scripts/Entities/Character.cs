@@ -138,7 +138,6 @@ public class Character : Entity
     {
 
         bool succesfullyUsedAbility = false;
-        //print("ActivatedAbility");
         if(toggledAbility.isAttackAbility)
         {
             succesfullyUsedAbility = AttackEnemiesInArea();

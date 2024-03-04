@@ -95,8 +95,8 @@ public class ImageChooser : MonoBehaviour
     private void SpriteDictSetup()
     {
         spriteDict.Add("StickyBomb", Resources.Load<Sprite>("Sticky_bomb"));
-        //spriteDict.Add("Shield", Resources.Load<Sprite>("Shield"));
-        //spriteDict.Add("Sniper", Resources.Load<Sprite>("Sniper"));
+        spriteDict.Add("Shield", Resources.Load<Sprite>("Shield"));
+        spriteDict.Add("Sniper", Resources.Load<Sprite>("Sniper"));
         spriteDict.Add("Transparent", Resources.Load<Sprite>("Transparent"));
     }
 
