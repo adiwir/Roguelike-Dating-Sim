@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public InfoScreen infoScreen;
     public GameOverScreen gameOverScreen;
     public GameWonScreen gameWonScreen;
     public Health healthController;
