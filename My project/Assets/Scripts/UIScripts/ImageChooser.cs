@@ -14,8 +14,6 @@ public class ImageChooser : MonoBehaviour
     public Image ShiftBorder;
     public Image Mouse2Border;
 
-    //public Image oldImage;
-    //public Sprite icon;
     public Sprite outOfAbilties;
     
     private List<Image> imageList = new List<Image>();

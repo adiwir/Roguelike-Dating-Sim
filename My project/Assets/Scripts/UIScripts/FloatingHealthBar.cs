@@ -5,10 +5,7 @@ using UnityEngine.UI;
 
 public class FloatingHealthBar : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] private Slider slider;
-    //[SerializeField] private Camera camera;
-    //[SerializeField] private Transform target;
 
     public void UpdateHealthBar(int currentValue, int maxValue)
     {
@@ -17,11 +14,5 @@ public class FloatingHealthBar : MonoBehaviour
         slider.value = currentVal/maxVal;
         Debug.Log(slider.value);
         Debug.Log(currentValue/maxValue);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

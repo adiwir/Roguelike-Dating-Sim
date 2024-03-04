@@ -9,7 +9,6 @@ public class Sniper : ActiveAbility
 
     public Sniper() 
     {
-        //this.icon = 
         this.areaOfEffect = new();
         this.name = "Sniper";
         this.range = 14;
@@ -20,9 +19,7 @@ public class Sniper : ActiveAbility
 
     public override void UseAbility(List<Vector3Int> targetedTiles)
     {
-        //Debug.Log("Nr of tiles: " + targetedTiles.Count);
         HashSet<Enemy> hitEnemies = EnemyPosStorage.Instance.GetEnemyOnCell(targetedTiles);
-        //Debug.Log("Nr. of enemies: " + hitEnemies.Count);
         if (hitEnemies != null)
         {
             foreach (Enemy enemy in hitEnemies)

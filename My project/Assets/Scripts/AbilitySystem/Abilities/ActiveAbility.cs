@@ -17,7 +17,6 @@ public abstract class ActiveAbility : IAbility
     public Vector3Int targetSquare;
     public List<Vector3Int> areaOfEffect;
 
-    //public abstract void UseAbility(Character character, List<Vector3Int> targetedTiles);
     public abstract void UseAbility(List<Vector3Int> targetedTiles);
 
     public abstract void UseAbility(MonoBehaviour entity);

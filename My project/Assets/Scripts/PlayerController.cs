@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour
         tilePos.x = targetCell.x;
         tilePos.y = targetCell.y;
         standingOnTile = finished2.MapManager.Instance.map[tilePos];
-        //currentNode = GridManager.Instance.map[new Vector2Int(targetCell.x, targetCell.y)];
         character = GetComponent<Character>();
         character.SetPos(transform.position);
 
