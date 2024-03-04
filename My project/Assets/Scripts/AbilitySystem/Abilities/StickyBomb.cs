@@ -20,9 +20,9 @@ public class StickyBomb : ActiveAbility
 
     public override void UseAbility(List<Vector3Int> targetedTiles)
     {
-        Debug.Log("Nr of tiles: " + targetedTiles.Count);
+        //Debug.Log("Nr of tiles: " + targetedTiles.Count);
         HashSet<Enemy> hitEnemies = EnemyPosStorage.Instance.GetEnemyOnCell(targetedTiles);
-        Debug.Log("Nr. of enemies: " + hitEnemies.Count);
+        //Debug.Log("Nr. of enemies: " + hitEnemies.Count);
         if (hitEnemies != null)
         {
             foreach (Enemy enemy in hitEnemies)

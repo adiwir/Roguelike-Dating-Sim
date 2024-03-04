@@ -243,9 +243,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.Log("pressed esc");
-            Debug.Log("before " +character.GetToggledAbility());
+            //Debug.Log("before " +character.GetToggledAbility());
             character.UnToggleAbility();
-            Debug.Log("after " +character.GetToggledAbility());
+            //Debug.Log("after " +character.GetToggledAbility());
         }
 
         if (!(character.UsedAbility()))
@@ -253,18 +253,17 @@ public class PlayerController : MonoBehaviour
             character.DisplayAreaOfEffect();
         }
 
-        allOutOfAbilities = character.CheckIfAllAbilitiesUsed();
+        //allOutOfAbilities = character.CheckIfAllAbilitiesUsed();
 
         //Recharge
-        if (Input.GetKeyDown(KeyCode.R) && allOutOfAbilities)
+        if (Input.GetKeyDown(KeyCode.R) && character.CheckIfAllAbilitiesUsed())
         {
+            Debug.Log("made it to Recharge");
             isRecharging = true;
             character.RechargeAbilities();
             currentRechargeTime = fullRechargeTime;
         }
     }
-
-    //void ShowAreaOfEffect()
 
     void MovePlayer(Vector3 target)
     {

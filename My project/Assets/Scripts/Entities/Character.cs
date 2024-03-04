@@ -25,7 +25,7 @@ public class Character : Entity
 
     private int healthPoints;
     private int maxHealth = 4;
-    public bool hasActiveAbilityLeft = true;
+    //public bool hasActiveAbilityLeft = true;
 
     [SerializeField] private ImageChooser imageChooser;
 
@@ -125,7 +125,12 @@ public class Character : Entity
         }
         else
         {
+            if (!ReferenceEquals(toggledAbility, assignedAbilities[spot]))
+            {
+                print("reference doesn't equal");
+            }
             ToggleAbilityInSpot(spot);
+
         }
     }
 
@@ -153,7 +158,9 @@ public class Character : Entity
 
             if (abilityQueue.Count <= 0)
             {
-                hasActiveAbilityLeft = false;
+                //hasActiveAbilityLeft = false;
+                assignedAbilities[spot] = null;
+                imageChooser.SetOutOfAbilities(spot);
             }
             else
             {
@@ -202,6 +209,7 @@ public class Character : Entity
     {
         if (ActivesAvailable())
         {
+            print(assignedAbilities[spot]);
             if (assignedAbilities[spot] != null) 
             {
                 //print("toggledAbility");
@@ -215,7 +223,7 @@ public class Character : Entity
                 imageChooser.SetOutOfAbilities(spot);
                 print("That button doesn't have an ability"); //TODO: fixa så att man inte kan aktivera den alls om den är tom
             }
-        }
+        } //TODO: säg åt spelaren att de kan ladda om med R
     }
 
     private List<Vector3Int> CalculateTargetArea(Vector3Int mouseTargetCell)
@@ -328,7 +336,9 @@ public class Character : Entity
 
     public bool CheckIfAllAbilitiesUsed()
     {
+        Debug.Log("checking if abilities used");
         bool noAssignedAbilities = assignedAbilities.All(item => item == null);
+        Debug.Log(noAssignedAbilities);
         //TODO: change the discard box to say something like can reload
         return (noAssignedAbilities && abilityQueue.Count <= 0);
     }

@@ -81,18 +81,19 @@ public class AbilityManager : MonoBehaviour
                 switch (randomNumber)
                 {
                     case 1:
-                        //return new StickyBomb();
-                        return new Sniper();
+                        return new StickyBomb();
+                        //return new Sniper();
                     case 2:
                         //return new Shield();
-                        return new Sniper();
+                        return new StickyBomb();
                     case 3:
-                        return new Sniper();
+                        return new StickyBomb();
+                        //return new Sniper();
                     case 4:
                         //return new Shield();
-                        return new Sniper();
-            default:
+                        return new StickyBomb();
+                    default:
                         throw new InvalidOperationException("Unexpected random number");
-                    }
+                }
     }  
 }

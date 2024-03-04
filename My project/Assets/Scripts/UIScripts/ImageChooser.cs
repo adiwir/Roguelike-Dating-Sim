@@ -24,6 +24,7 @@ public class ImageChooser : MonoBehaviour
 
     private void Awake()
     {
+        outOfAbilties = Resources.Load<Sprite>("Transparent"); 
         ImageSetup();
         ImageListSetup();
         SpriteDictSetup();
