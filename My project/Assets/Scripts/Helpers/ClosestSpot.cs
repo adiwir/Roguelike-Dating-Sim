@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class ClosestSpot
 {
-    int range;
+    int abilityRange;
     public int pXPos;
     public int pYPos;
 
     int targetX;
     int targetY;
-    Vector3Int mPos;
 
     public ClosestSpot() 
     { 
@@ -22,6 +21,7 @@ public class ClosestSpot
         pYPos = playerPos.y;
         targetX = mousePos.x;
         targetY = mousePos.y;
+        abilityRange = range;
 
         if (IsInRange(targetX, targetY))
         {
@@ -32,58 +32,42 @@ public class ClosestSpot
         int closestY = targetY;
         double minDistance = double.MaxValue;
 
-        // raden nedanför är skit
-
-        int differenceX = Math.Abs(targetX - pXPos);
-        int differenceY = Math.Abs(targetY - pYPos);
-
-        int i = 0;
-        while (!IsInRange(closestX, closestY))
+        for (int i = Math.Max(pXPos - abilityRange, 0); i <= Math.Min(pXPos + abilityRange, targetX); i++)
         {
-            targetX += (targetX < pXPos) ? 1 : -1;
-
-            // Update cY coordinate
-            targetY += (targetY < pYPos) ? 1 : -1;
-
+            for (int j = Math.Max(pYPos - abilityRange, 0); j <= Math.Min(pYPos + abilityRange, targetY); j++)
+            {
+                if (IsInRange(i, j))
+                {
+                    double distance = CalculateEuclideanDistance(i, j, targetX, targetY);
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        closestX = i;
+                        closestY = j;
+                    }
+                }
+            }
         }
+        Debug.Log(closestX + "closest" + closestY);
         return (closestX, closestY);
-
-        //    for (int i = Math.Max(pXPos - range, 0); i <= Math.Min(pXPos + range, targetX); i++)
-        //    {
-        //        for (int j = Math.Max(pYPos - range, 0); j <= Math.Min(pYPos + range, targetY); j++)
-        //        {
-        //            if (IsInRange(i, j))
-        //            {
-        //                double distance = CalculateEuclideanDistance(i, j, targetX, targetY);
-        //                if (distance < minDistance)
-        //                {
-        //                    minDistance = distance;
-        //                    closestX = i;
-        //                    closestY = j;
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    return (closestX, closestY);
-        //}
-
-        //private static int CalculateManhattanDistance(int x1, int y1, int x2, int y2)
-        //{
-        //    return Math.Abs(x1 - x2) + Math.Abs(y1 - y2);
-    
     }
 
-    private  double CalculateEuclideanDistance(int x2, int y2)
+    private static int CalculateManhattanDistance(int x1, int y1, int x2, int y2)
     {
-        return Math.Sqrt(Math.Pow(x2 - pXPos, 2) + Math.Pow(y2 - pYPos, 2));
+        return Math.Abs(x1 - x2) + Math.Abs(y1 - y2);
+
+    }
+
+    private  double CalculateEuclideanDistance(int x1, int y1, int x2, int y2)
+    {
+        return Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
     }
 
 
     public bool IsInRange (int targetX, int targetY)
     {
-        double distance = CalculateEuclideanDistance(targetX, targetY);
-        return distance <= range;
+        double distance = CalculateEuclideanDistance(pXPos, pYPos, targetX, targetY);
+        return distance <= abilityRange;
     }
 
 }

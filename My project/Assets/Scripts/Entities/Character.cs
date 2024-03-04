@@ -43,7 +43,7 @@ public class Character : Entity
     {
         moveDistance = 1;
         abilityManager = GetComponent<AbilityManager>();
-        closestSpotFinder = new();
+        //closestSpotFinder = new();
     }
 
     public void Start()
@@ -121,7 +121,7 @@ public class Character : Entity
         imageChooser.ToggleBorder(spot);
         if (toggledAbility != null && ReferenceEquals(toggledAbility, assignedAbilities[spot]))
         {
-            Debug.Log(toggledAbility.ToString());
+            //Debug.Log(toggledAbility.ToString());
             ActivateToggledAbility(spot);
         }
         else
@@ -132,39 +132,43 @@ public class Character : Entity
 
     private void ActivateToggledAbility(int spot)
     {
-        print("ActivatedAbility");
-        //CalculateTargetArea();
-        //toggledAbility.CanIActivate();
+
+        bool succesfullyUsedAbility = false;
+        //print("ActivatedAbility");
         if(toggledAbility.isAttackAbility)
         {
-            AttackEnemiesInArea();
+            succesfullyUsedAbility = AttackEnemiesInArea();
         }
         else 
         {
             useBuffAbility();
         }
         
-        toggledAbility = null;
-
-        HideAOE();
-
-        abilityManager.SendActiveToDiscard(assignedAbilities[spot]);
-
-        if (abilityQueue.Count <= 0)
+        if(succesfullyUsedAbility) 
         {
-            hasActiveAbilityLeft = false;
-        }
-        else { 
-            assignedAbilities[spot] = abilityQueue.Dequeue();
+            toggledAbility = null;
 
-            imageChooser.ImageChange(spot, assignedAbilities[spot].GetName());
-            if(abilityQueue.Count > 0)
+            HideAOE();
+
+            abilityManager.SendActiveToDiscard(assignedAbilities[spot]);
+
+            if (abilityQueue.Count <= 0)
             {
-                imageChooser.ImageChange(-1, abilityQueue.Peek().GetName());
-            } 
+                hasActiveAbilityLeft = false;
+            }
             else
             {
-                imageChooser.SetOutOfAbilities(-1);
+                assignedAbilities[spot] = abilityQueue.Dequeue();
+
+                imageChooser.ImageChange(spot, assignedAbilities[spot].GetName());
+                if (abilityQueue.Count > 0)
+                {
+                    imageChooser.ImageChange(-1, abilityQueue.Peek().GetName());
+                }
+                else
+                {
+                    imageChooser.SetOutOfAbilities(-1);
+                }
             }
         }
     }
@@ -174,10 +178,25 @@ public class Character : Entity
         toggledAbility.UseAbility(this);
     }
 
-    private void AttackEnemiesInArea()
+    private bool AttackEnemiesInArea()
     {
-        List<Vector3Int> tilesToAttack = CalculateTargetArea();
-        toggledAbility.UseAbility(tilesToAttack);
+        Vector3 mousePos = MousePos.Instance.GetHoveredNode();
+        Vector3Int mouseTargetCell = tilemap.WorldToCell(mousePos);
+        Vector3Int characterCell = tilemap.WorldToCell(this.pos);
+        Vector2Int twoDCharacterCell = new(characterCell.x, characterCell.y);
+
+        List<Vector3Int> tilesToAttack = CalculateTargetArea(mouseTargetCell);
+        HashSet<Vector2Int> areaInRange = AreaInRange.CalcAreaInRange(toggledAbility.range, twoDCharacterCell);
+        if (areaInRange.Contains(new Vector2Int(mouseTargetCell.x, mouseTargetCell.y)))
+        {
+            toggledAbility.UseAbility(tilesToAttack);
+            return true;
+        }
+        else
+        {
+            print("Not in range!");
+            return false;
+        }
     }
 
     public void ToggleAbilityInSpot(int spot)
@@ -186,7 +205,7 @@ public class Character : Entity
         {
             if (assignedAbilities[spot] != null) 
             {
-                print("toggledAbility");
+                //print("toggledAbility");
                 
                 toggledAbility = assignedAbilities[spot];
                 areaOfEffect = toggledAbility.GetAreaOfEffect();
@@ -200,22 +219,26 @@ public class Character : Entity
         }
     }
 
-    private List<Vector3Int> CalculateTargetArea()//kanske borde returna egentligen men då måste metoden ändras
+    private List<Vector3Int> CalculateTargetArea(Vector3Int mouseTargetCell)
     {
-        Vector3 mousePos = MousePos.Instance.GetHoveredNode();
-        Vector3Int mouseTargetCell = tilemap.WorldToCell(mousePos);
+
         List<Vector3Int> tilesToTarget = new List<Vector3Int>();
 
-        (int targetCellX, int targetCellY) adjustedMouseTargetCell = closestSpotFinder.FindClosestSpot(tilemap.WorldToCell(this.pos), mouseTargetCell, toggledAbility.range);
-        
-        int targetCellX = adjustedMouseTargetCell.Item1;
-        int targetCellY = adjustedMouseTargetCell.Item2;
+        //(int targetCellX, int targetCellY) adjustedMouseTargetCell = closestSpotFinder.FindClosestSpot(tilemap.WorldToCell(this.pos), mouseTargetCell, toggledAbility.range);
+
+        //int targetCellX = adjustedMouseTargetCell.targetCellX;
+        //int targetCellY = adjustedMouseTargetCell.targetCellY;
+
+        //Vector3Int newMouseTargetCell = new Vector3Int(targetCellX, targetCellY);
+
+
+
 
         newAreaOfEffect = new List<Vector3Int>();
 
         foreach (Vector3Int tile in areaOfEffect)
         {
-            twoDAreaOfEffect.Add(new Vector2Int(tile.x + targetCellX + 1, tile.y + mouseTargetCell.y + 1));
+            twoDAreaOfEffect.Add(new Vector2Int(tile.x + mouseTargetCell.x + 1, tile.y + mouseTargetCell.y + 1));
             tilesToTarget.Add(tile+mouseTargetCell);
             newAreaOfEffect.Add(tile);
         }
@@ -229,19 +252,27 @@ public class Character : Entity
 
         if (toggledAbility.affectsAnArea)
         {
-            
-            CalculateTargetArea();
+            Vector3 mousePos = MousePos.Instance.GetHoveredNode();
+            Vector3Int mouseTargetCell = tilemap.WorldToCell(mousePos);
+            Vector3Int characterCell = tilemap.WorldToCell(this.pos);
+            Vector2Int twoDCharacterCell = new(characterCell.x, characterCell.y);
 
-            foreach (Vector2Int node in twoDAreaOfEffect)
+            HashSet<Vector2Int> areaInRange = AreaInRange.CalcAreaInRange(toggledAbility.range, twoDCharacterCell);
+            if (areaInRange.Contains(new Vector2Int(mouseTargetCell.x, mouseTargetCell.y)))
             {
-                if (finished2.MapManager.Instance.map.ContainsKey(node))
+                CalculateTargetArea(mouseTargetCell);
+
+                foreach (Vector2Int node in twoDAreaOfEffect)
                 {
-                    finished2.MapManager.Instance.map[node].ShowTile();
+                    if (finished2.MapManager.Instance.map.ContainsKey(node))
+                    {
+                        finished2.MapManager.Instance.map[node].ShowTile();
+                    }
                 }
+
+                areaOfEffect.Clear();
+                areaOfEffect = newAreaOfEffect;
             }
-    
-            areaOfEffect.Clear();
-            areaOfEffect = newAreaOfEffect;
         }
     }
 
