@@ -161,7 +161,6 @@ public class Health : MonoBehaviour
 
     public void BecomeInvincible(float seconds)
     {
-        Debug.Log("in health.cs");
         StartCoroutine(BecomeTemporarilyInvincible(seconds, true));
     }
 

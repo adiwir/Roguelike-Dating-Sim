@@ -50,7 +50,9 @@ public class AbilityManager : MonoBehaviour
 
     public Queue<ActiveAbility> Recharge()
     {
-        return ShuffleAndEnqueue(UsedAbilities);
+        ActiveAbilities.Clear();
+        ActiveAbilities = ShuffleAndEnqueue(UsedAbilities);
+        return ActiveAbilities;
     }
 
     private static Queue<ActiveAbility> ShuffleAndEnqueue<ActiveAbility>(List<ActiveAbility> list)

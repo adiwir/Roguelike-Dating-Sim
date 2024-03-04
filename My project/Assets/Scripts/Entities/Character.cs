@@ -50,12 +50,13 @@ public class Character : Entity
         this.healthPoints = maxHealth;
         CombineAbilityQueues(abilityManager.GetAbilityQueue());
         Debug.Log("ability amount " + abilityQueue.Count);
+        assignedAbilities = new List<ActiveAbility>();
         AssignAbilities();
     }
 
     private void AssignAbilities()
     {
-        assignedAbilities = new List<ActiveAbility>(3);
+        //assignedAbilities = new List<ActiveAbility>(3);
         for (int i = 0; i < startingAbilityAmount; i++)
         { 
             assignedAbilities.Add(abilityQueue.Dequeue());
@@ -302,6 +303,9 @@ public class Character : Entity
     {
         if (abilityManager.HasADiscardedAbility)
         {
+            abilityQueue.Clear();
+            assignedAbilities.Clear();
+            //abilityQueue = abilityManager.Recharge();
             CombineAbilityQueues(abilityManager.Recharge());
             AssignAbilities();
             imageChooser.AddLastAbilityIconToDiscard("Transparent");
@@ -347,9 +351,9 @@ public class Character : Entity
     }
 
     public bool UsedAbility() //kan vara buggig
-   {
+    {
         return (this.toggledAbility == null);
-   }
+    }
 
     public void UnToggleAbility()
     {
