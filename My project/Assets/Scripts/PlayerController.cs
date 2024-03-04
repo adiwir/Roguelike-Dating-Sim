@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //VariableAbilities
-        if (Input.GetButtonDown("RightMouse") && (abilityCd <= 0)) //frågan är om man ska använda nya ability systemet här
+        if (Input.GetButtonDown("RightMouse") && (abilityCd <= 0))
         {
             if (!isRecharging)
             {
@@ -178,7 +178,6 @@ public class PlayerController : MonoBehaviour
         origPos = tilemap.WorldToCell(transform.position);
         targetCell = origPos;
         Vector3 scale = transform.localScale;
-
 
         //PlayerMovement
         CleanMovIn();

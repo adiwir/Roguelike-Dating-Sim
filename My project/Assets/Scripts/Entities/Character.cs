@@ -25,7 +25,6 @@ public class Character : Entity
 
     private int healthPoints;
     private int maxHealth = 4;
-    //public bool hasActiveAbilityLeft = true;
 
     [SerializeField] private ImageChooser imageChooser;
 
@@ -55,7 +54,6 @@ public class Character : Entity
 
     private void AssignAbilities(Queue<ActiveAbility> queue)
     {
-        //assignedAbilities = new List<ActiveAbility>(3);
         for (int i = 0; i < startingAbilityAmount; i++)
         { 
             assignedAbilities.Add(queue.Dequeue());
@@ -97,7 +95,7 @@ public class Character : Entity
         }
         AttackNextCell(cellToAttack, addVector);
     }
-    private void AttackNextCell(Vector3Int closestTargetCell, Vector3Int addVec) //TODO: Loopa denna(för basic loopa 2 gånger).
+    private void AttackNextCell(Vector3Int closestTargetCell, Vector3Int addVec)
     {
         List<Vector3Int> targetCells = new List<Vector3Int>();
 
@@ -121,7 +119,6 @@ public class Character : Entity
         imageChooser.ToggleBorder(spot);
         if (toggledAbility != null && ReferenceEquals(toggledAbility, assignedAbilities[spot]))
         {
-            //Debug.Log(toggledAbility.ToString());
             ActivateToggledAbility(spot);
         }
         else
@@ -160,7 +157,6 @@ public class Character : Entity
 
             if (abilityQueue.Count <= 0)
             {
-                //hasActiveAbilityLeft = false;
                 assignedAbilities[spot] = null;
                 imageChooser.SetOutOfAbilities(spot);
             }
@@ -235,7 +231,6 @@ public class Character : Entity
 
         foreach (Vector3Int tile in areaOfEffect)
         {
-            //twoDAreaOfEffect.Add(((tile + mouseTargetCell).Vector2Int));
             
             tilesToTarget.Add(tile+mouseTargetCell);
             twoDAreaOfEffect.Add(new Vector2Int(tile.x + mouseTargetCell.x , tile.y + mouseTargetCell.y ));
@@ -255,7 +250,6 @@ public class Character : Entity
             Vector3Int characterCell = tilemap.WorldToCell(this.pos);
             Vector2Int twoDCharacterCell = new(characterCell.x, characterCell.y);
             
-            //if(area)
             HashSet<Vector2Int> areaInRange = AreaInRange.CalcAreaInRange(toggledAbility.range, twoDCharacterCell);
             if (areaInRange.Contains(new Vector2Int(mouseTargetCell.x, mouseTargetCell.y)))
             {
@@ -342,11 +336,10 @@ public class Character : Entity
         Debug.Log("checking if abilities used");
         bool noAssignedAbilities = assignedAbilities.All(item => item == null);
         Debug.Log(noAssignedAbilities);
-        //TODO: change the discard box to say something like can reload
         return (noAssignedAbilities && abilityQueue.Count <= 0);
     }
 
-    public bool UsedAbility() //kan vara buggig
+    public bool UsedAbility()
     {
         return (this.toggledAbility == null);
     }

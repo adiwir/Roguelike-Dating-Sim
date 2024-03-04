@@ -79,17 +79,15 @@ public class AbilityManager : MonoBehaviour
     {
             System.Random random = new System.Random();
 
-            int randomNumber = random.Next(1, 5); // Generate a random number between 1 and 4
+            int randomNumber = random.Next(1, 5);
 
                 switch (randomNumber)
                 {
                     case 1:
                         return new StickyBomb();
-                        //return new Sniper();
                     case 2:
                         return new Shield();
                     case 3:
-                        //return new StickyBomb();
                         return new Sniper();
                     case 4:
                         return new StickyBomb();
