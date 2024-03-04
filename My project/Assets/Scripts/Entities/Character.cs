@@ -150,7 +150,7 @@ public class Character : Entity
 
         imageChooser.AddLastAbilityIconToDiscard(toggledAbility.GetName());
 
-        if (succesfullyUsedAbility) 
+        if (succesfullyUsedAbility || !toggledAbility.isAttackAbility) 
         {
             toggledAbility = null;
 
