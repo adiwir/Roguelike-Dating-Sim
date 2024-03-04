@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class StickyBomb : ActiveAbility
 {
-    //public __ image
     private int amountOfareaOfEffect = 5;
     private int damage = 3;
 
@@ -17,7 +16,6 @@ public class StickyBomb : ActiveAbility
         SetAreaOfEffect();
         this.affectsAnArea = true;
         isAttackAbility = true;
-        //this.icon = Assets/Prefabs/sticky_bomb.png;
     }
 
     public override void UseAbility(List<Vector3Int> targetedTiles)
