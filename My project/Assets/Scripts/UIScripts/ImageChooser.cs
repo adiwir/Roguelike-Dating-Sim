@@ -135,6 +135,14 @@ public class ImageChooser : MonoBehaviour
         }
     }
 
+    public void UntoggleAllBorders()
+    {
+        foreach (Image borderImage in borderImages)
+        {
+            borderImage.color = Color.black;
+        }
+    }
+
     public void AddLastAbilityIconToDiscard(string name)
     {
         if(spriteDict.ContainsKey(name))
