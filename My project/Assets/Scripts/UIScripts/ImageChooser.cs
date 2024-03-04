@@ -9,6 +9,7 @@ public class ImageChooser : MonoBehaviour
     public Image Shift;
     public Image Space;
     public Image Mouse2;
+    public Image Discard;
     public Image SpaceBorder;
     public Image ShiftBorder;
     public Image Mouse2Border;
@@ -44,6 +45,7 @@ public class ImageChooser : MonoBehaviour
         imageList.Add(Shift);
         imageList.Add(Space);
         imageList.Add(Mouse2);
+        imageList.Add(Discard);
         borderImages.Add(SpaceBorder);
         borderImages.Add(ShiftBorder);
         borderImages.Add(Mouse2Border);
@@ -71,6 +73,10 @@ public class ImageChooser : MonoBehaviour
             {
                 Mouse2 = image;
             }
+            else if (imageName == "DiscardImage")
+            {
+                Discard = image;
+            }
             else if (imageName == "Border")
             {
                 ShiftBorder = image; 
@@ -91,6 +97,7 @@ public class ImageChooser : MonoBehaviour
         spriteDict.Add("StickyBomb", Resources.Load<Sprite>("Sticky_bomb"));
         //spriteDict.Add("Shield", Resources.Load<Sprite>("Shield"));
         //spriteDict.Add("Sniper", Resources.Load<Sprite>("Sniper"));
+        spriteDict.Add("Transparent", Resources.Load<Sprite>("Transparent"));
     }
 
     //public void ImageChange(int abilityNum, Sprite icon)
@@ -125,6 +132,15 @@ public class ImageChooser : MonoBehaviour
             case 2:
                 ToggleBorderColor(Mouse2Border);
                 break;
+        }
+    }
+
+    public void AddLastAbilityIconToDiscard(string name)
+    {
+        if(spriteDict.ContainsKey(name))
+        {
+            print(imageList[3]);
+            imageList[4].overrideSprite = spriteDict[name];
         }
     }
 

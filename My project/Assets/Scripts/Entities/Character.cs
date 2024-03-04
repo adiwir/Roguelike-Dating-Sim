@@ -147,8 +147,10 @@ public class Character : Entity
         {
             useBuffAbility();
         }
-        
-        if(succesfullyUsedAbility) 
+
+        imageChooser.AddLastAbilityIconToDiscard(toggledAbility.GetName());
+
+        if (succesfullyUsedAbility) 
         {
             toggledAbility = null;
 
@@ -303,6 +305,8 @@ public class Character : Entity
         {
             CombineAbilityQueues(abilityManager.Recharge());
             AssignAbilities();
+            imageChooser.AddLastAbilityIconToDiscard("Transparent");
+            //imageChooser.SetOutOfAbilities(3);
         }
     }
 
