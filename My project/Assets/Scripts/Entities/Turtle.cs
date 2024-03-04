@@ -254,8 +254,8 @@ public class Turtle : Enemy
 
     public override void OnDeath()
     {
+        controller.HideAttack(attackTiles);
         EnemyPosStorage.Instance.RemoveEnemy(this);
-        Debug.Log("Turtle died");
         Destroy(this.gameObject);
     }
 }
