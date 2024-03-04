@@ -23,9 +23,9 @@ public class Shield : ActiveAbility
 
     public override void UseAbility(MonoBehaviour entity)
     {
-        Debug.Log("trying to use shield");
         BecomeTemporarilyInvincible();
     }
+
 
     public override void SetAreaOfEffect()
     {

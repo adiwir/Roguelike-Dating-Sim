@@ -15,6 +15,11 @@ public class Health : MonoBehaviour
     [SerializeField] private float invincibilityDurationSeconds;
     [SerializeField] private float invincibilityDeltaTime;
 
+    [SerializeField] private Material shieldMaterial;
+    private Material originalMaterial;
+
+    private SpriteRenderer spriteRenderer;
+
     private PlayerController playerController;
     
     //Simons tillägg under
@@ -35,6 +40,9 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        originalMaterial = spriteRenderer.material;
+
         playerController = GetComponent<PlayerController>();
         health = 4;
         numOfHearts = 4;
@@ -103,10 +111,27 @@ public class Health : MonoBehaviour
             {
                 startFlashingOnInjury();
             }
+            else
+            {
+                startShielding();
+            }
             yield return new WaitForSeconds(invincibilityDeltaTime);
         }
         ScaleModelTo(Vector3.one);
+        spriteRenderer.material = originalMaterial;
         isInvincible = false;
+    }
+
+    private void startShielding()
+    {
+        if (spriteRenderer.material == shieldMaterial)
+        {
+            spriteRenderer.material = originalMaterial;
+        }
+        else
+        {
+            spriteRenderer.material = shieldMaterial;
+        }
     }
 
     private void startFlashingOnInjury()
