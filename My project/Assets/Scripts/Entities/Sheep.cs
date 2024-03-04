@@ -157,6 +157,7 @@ public class Sheep : Enemy
 
     public override void OnDeath()
     {
+        controller.HideAttack(attackTiles);
         EnemyPosStorage.Instance.RemoveEnemy(this);
         Destroy(this.gameObject);
     }
