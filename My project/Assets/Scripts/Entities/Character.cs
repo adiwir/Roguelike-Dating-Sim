@@ -95,9 +95,7 @@ public class Character : Entity
                 break;
         }
         AttackNextCell(cellToAttack, addVector);
-
     }
-
     private void AttackNextCell(Vector3Int closestTargetCell, Vector3Int addVec) //TODO: Loopa denna(för basic loopa 2 gånger).
     {
         List<Vector3Int> targetCells = new List<Vector3Int>();
