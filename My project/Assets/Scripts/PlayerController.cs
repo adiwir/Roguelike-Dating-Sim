@@ -110,8 +110,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            basicCd -= Time.deltaTime; //d�ligt system, kan bli -massa om man bara inte trycker in den knappen men f�r fixa det senare
-                                            //tror nog inte ens att detta systemet kommer funka lol, TODO: fixa
+            basicCd -= Time.deltaTime;
+                                          
         }
 
         //VariableAbilities
@@ -179,8 +179,6 @@ public class PlayerController : MonoBehaviour
         targetCell = origPos;
         Vector3 scale = transform.localScale;
 
-        //elapsedTime += Time.fixedDeltaTime;
-        //elapsedBasicAttackTime += Time.fixedDeltaTime;
 
         //PlayerMovement
         CleanMovIn();

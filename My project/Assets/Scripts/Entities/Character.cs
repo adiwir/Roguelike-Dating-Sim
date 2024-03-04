@@ -42,7 +42,6 @@ public class Character : Entity
     {
         moveDistance = 1;
         abilityManager = GetComponent<AbilityManager>();
-        //closestSpotFinder = new();
     }
 
     public void Start()
@@ -215,7 +214,6 @@ public class Character : Entity
             print(assignedAbilities[spot]);
             if (assignedAbilities[spot] != null) 
             {
-                //print("toggledAbility");
                 
                 toggledAbility = assignedAbilities[spot];
                 areaOfEffect = toggledAbility.GetAreaOfEffect();
@@ -224,7 +222,7 @@ public class Character : Entity
             } else
             {
                 imageChooser.SetOutOfAbilities(spot);
-                print("That button doesn't have an ability"); //TODO: fixa så att man inte kan aktivera den alls om den är tom
+                print("That button doesn't have an ability");
             }
         } //TODO: säg åt spelaren att de kan ladda om med R
     }
@@ -256,7 +254,8 @@ public class Character : Entity
             Vector3Int mouseTargetCell = tilemap.WorldToCell(mousePos);
             Vector3Int characterCell = tilemap.WorldToCell(this.pos);
             Vector2Int twoDCharacterCell = new(characterCell.x, characterCell.y);
-
+            
+            //if(area)
             HashSet<Vector2Int> areaInRange = AreaInRange.CalcAreaInRange(toggledAbility.range, twoDCharacterCell);
             if (areaInRange.Contains(new Vector2Int(mouseTargetCell.x, mouseTargetCell.y)))
             {
@@ -270,7 +269,7 @@ public class Character : Entity
                     }
                 }
 
-                areaOfEffect.Clear();
+                //areaOfEffect.Clear();
                 areaOfEffect = newAreaOfEffect;
             }
         }
@@ -295,7 +294,6 @@ public class Character : Entity
         {
             if (active != null) { hasAssignedAbility = true; }
         }
-        print(hasAssignedAbility + "hasAssignedAbility");
         return hasAssignedAbility;
     }
 
@@ -305,11 +303,9 @@ public class Character : Entity
         {
             abilityQueue.Clear();
             assignedAbilities.Clear();
-            //abilityQueue = abilityManager.Recharge();
             abilityQueue = CombineAbilityQueues(abilityManager.Recharge());
             AssignAbilities(abilityQueue);
             imageChooser.AddLastAbilityIconToDiscard("Transparent");
-            //imageChooser.SetOutOfAbilities(3);
         }
     }
 
