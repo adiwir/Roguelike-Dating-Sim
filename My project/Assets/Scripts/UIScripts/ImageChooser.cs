@@ -139,7 +139,6 @@ public class ImageChooser : MonoBehaviour
     {
         if(spriteDict.ContainsKey(name))
         {
-            print(imageList[3]);
             imageList[4].overrideSprite = spriteDict[name];
         }
     }
