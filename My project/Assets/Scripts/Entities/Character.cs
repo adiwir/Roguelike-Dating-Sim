@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.TextCore.Text;
 using UnityEngine.Tilemaps;
@@ -377,5 +378,29 @@ public class Character : Entity
     public ActiveAbility GetToggledAbility()
     {
         return this.toggledAbility;
+    }
+
+    public string GetOrientationAsString()
+    {
+        string stringOrient = "None";
+        switch (orientation)
+        {
+            case Orientation.north:
+                stringOrient = "W";
+                break;
+
+            case Orientation.south:
+                stringOrient = "S";
+                break;
+
+            case Orientation.west:
+                stringOrient = "A";
+                break;
+
+            case Orientation.east:
+                stringOrient = "D";
+                break;
+        }
+        return stringOrient;
     }
 }

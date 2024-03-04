@@ -17,34 +17,56 @@ public class Teleport : ActiveAbility
         isAttackAbility = false;
     }
 
-    //public override void UseAbility(List<Vector3Int> targetedTiles)
-    //{
-    //    HashSet<Enemy> hitEnemies = EnemyPosStorage.Instance.GetEnemyOnCell(targetedTiles);
-    //    if (hitEnemies != null)
-    //    {
-    //        foreach (Enemy enemy in hitEnemies)
-    //        {
-    //            Debug.Log(enemy);
-    //            enemy.TakeDamage(damage);
-    //        }
-    //    }
-    //}
-
     public override void UseAbility(PlayerController player)
     {
-        Vector3 mousePos = MousePos.Instance.GetHoveredNode();
+        //Vector3 mousePos = MousePos.Instance.GetHoveredNode();
         Vector3 playerPos = player.GetPos();
+        Vector3 addVec = new Vector3(0, 0, 0);
+        //Vector3Int mouseplayerPos = player.tilemap.WorldToCell(mousePos);
+        string orientation = player.GetOrientation();
 
-        Vector3Int mouseTargetCell = player.tilemap.WorldToCell(mousePos);
-        Vector3Int currentPos = player.tilemap.WorldToCell(playerPos);
-        Vector2Int twoD = new Vector2Int(currentPos.x, currentPos.y);
-
-        HashSet <Vector2Int> areaInRange = AreaInRange.CalcAreaInRange(range, twoD);
-        if(areaInRange.Contains(new Vector2Int(mouseTargetCell.x, mouseTargetCell.y)))
+        switch (orientation)
         {
-            player.transform.position = mousePos;
-            player.UpdatePlayerPos(mousePos);
+            case "W":
+                addVec.x += 1;
+                break;
+
+            case "S":
+                addVec.x -= 1;
+                break;
+
+            case "A":
+                addVec.y += 1;
+                break;
+
+            case "D":
+                addVec.y -= 1;
+                break;
         }
+
+        for(int i=0; i < range; i++)
+        {
+            playerPos += addVec;
+            Vector3.MoveTowards(player.transform.position, playerPos, 10);
+            player.UpdatePlayerPos(playerPos);
+        }
+        //Vector3 target = Vector3.MoveTowards(player.transform.position, playerPos + , 10);
+        //player.transform.position = target;
+        //player.transform.position = target;
+        //player.UpdatePlayerPos(target);
+        
+
+        //HashSet<Vector2Int> areaInRange = AreaInRange.CalcAreaInRange(range, twoD);
+
+        //Vector3Int currentPos = player.tilemap.WorldToCell(playerPos);
+        //Vector2Int twoD = new Vector2Int(currentPos.x, currentPos.y);
+
+        //HashSet <Vector2Int> areaInRange = AreaInRange.CalcAreaInRange(range, twoD);
+        //if(areaInRange.Contains(new Vector2Int(mouseT.x, mouseplayerPos.y)))
+        //{
+        //    player.transform.position = mousePos;
+        //    player.UpdatePlayerPos(mousePos);
+        //}
 
         
         

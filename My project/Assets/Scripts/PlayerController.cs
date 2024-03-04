@@ -351,6 +351,11 @@ public class PlayerController : MonoBehaviour
         return character.GetPos();
     }
 
+    public string GetOrientation()
+    {
+        return character.GetOrientationAsString();
+    }
+
     public void UpdatePlayerPos(Vector3 newPos)
     {
         //transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed);
