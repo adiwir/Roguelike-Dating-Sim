@@ -1747,6 +1747,7 @@ MonoBehaviour:
   isInvincible: 0
   invincibilityDurationSeconds: 1.5
   invincibilityDeltaTime: 0.15
+  shieldMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
 --- !u!61 &918480897
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1804,8 +1805,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52f258c65d08b1541a70b374686b4329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldMaterial: {fileID: 2100000, guid: c719e38f25a9480abd2480ab621a2949, type: 2}
-  duration: 3
 --- !u!4 &950630261 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3966063753723356739, guid: 894f274c500d00642a35a68f01193a76, type: 3}
