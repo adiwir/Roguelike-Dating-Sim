@@ -64,5 +64,17 @@ namespace finished2
                 //}
             //}
         }
+
+        public void instantiateDoorNodes(int x, int y)
+        {
+            var overlayTile = Instantiate(overlayPrefab, overlayContainer.transform);
+            var cellWorldPosition = walkable.GetCellCenterWorld(new Vector3Int(x, y, 0));
+            overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z + 1);
+            overlayTile.GetComponent<SpriteRenderer>().sortingOrder = walkable.GetComponent<TilemapRenderer>().sortingOrder;
+            overlayTile.gameObject.GetComponent<OverlayTile>().gridLocation = new Vector3Int(x, y, 0);
+            overlayTile.gameObject.GetComponent<OverlayTile>().HideTile();
+
+            map.Add(new Vector2Int(x, y), overlayTile.gameObject.GetComponent<OverlayTile>());
+        }
     }
 }

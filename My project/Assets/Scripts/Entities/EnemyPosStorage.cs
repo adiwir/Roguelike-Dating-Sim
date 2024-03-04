@@ -37,6 +37,11 @@ public class EnemyPosStorage : MonoBehaviour
         this.enemyList.Add(enemy);
     }
 
+    public void RemoveEnemy(Enemy enemy)
+    {
+        this.enemyList.Remove(enemy);
+    }
+
     public HashSet<Enemy> GetEnemyOnCell(List<Vector3Int> targetCells)
     {
         //I apologise for this function

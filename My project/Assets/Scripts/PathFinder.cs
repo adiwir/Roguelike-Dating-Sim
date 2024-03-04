@@ -17,7 +17,7 @@ namespace finished2
             i = 0;
             openList.Add(start);
 
-            while (openList.Count > 0 && i < 900)
+            while (openList.Count > 0 && i < 100)
             {
                 OverlayTile currentOverlayTile = openList.OrderBy(x => x.F).First();
 
