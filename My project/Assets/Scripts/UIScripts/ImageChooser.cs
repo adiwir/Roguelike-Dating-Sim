@@ -31,14 +31,6 @@ public class ImageChooser : MonoBehaviour
         SpriteDictSetup();
     }
 
-    private void Start()
-    {
-        //ImageSetup();
-        //ImageListSetup();
-        //SpriteDictSetup();
-        //outOfAbilties = Resources.Load<Sprite>("Empty");
-    }
-
     private void ImageListSetup()
     {
         imageList.Add(NextAbility);
@@ -100,18 +92,12 @@ public class ImageChooser : MonoBehaviour
         spriteDict.Add("Transparent", Resources.Load<Sprite>("Transparent"));
     }
 
-    //public void ImageChange(int abilityNum, Sprite icon)
     public void ImageChange(int buttonNum, string name)
     {
         if (spriteDict.ContainsKey(name))
         {
             imageList[buttonNum + 1].overrideSprite = spriteDict[name];
         }
-    }
-
-    public void ToggleImage(int abilityNum) 
-    {
-        //set toggled state here
     }
 
     public void SetOutOfAbilities(int buttonNum)
