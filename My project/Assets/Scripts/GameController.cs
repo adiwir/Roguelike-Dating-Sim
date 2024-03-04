@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
     public InfoScreen infoScreen;
     public GameOverScreen gameOverScreen;
     public GameWonScreen gameWonScreen;
+    public InfoCardsScreen infoCardsScreen;
     public Health healthController;
     public Boss bossController;
 
@@ -22,6 +23,10 @@ public class GameController : MonoBehaviour
         if (bossController.hp <= 0) 
         {
             GameWon();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab)) {
+            infoCardsScreen.ShowInfoScreen();
         }
     }
 

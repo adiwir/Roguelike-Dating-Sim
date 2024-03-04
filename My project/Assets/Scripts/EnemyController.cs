@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] Tilemap tilemap;
 
-    public float moveSpeed = 1;
+    public float moveSpeed = 10000000000;
 
     private Vector3Int currentCell;
     public Vector2Int tilePos;
