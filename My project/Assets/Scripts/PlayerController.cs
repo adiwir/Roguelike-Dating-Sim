@@ -6,11 +6,12 @@ using System.Timers;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] private Tilemap tilemap;
+    [SerializeField] public Tilemap tilemap;
     [SerializeField] private Tilemap col;
     
     Character character;
@@ -39,6 +40,20 @@ public class PlayerController : MonoBehaviour
 
     public List<KeyCode> movIn;
 
+    private static PlayerController _instance;
+    public static PlayerController Instance { get { return _instance; } }
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
 
     private void Start()
     {
@@ -290,6 +305,10 @@ public class PlayerController : MonoBehaviour
         isDead = value;
     }
 
+    public void TeleportPlayer(int distance)
+    {
+
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -325,5 +344,23 @@ public class PlayerController : MonoBehaviour
                 movIn.Remove(KeyCode.S);
             }
         }
+    }
+
+    public Vector3 GetPos()
+    {
+        return character.GetPos();
+    }
+
+    public void UpdatePlayerPos(Vector3 newPos)
+    {
+        //transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed);
+        transform.position = newPos;
+        character.SetPos(newPos);
+        targetCell = tilemap.WorldToCell(transform.position);
+        targetPosition = tilemap.GetCellCenterWorld(targetCell);
+        tilePos.x = targetCell.x;
+        tilePos.y = targetCell.y;
+
+        standingOnTile = finished2.MapManager.Instance.map[tilePos];
     }
 }

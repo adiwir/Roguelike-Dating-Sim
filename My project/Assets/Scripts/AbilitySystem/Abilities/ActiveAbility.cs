@@ -19,7 +19,7 @@ public abstract class ActiveAbility : IAbility
 
     public abstract void UseAbility(List<Vector3Int> targetedTiles);
 
-    public abstract void UseAbility(MonoBehaviour entity);
+    public abstract void UseAbility(PlayerController player);
 
     public void CanIActivate()
     {

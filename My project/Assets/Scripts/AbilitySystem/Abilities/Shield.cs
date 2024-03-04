@@ -6,9 +6,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Shield : ActiveAbility
 {
-    string Name = "Shield";
     private float invincibilityDurationSeconds = 3;
-    //private Health health;
    
    public Shield() 
    {
@@ -21,7 +19,7 @@ public class Shield : ActiveAbility
         Health.Instance.BecomeInvincible(invincibilityDurationSeconds);
     }
 
-    public override void UseAbility(MonoBehaviour entity)
+    public override void UseAbility(PlayerController player)
     {
         BecomeTemporarilyInvincible();
     }

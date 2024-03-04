@@ -30,7 +30,7 @@ public class Sniper : ActiveAbility
         }
     }
 
-    public override void UseAbility(MonoBehaviour entity)
+    public override void UseAbility(PlayerController player)
     {
         throw new System.NotImplementedException();
     }

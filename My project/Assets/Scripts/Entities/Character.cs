@@ -95,6 +95,7 @@ public class Character : Entity
         }
         AttackNextCell(cellToAttack, addVector);
     }
+
     private void AttackNextCell(Vector3Int closestTargetCell, Vector3Int addVec)
     {
         List<Vector3Int> targetCells = new List<Vector3Int>();
@@ -180,7 +181,7 @@ public class Character : Entity
 
     private void useBuffAbility()
     {
-        toggledAbility.UseAbility(this);
+        toggledAbility.UseAbility(PlayerController.Instance);
     }
 
     private bool AttackEnemiesInArea()
