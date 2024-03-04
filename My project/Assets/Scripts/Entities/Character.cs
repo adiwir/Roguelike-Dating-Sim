@@ -116,7 +116,7 @@ public class Character : Entity
 
     public void ActivateAbilityInSpot(int spot)
     {
-        imageChooser.ToggleBorder(spot);
+        
         if (toggledAbility != null && ReferenceEquals(toggledAbility, assignedAbilities[spot]))
         {
             ActivateToggledAbility(spot);
@@ -145,10 +145,11 @@ public class Character : Entity
             useBuffAbility();
         }
 
-        imageChooser.AddLastAbilityIconToDiscard(toggledAbility.GetName());
-
         if (succesfullyUsedAbility || !toggledAbility.isAttackAbility) 
         {
+            
+            imageChooser.AddLastAbilityIconToDiscard(toggledAbility.GetName());
+            imageChooser.ToggleBorder(spot);
             toggledAbility = null;
 
             HideAOE();
@@ -210,7 +211,7 @@ public class Character : Entity
             print(assignedAbilities[spot]);
             if (assignedAbilities[spot] != null) 
             {
-                
+                imageChooser.ToggleBorder(spot);
                 toggledAbility = assignedAbilities[spot];
                 areaOfEffect = toggledAbility.GetAreaOfEffect();
                 DisplayAreaOfEffect();
@@ -300,6 +301,7 @@ public class Character : Entity
             abilityQueue = CombineAbilityQueues(abilityManager.Recharge());
             AssignAbilities(abilityQueue);
             imageChooser.AddLastAbilityIconToDiscard("Transparent");
+            imageChooser.UntoggleAllBorders();
         }
     }
 
