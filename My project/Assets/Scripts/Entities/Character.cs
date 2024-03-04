@@ -48,29 +48,30 @@ public class Character : Entity
     public void Start()
     {
         this.healthPoints = maxHealth;
-        CombineAbilityQueues(abilityManager.GetAbilityQueue());
+        abilityQueue = CombineAbilityQueues(abilityManager.GetAbilityQueue());
         Debug.Log("ability amount " + abilityQueue.Count);
         assignedAbilities = new List<ActiveAbility>();
-        AssignAbilities();
+        AssignAbilities(abilityQueue);
     }
 
-    private void AssignAbilities()
+    private void AssignAbilities(Queue<ActiveAbility> queue)
     {
         //assignedAbilities = new List<ActiveAbility>(3);
         for (int i = 0; i < startingAbilityAmount; i++)
         { 
-            assignedAbilities.Add(abilityQueue.Dequeue());
+            assignedAbilities.Add(queue.Dequeue());
             imageChooser.ImageChange(i, assignedAbilities[i].GetName());
         }
-        imageChooser.ImageChange(-1, abilityQueue.Peek().GetName());
+        imageChooser.ImageChange(-1, queue.Peek().GetName());
     }
 
-    private void CombineAbilityQueues(Queue<ActiveAbility> queueToAdd) 
+    private Queue<ActiveAbility> CombineAbilityQueues(Queue<ActiveAbility> queueToAdd) 
     {
         while (queueToAdd.Count > 0)
         {
             abilityQueue.Enqueue(queueToAdd.Dequeue());
         }
+        return abilityQueue;
     }
 
     public void UseBasicAbility(Vector3Int cellToAttack)
@@ -209,7 +210,7 @@ public class Character : Entity
 
     public void ToggleAbilityInSpot(int spot)
     {
-        if (ActivesAvailable())
+        if (ActivesAvailable(assignedAbilities))
         {
             print(assignedAbilities[spot]);
             if (assignedAbilities[spot] != null) 
@@ -244,7 +245,6 @@ public class Character : Entity
         }
         return tilesToTarget;
     }
-
 
     public void DisplayAreaOfEffect()
     {
@@ -285,17 +285,17 @@ public class Character : Entity
                 finished2.MapManager.Instance.map[node].HideTile();
             }
         }
-
         twoDAreaOfEffect.Clear();
     }
 
-    private bool ActivesAvailable()
+    private bool ActivesAvailable(List<ActiveAbility> list)
     {
         bool hasAssignedAbility = false;
-        foreach(ActiveAbility active in assignedAbilities)
+        foreach(ActiveAbility active in list)
         {
             if (active != null) { hasAssignedAbility = true; }
         }
+        print(hasAssignedAbility + "hasAssignedAbility");
         return hasAssignedAbility;
     }
 
@@ -306,8 +306,8 @@ public class Character : Entity
             abilityQueue.Clear();
             assignedAbilities.Clear();
             //abilityQueue = abilityManager.Recharge();
-            CombineAbilityQueues(abilityManager.Recharge());
-            AssignAbilities();
+            abilityQueue = CombineAbilityQueues(abilityManager.Recharge());
+            AssignAbilities(abilityQueue);
             imageChooser.AddLastAbilityIconToDiscard("Transparent");
             //imageChooser.SetOutOfAbilities(3);
         }

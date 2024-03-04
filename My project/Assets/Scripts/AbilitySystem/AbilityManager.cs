@@ -52,6 +52,7 @@ public class AbilityManager : MonoBehaviour
     {
         ActiveAbilities.Clear();
         ActiveAbilities = ShuffleAndEnqueue(UsedAbilities);
+        UsedAbilities.Clear();
         return ActiveAbilities;
     }
 
